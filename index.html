@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Character set -->
+    <meta charset="UTF-8">
+
+    <!-- Mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Website title -->
+    <title>Civic Issue and Resolution Website</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+
+        <div class="container">
+
+            <!-- Logo -->
+
+            <a class="navbar-brand logo-text" href="#">
+                CIVIC<span>CONNECT</span>
+            </a>
+
+            <!-- Mobile toggle -->
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <!-- Navbar links -->
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link custom-nav-link active-nav" href="#">
+                            Home
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link custom-nav-link" href="#report-form">
+                            Report Issue
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                  <a class="nav-link custom-nav-link" href="#complaints">
+    My Complaints
+</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                      <a class="nav-link custom-nav-link" href="#about">
+    About
+</a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Hero Section -->
+
+    <section class="hero-section" id="home">
+
+        <div class="container">
+
+            <div class="hero-content">
+
+                <!-- Small label -->
+
+                <p class="hero-label">
+                    CIVIC TECH FOR PAKISTAN
+                </p>
+
+                <!-- Main heading -->
+
+                <h1 class="hero-title">
+                    Report Civic Issues <br>
+                    Faster And Smarter
+                </h1>
+
+                <!-- Urdu subtitle -->
+
+                <p class="hero-subtitle">
+                    شہری مسائل جیسے کچرا، بجلی، پانی، گیس اور سڑک کی خرابی آسانی سے رپورٹ کریں
+                </p>
+
+                <!-- Description -->
+
+                <p class="hero-description">
+                    A simple platform where citizens can report public issues in English, Roman Urdu, or Urdu and
+                    generate a structured complaint.
+                </p>
+
+                <!-- Button -->
+
+                <a href="#report-form" class="hero-btn">
+                    Report an Issue
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Issue Categories -->
+
+    <section class="category-section reveal-section" id="categories">
+
+        <div class="container">
+
+            <!-- Section heading -->
+
+            <div class="section-heading text-center">
+
+                <p class="section-label">
+                    ISSUE CATEGORIES
+                </p>
+
+                <h2 class="section-title">
+                    Choose The Problem You Want To Report
+                </h2>
+
+                <p class="section-description">
+                    Select one category below. The form will automatically prepare your complaint type.
+                </p>
+
+            </div>
+
+            <!-- Category cards -->
+
+            <div class="row g-4 mt-4">
+
+                <!-- Garbage -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="category-card" data-category="Garbage">
+
+                        <div class="category-icon">
+                            🗑️
+                        </div>
+
+                        <h3>
+                            Garbage
+                        </h3>
+
+                        <p>
+                            Kachra / کچرا
+                        </p>
+
+                        <button class="category-btn">
+                            Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Electricity -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="category-card" data-category="Electricity">
+
+                        <div class="category-icon">
+                            ⚡
+                        </div>
+
+                        <h3>
+                            Bijli
+                        </h3>
+
+                        <p>
+                            Electricity / بجلی
+                        </p>
+
+                        <button class="category-btn">
+                            Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Water -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="category-card" data-category="Water">
+
+                        <div class="category-icon">
+                            💧
+                        </div>
+
+                        <h3>
+                            Paani
+                        </h3>
+
+                        <p>
+                            Water / پانی
+                        </p>
+
+                        <button class="category-btn">
+                            Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Gas -->
+
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="category-card" data-category="Gas">
+
+                        <div class="category-icon">
+                            🔥
+                        </div>
+
+                        <h3>
+                            Gas
+                        </h3>
+
+                        <p>
+                            Gas Supply / گیس
+                        </p>
+
+                        <button class="category-btn">
+                            Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Road -->
+
+                <div class="col-lg-6 col-md-12">
+
+                    <div class="category-card" data-category="Road Damage">
+
+                        <div class="category-icon">
+                            🛣️
+                        </div>
+
+                        <h3>
+                            Sadak
+                        </h3>
+
+                        <p>
+                            Road Damage / سڑک
+                        </p>
+
+                        <button class="category-btn">
+                            Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Complaint Form -->
+
+    <section class="complaint-section reveal-section" id="report-form">
+
+        <div class="container">
+
+            <div class="row align-items-center g-5">
+
+                <!-- Left content -->
+
+                <div class="col-lg-5">
+
+                    <div class="complaint-info">
+
+                        <p class="section-label">
+                            REPORT ISSUE
+                        </p>
+
+                        <h2 class="section-title">
+                            Generate A Structured Complaint
+                        </h2>
+
+                        <p class="complaint-text">
+                            Select the issue category, write your complaint, choose your language, and generate a ready
+                            complaint format.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Form -->
+
+                <div class="col-lg-7">
+
+                    <form class="complaint-form" id="complaintForm">
+
+                        <!-- Category dropdown -->
+
+                        <div class="form-group">
+
+                            <label for="complaintCategory">
+                                Issue Category
+                            </label>
+
+                            <select id="complaintCategory" class="form-control">
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="Garbage">
+                                    Garbage
+                                </option>
+
+                                <option value="Electricity">
+                                    Electricity / Bijli
+                                </option>
+
+                                <option value="Water">
+                                    Water / Paani
+                                </option>
+
+                                <option value="Gas">
+                                    Gas
+                                </option>
+
+                                <option value="Road Damage">
+                                    Road Damage / Sadak
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Complaint text -->
+
+                        <div class="form-group">
+
+                            <label for="complaintText">
+                                Your Complaint
+                            </label>
+
+                            <textarea id="complaintText" class="form-control" rows="6"
+                                placeholder="Example: Mere area mein 3 din se kachra nahi uthaya gaya..."></textarea>
+
+                        </div>
+
+                        <!-- Language buttons -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Complaint Language
+                            </label>
+
+                            <div class="language-buttons">
+
+                                <button type="button" class="language-btn active-language" data-language="English">
+                                    English
+                                </button>
+
+                                <button type="button" class="language-btn" data-language="Roman Urdu">
+                                    Roman Urdu
+                                </button>
+
+                                <button type="button" class="language-btn" data-language="Urdu">
+                                    اردو
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Speak button -->
+
+                        <button type="button" class="speak-btn">
+                            🎤 Speak
+                        </button>
+
+                        <!-- Submit button -->
+
+                        <button type="submit" class="generate-btn">
+                            Generate Complaint
+                        </button>
+
+                    </form>
+
+                    <!-- Result card -->
+
+                    <div class="result-card" id="resultCard">
+
+                        <p class="result-label">
+                            Generated Complaint
+                        </p>
+
+                        <h3 id="resultTitle">
+                            Complaint Ready
+                        </h3>
+
+                        <p id="resultText">
+                            Your complaint preview will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- How It Works -->
+
+    <section class="how-section reveal-section" id="how-it-works">
+
+        <div class="container">
+
+            <!-- Section heading -->
+
+            <div class="section-heading text-center">
+
+                <p class="section-label">
+                    HOW IT WORKS
+                </p>
+
+                <h2 class="section-title">
+                    From Problem To Complaint In 5 Simple Steps
+                </h2>
+
+                <p class="section-description">
+                    The platform guides citizens from writing an issue to creating a clear complaint format.
+                </p>
+
+            </div>
+
+            <!-- Steps flow -->
+
+            <div class="steps-flow mt-5">
+
+                <!-- Step 1 -->
+
+                <div class="step-box">
+
+                    <div class="step-circle">
+                        01
+                    </div>
+
+                    <h3>
+                        Input
+                    </h3>
+
+                    <p>
+                        Citizen writes or speaks the issue.
+                    </p>
+
+                </div>
+
+                <!-- Step 2 -->
+
+                <div class="step-box">
+
+                    <div class="step-circle">
+                        02
+                    </div>
+
+                    <h3>
+                        Classify
+                    </h3>
+
+                    <p>
+                        System identifies the problem type.
+                    </p>
+
+                </div>
+
+                <!-- Step 3 -->
+
+                <div class="step-box">
+
+                    <div class="step-circle">
+                        03
+                    </div>
+
+                    <h3>
+                        Map Department
+                    </h3>
+
+                    <p>
+                        Issue is matched with the right department.
+                    </p>
+
+                </div>
+
+                <!-- Step 4 -->
+
+                <div class="step-box">
+
+                    <div class="step-circle">
+                        04
+                    </div>
+
+                    <h3>
+                        Generate
+                    </h3>
+
+                    <p>
+                        A structured complaint is created.
+                    </p>
+
+                </div>
+
+                <!-- Step 5 -->
+
+                <div class="step-box">
+
+                    <div class="step-circle">
+                        05
+                    </div>
+
+                    <h3>
+                        Submit
+                    </h3>
+
+                    <p>
+                        User can submit the complaint further.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+<!-- My Complaints -->
+
+<section class="complaints-section reveal-section" id="complaints">
+
+    <div class="container">
+
+        <!-- Heading -->
+
+        <div class="section-heading text-center">
+
+            <p class="section-label">
+                MY COMPLAINTS
+            </p>
+
+            <h2 class="section-title">
+                Complaint Tracking Dashboard
+            </h2>
+
+            <p class="section-description">
+                View recently generated civic complaints and their current status.
+            </p>
+
+        </div>
+
+        <!-- Complaint cards -->
+
+        <div class="row g-4 mt-4">
+
+            <!-- Complaint 1 -->
+
+            <div class="col-lg-4">
+
+                <div class="complaint-card">
+
+                    <span class="complaint-status pending-status">
+                        Pending
+                    </span>
+
+                    <h3>
+                        Garbage Collection Issue
+                    </h3>
+
+                    <p>
+                        Complaint submitted regarding uncollected garbage in North Karachi.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Complaint 2 -->
+
+            <div class="col-lg-4">
+
+                <div class="complaint-card">
+
+                    <span class="complaint-status progress-status">
+                        In Progress
+                    </span>
+
+                    <h3>
+                        Water Supply Complaint
+                    </h3>
+
+                    <p>
+                        Water shortage issue reported for the local residential area.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Complaint 3 -->
+
+            <div class="col-lg-4">
+
+                <div class="complaint-card">
+
+                    <span class="complaint-status resolved-status">
+                        Resolved
+                    </span>
+
+                    <h3>
+                        Road Damage Complaint
+                    </h3>
+
+                    <p>
+                        Broken road and pothole repair request completed successfully.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- About Section -->
+
+<section class="about-section reveal-section" id="about">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <!-- Left -->
+
+            <div class="col-lg-6">
+
+                <p class="section-label">
+                    ABOUT PLATFORM
+                </p>
+
+                <h2 class="section-title">
+                    Civic Technology For Better Communities
+                </h2>
+
+                <p class="about-text">
+
+                    CivicConnect is a civic-tech platform designed for Pakistani citizens to report local public issues
+                    such as garbage collection, electricity failures, gas shortages, water problems, and road damage.
+
+                </p>
+
+                <p class="about-text">
+
+                    The platform supports English, Roman Urdu, and Urdu complaint generation to make reporting easier
+                    for everyone.
+
+                </p>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="col-lg-6">
+
+                <div class="about-card">
+
+                    <div class="about-item">
+
+                        <h3>
+                            🌍 Multi-language Support
+                        </h3>
+
+                        <p>
+                            English, Roman Urdu, and Urdu complaint input.
+                        </p>
+
+                    </div>
+
+                    <div class="about-item">
+
+                        <h3>
+                            🏛 Department Mapping
+                        </h3>
+
+                        <p>
+                            Connect issues with the correct civic department.
+                        </p>
+
+                    </div>
+
+                    <div class="about-item">
+
+                        <h3>
+                            ⚡ Fast Complaint Generation
+                        </h3>
+
+                        <p>
+                            Generate structured complaint drafts instantly.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- Footer -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <!-- Footer brand -->
+
+                <div>
+
+                    <h3 class="footer-logo">
+                        CIVIC<span>CONNECT</span>
+                    </h3>
+
+                    <p class="footer-text">
+                        A civic tech project for reporting public issues in Pakistan.
+                    </p>
+
+                </div>
+
+                <!-- Footer team -->
+
+                <div class="footer-team">
+
+                    <p>
+                        Team Members
+                    </p>
+
+                    <h4>
+                        Sufyan · Fazal · Sana
+                    </h4>
+
+                </div>
+
+                <!-- Footer note -->
+
+                <div class="footer-note">
+
+                    <p>
+                        Aptech Vision Project
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- External JS -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
