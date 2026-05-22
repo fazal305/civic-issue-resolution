@@ -84,6 +84,11 @@ civic-issue-resolution/
 3. Open `index.html` in your browser
 
 No server setup is required for Phase 1.
+---
+
+## Live Demo
+
+https://fazal305.github.io/civic-issue-resolution/
 
 ---
 
