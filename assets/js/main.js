@@ -2,6 +2,38 @@
 
 $(document).ready(function () {
 
+    // Load saved theme
+
+    if (localStorage.getItem("civicTheme") === "light") {
+
+        $("body").addClass("light-theme");
+
+        $("#themeToggleBtn").text("☀️");
+
+    }
+
+    // Theme toggle
+
+    $("#themeToggleBtn").click(function () {
+
+        $("body").toggleClass("light-theme");
+
+        if ($("body").hasClass("light-theme")) {
+
+            $(this).text("☀️");
+
+            localStorage.setItem("civicTheme", "light");
+
+        } else {
+
+            $(this).text("🌙");
+
+            localStorage.setItem("civicTheme", "dark");
+
+        }
+
+    });
+
     // Category card click
 
     $(".category-card").click(function () {
