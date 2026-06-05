@@ -10,11 +10,11 @@
 
 :root {
 
-    --navy: #0D1B2A;
-    --teal: #00C2B2;
+    --navy: #12372A;
+    --teal: #ADBC9F;
     --white: #FFFFFF;
-    --light-gray: #F1F5F9;
-    --text-gray: #94A3B8;
+    --light-gray: #F5F7F0;
+    --text-gray: #D6DAC8;
 
 }
 
@@ -32,7 +32,6 @@ body {
     background-color: var(--navy);
     color: var(--white);
     overflow-x: hidden;
-    transition: 0.3s ease;
 
 }
 
@@ -66,25 +65,23 @@ button {
 
 .container {
     position: relative;
-    z-index: 2;
 }
 
 /* Selection color */
 
 ::selection {
     background-color: var(--teal);
-    color: var(--white);
+    color: var(--navy);
 }
 
 /* Navbar */
 
 .custom-navbar {
 
-    background-color: rgba(13, 27, 42, 0.95);
+    background-color: rgba(18, 55, 42, 0.95);
     backdrop-filter: blur(10px);
     padding: 18px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition: 0.3s ease;
 
 }
 
@@ -119,29 +116,6 @@ button {
     color: var(--teal) !important;
 }
 
-/* Theme button */
-
-.theme-toggle-btn {
-
-    width: 42px;
-    height: 42px;
-    margin-left: 18px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.08);
-    color: var(--white);
-    font-size: 1.1rem;
-    transition: 0.3s ease;
-
-}
-
-.theme-toggle-btn:hover {
-
-    background-color: var(--teal);
-    color: var(--navy);
-    transform: translateY(-2px);
-
-}
-
 /* Mobile toggle */
 
 .custom-toggler {
@@ -157,45 +131,14 @@ button {
 
 .hero-section {
 
-    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     background:
-        radial-gradient(circle at top right, rgba(0, 194, 178, 0.25), transparent 35%),
-        linear-gradient(135deg, #0D1B2A 0%, #102A43 55%, #003C3A 100%);
+        radial-gradient(circle at top right, rgba(173, 188, 159, 0.28), transparent 35%),
+        linear-gradient(135deg, #12372A 0%, #436850 55%, #0F2A1D 100%);
     padding-top: 140px;
     overflow: hidden;
-
-}
-
-/* Stars layer */
-
-.stars-layer {
-
-    position: absolute;
-    inset: 0;
-    background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.85) 1px, transparent 1px),
-        radial-gradient(circle, rgba(0, 194, 178, 0.65) 1px, transparent 1px);
-    background-size: 90px 90px, 150px 150px;
-    background-position: 0 0, 45px 70px;
-    opacity: 0.34;
-    animation: moveStars 24s linear infinite;
-    pointer-events: none;
-    z-index: 1;
-
-}
-
-@keyframes moveStars {
-
-    from {
-        background-position: 0 0, 45px 70px;
-    }
-
-    to {
-        background-position: 350px 350px, 500px 520px;
-    }
 
 }
 
@@ -204,8 +147,6 @@ button {
 .hero-content {
 
     max-width: 850px;
-    position: relative;
-    z-index: 2;
     animation: fadeUp 1s ease forwards;
 
 }
@@ -268,7 +209,7 @@ button {
     padding: 15px 34px;
     border-radius: 50px;
     font-weight: 700;
-    box-shadow: 0 0 30px rgba(0, 194, 178, 0.35);
+    box-shadow: 0 0 30px rgba(173, 188, 159, 0.35);
     transition: 0.3s ease;
 
 }
@@ -277,7 +218,7 @@ button {
 
     transform: translateY(-4px);
     color: var(--navy);
-    box-shadow: 0 0 45px rgba(0, 194, 178, 0.6);
+    box-shadow: 0 0 45px rgba(173, 188, 159, 0.6);
 
 }
 
@@ -331,7 +272,7 @@ button {
 
     max-width: 650px;
     margin: 0 auto;
-    color: #64748B;
+    color: #436850;
     font-size: 1.05rem;
     line-height: 1.7;
 
@@ -349,8 +290,8 @@ button {
     border-radius: 24px;
     height: 100%;
     cursor: pointer;
-    border: 1px solid rgba(13, 27, 42, 0.08);
-    box-shadow: 0 20px 45px rgba(13, 27, 42, 0.08);
+    border: 1px solid rgba(18, 55, 42, 0.08);
+    box-shadow: 0 20px 45px rgba(18, 55, 42, 0.08);
     transition: 0.3s ease;
 
 }
@@ -360,15 +301,17 @@ button {
 .complaint-card:hover {
 
     transform: translateY(-10px);
-    box-shadow: 0 30px 65px rgba(13, 27, 42, 0.14);
+    box-shadow: 0 30px 65px rgba(18, 55, 42, 0.14);
 
 }
+
+/* Category icon */
 
 .category-icon {
 
     width: 70px;
     height: 70px;
-    background-color: rgba(0, 194, 178, 0.12);
+    background-color: rgba(173, 188, 159, 0.22);
     border-radius: 22px;
     display: flex;
     align-items: center;
@@ -377,6 +320,8 @@ button {
     margin-bottom: 25px;
 
 }
+
+/* Category text */
 
 .category-card h3,
 .complaint-card h3 {
@@ -390,13 +335,17 @@ button {
 .category-card p,
 .complaint-card p {
 
-    color: #64748B;
+    color: #436850;
     margin-bottom: 25px;
 
 }
 
-.category-btn {
+/* Category button */
 
+.category-btn,
+.dashboard-btn {
+
+    display: inline-block;
     background-color: var(--navy);
     color: var(--white);
     padding: 11px 24px;
@@ -406,10 +355,12 @@ button {
 
 }
 
-.category-card:hover .category-btn {
+.category-card:hover .category-btn,
+.dashboard-btn:hover {
 
     background-color: var(--teal);
     color: var(--navy);
+    transform: translateY(-3px);
 
 }
 
@@ -422,6 +373,8 @@ button {
     color: var(--white);
 
 }
+
+/* Complaint text */
 
 .complaint-text,
 .about-text {
@@ -445,6 +398,8 @@ button {
 
 }
 
+/* Form group */
+
 .form-group {
     margin-bottom: 22px;
 }
@@ -457,6 +412,8 @@ button {
     color: var(--white);
 
 }
+
+/* Inputs */
 
 .form-control {
 
@@ -474,12 +431,12 @@ button {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--white);
     border-color: var(--teal);
-    box-shadow: 0 0 0 4px rgba(0, 194, 178, 0.15);
+    box-shadow: 0 0 0 4px rgba(173, 188, 159, 0.18);
 
 }
 
 .form-control::placeholder {
-    color: #94A3B8;
+    color: var(--text-gray);
 }
 
 select.form-control option {
@@ -555,7 +512,7 @@ select.form-control option {
 .generate-btn:hover {
 
     transform: translateY(-3px);
-    box-shadow: 0 0 35px rgba(0, 194, 178, 0.45);
+    box-shadow: 0 0 35px rgba(173, 188, 159, 0.45);
 
 }
 
@@ -583,13 +540,17 @@ select.form-control option {
 }
 
 .result-card h3 {
+
     font-weight: 700;
     margin-bottom: 12px;
+
 }
 
 .result-card p {
-    color: #475569;
+
+    color: #436850;
     line-height: 1.7;
+
 }
 
 /* Steps flow */
@@ -611,10 +572,12 @@ select.form-control option {
     left: 8%;
     right: 8%;
     height: 3px;
-    background-color: rgba(0, 194, 178, 0.25);
+    background-color: rgba(173, 188, 159, 0.45);
     z-index: 1;
 
 }
+
+/* Step box */
 
 .step-box {
 
@@ -625,6 +588,8 @@ select.form-control option {
     cursor: default;
 
 }
+
+/* Step circle */
 
 .step-circle {
 
@@ -638,9 +603,11 @@ select.form-control option {
     justify-content: center;
     font-weight: 800;
     margin: 0 auto 22px;
-    box-shadow: 0 0 30px rgba(0, 194, 178, 0.35);
+    box-shadow: 0 0 30px rgba(173, 188, 159, 0.35);
 
 }
+
+/* Step text */
 
 .step-box h3 {
 
@@ -652,7 +619,7 @@ select.form-control option {
 
 .step-box p {
 
-    color: #64748B;
+    color: #436850;
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 0;
@@ -668,6 +635,8 @@ select.form-control option {
 
 }
 
+/* Complaint status */
+
 .complaint-status {
 
     display: inline-block;
@@ -678,6 +647,8 @@ select.form-control option {
     margin-bottom: 20px;
 
 }
+
+/* Status colors */
 
 .pending-status {
 
@@ -697,6 +668,42 @@ select.form-control option {
 
     background-color: rgba(34, 197, 94, 0.15);
     color: #16A34A;
+
+}
+
+/* Sample data */
+
+.sample-data-wrapper {
+
+    display: grid;
+    gap: 24px;
+
+}
+
+.sample-data-card {
+
+    background-color: var(--light-gray);
+    color: var(--navy);
+    padding: 30px;
+    border-radius: 24px;
+    border-left: 6px solid var(--teal);
+    box-shadow: 0 20px 45px rgba(18, 55, 42, 0.08);
+    scroll-margin-top: 110px;
+
+}
+
+.sample-data-card h3 {
+
+    font-weight: 700;
+    margin-bottom: 16px;
+
+}
+
+.sample-data-card p {
+
+    color: #436850;
+    line-height: 1.7;
+    margin-bottom: 10px;
 
 }
 
@@ -728,7 +735,7 @@ select.form-control option {
 
 .site-footer {
 
-    background-color: #08111F;
+    background-color: #0F2A1D;
     color: var(--white);
     padding: 45px 0;
 
@@ -797,129 +804,6 @@ select.form-control option {
 
 }
 
-/* Light theme */
-
-body.light-theme {
-
-    background-color: var(--light-gray);
-    color: var(--navy);
-
-}
-
-body.light-theme .custom-navbar {
-
-    background-color: rgba(255, 255, 255, 0.95);
-    border-bottom: 1px solid rgba(13, 27, 42, 0.08);
-
-}
-
-body.light-theme .logo-text,
-body.light-theme .custom-nav-link {
-
-    color: var(--navy) !important;
-
-}
-
-body.light-theme .navbar-toggler-icon {
-    filter: none;
-}
-
-body.light-theme .theme-toggle-btn {
-
-    background-color: rgba(13, 27, 42, 0.08);
-    color: var(--navy);
-
-}
-
-body.light-theme .hero-section {
-
-    background:
-        radial-gradient(circle at top right, rgba(0, 194, 178, 0.20), transparent 35%),
-        linear-gradient(135deg, #F1F5F9 0%, #FFFFFF 60%, #D9FFFA 100%);
-
-}
-
-body.light-theme .stars-layer {
-
-    opacity: 0.24;
-    background-image:
-        radial-gradient(circle, rgba(13, 27, 42, 0.45) 1px, transparent 1px),
-        radial-gradient(circle, rgba(0, 194, 178, 0.65) 1px, transparent 1px);
-
-}
-
-body.light-theme .hero-title,
-body.light-theme .hero-subtitle {
-
-    color: var(--navy);
-
-}
-
-body.light-theme .hero-description {
-    color: #475569;
-}
-
-body.light-theme .complaint-section,
-body.light-theme .about-section {
-
-    background-color: #FFFFFF;
-    color: var(--navy);
-
-}
-
-body.light-theme .complaint-text,
-body.light-theme .about-text,
-body.light-theme .about-item p {
-
-    color: #64748B;
-
-}
-
-body.light-theme .complaint-form,
-body.light-theme .about-card {
-
-    background-color: var(--light-gray);
-    border: 1px solid rgba(13, 27, 42, 0.08);
-    box-shadow: 0 20px 50px rgba(13, 27, 42, 0.08);
-
-}
-
-body.light-theme .form-group label {
-
-    color: var(--navy);
-
-}
-
-body.light-theme .form-control {
-
-    background-color: var(--white);
-    color: var(--navy);
-    border: 1px solid rgba(13, 27, 42, 0.15);
-
-}
-
-body.light-theme .speak-btn {
-
-    color: var(--navy);
-    border-color: rgba(13, 27, 42, 0.18);
-
-}
-
-body.light-theme .language-btn {
-
-    background-color: var(--white);
-    color: var(--navy);
-
-}
-
-body.light-theme .active-language,
-body.light-theme .language-btn:hover {
-
-    background-color: var(--teal);
-    color: var(--navy);
-
-}
-
 /* Responsive */
 
 @media (max-width: 991px) {
@@ -960,13 +844,6 @@ body.light-theme .language-btn:hover {
 
         margin-left: 0;
         padding: 12px 0;
-
-    }
-
-    .theme-toggle-btn {
-
-        margin-left: 0;
-        margin-top: 10px;
 
     }
 
