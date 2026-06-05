@@ -43,10 +43,41 @@ $(document).ready(function () {
   // Language button click
 
   $(".language-btn").click(function () {
+
     $(".language-btn").removeClass("active-language");
 
     $(this).addClass("active-language");
-  });
+
+    let selectedLanguage = $(this).data("language");
+
+    if (selectedLanguage === "English") {
+
+        $("#complaintText").attr(
+            "placeholder",
+            "Example: Garbage has not been collected in my area for the last 3 days."
+        );
+
+    }
+
+    else if (selectedLanguage === "Roman Urdu") {
+
+        $("#complaintText").attr(
+            "placeholder",
+            "Example: Mere area mein 3 din se kachra nahi uthaya gaya."
+        );
+
+    }
+
+    else if (selectedLanguage === "Urdu") {
+
+        $("#complaintText").attr(
+            "placeholder",
+            "مثال: میرے علاقے میں 3 دن سے کچرا نہیں اٹھایا گیا۔"
+        );
+
+    }
+
+});
 
   // Complaint form submit
 

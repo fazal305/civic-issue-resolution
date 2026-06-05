@@ -1143,3 +1143,19 @@ body.light-theme .shooting-star {
     );
 
 }
+/* Static pages spacing fix */
+
+body:not(:has(.hero-section)) section {
+
+    min-height: 100vh;
+    padding-top: 150px;
+
+}
+/* Inner pages */
+
+.inner-page section {
+
+    min-height: 100vh;
+    padding-top: 150px;
+
+}
