@@ -167,11 +167,10 @@ button {
 
 .hero-title {
 
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-size: clamp(2.2rem, 5vw, 4.5rem);
     font-weight: 700;
-    line-height: 0.95;
-    color: var(--white);
-    margin-bottom: 25px;
+    line-height: 1.1;
+    max-width: 900px;
 
 }
 
@@ -887,5 +886,260 @@ select.form-control option {
         text-align: center;
 
     }
+
+}
+/* Theme toggle */
+
+.theme-toggle-btn {
+
+    width: 42px;
+    height: 42px;
+    margin-left: 18px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    font-size: 1.1rem;
+    transition: 0.3s ease;
+
+}
+
+.theme-toggle-btn:hover {
+
+    background-color: var(--teal);
+    color: var(--navy);
+    transform: translateY(-2px);
+
+}
+
+/* Stars animation */
+
+.hero-section {
+
+    position: relative;
+
+}
+
+.stars-layer {
+
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 1px),
+        radial-gradient(circle, rgba(173, 188, 159, 0.9) 1px, transparent 1px);
+    background-size: 90px 90px, 150px 150px;
+    background-position: 0 0, 45px 70px;
+    animation: moveStars 24s linear infinite;
+
+}
+
+.hero-content {
+
+    position: relative;
+    z-index: 2;
+
+}
+
+@keyframes moveStars {
+
+    from {
+        background-position: 0 0, 45px 70px;
+    }
+
+    to {
+        background-position: 350px 350px, 500px 520px;
+    }
+
+}
+
+/* Light theme */
+
+body.light-theme {
+
+    background-color: var(--light-gray);
+    color: var(--navy);
+
+}
+
+body.light-theme .custom-navbar {
+
+    background-color: rgba(245, 247, 240, 0.95);
+
+}
+
+body.light-theme .logo-text,
+body.light-theme .custom-nav-link {
+
+    color: var(--navy) !important;
+
+}
+
+body.light-theme .theme-toggle-btn {
+
+    background-color: rgba(18, 55, 42, 0.12);
+    color: var(--navy);
+
+}
+
+body.light-theme .hero-section {
+
+    background:
+        radial-gradient(circle at top right, rgba(173, 188, 159, 0.45), transparent 35%),
+        linear-gradient(135deg, #F5F7F0 0%, #E6EAD8 55%, #ADBC9F 100%);
+
+}
+
+body.light-theme .stars-layer {
+
+    opacity: 0.45;
+    background-image:
+        radial-gradient(circle, rgba(18, 55, 42, 0.45) 1px, transparent 1px),
+        radial-gradient(circle, rgba(67, 104, 80, 0.75) 1px, transparent 1px);
+
+}
+
+body.light-theme .hero-title,
+body.light-theme .hero-subtitle {
+
+    color: var(--navy);
+
+}
+
+body.light-theme .hero-description {
+
+    color: #436850;
+
+}
+/* Stars layer */
+
+.stars-layer {
+
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+
+}
+
+/* Twinkling stars */
+
+.star {
+
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.9);
+    animation: twinkle 3s infinite ease-in-out;
+
+}
+
+.star:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+.star:nth-child(2) { top: 20%; left: 70%; animation-delay: 1s; }
+.star:nth-child(3) { top: 35%; left: 50%; animation-delay: 2s; }
+.star:nth-child(4) { top: 55%; left: 85%; animation-delay: 0.5s; }
+.star:nth-child(5) { top: 75%; left: 25%; animation-delay: 1.5s; }
+.star:nth-child(6) { top: 65%; left: 60%; animation-delay: 2.5s; }
+.star:nth-child(7) { top: 15%; left: 90%; animation-delay: 3s; }
+.star:nth-child(8) { top: 80%; left: 75%; animation-delay: 1.2s; }
+
+/* Twinkle animation */
+
+@keyframes twinkle {
+
+    0%,100% {
+
+        opacity: 0.2;
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        opacity: 1;
+        transform: scale(1.8);
+
+    }
+
+}
+
+/* Shooting star */
+
+.shooting-star {
+
+    position: absolute;
+    top: 20%;
+    left: -20%;
+    width: 180px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.9)
+    );
+
+    transform: rotate(-25deg);
+
+    animation: shootingStar 9s linear infinite;
+
+}
+
+/* Second shooting star */
+
+.shooting-star-2 {
+
+    top: 50%;
+    animation-delay: 4s;
+
+}
+
+/* Shooting animation */
+
+@keyframes shootingStar {
+
+    0% {
+
+        transform: translateX(0) rotate(-25deg);
+        opacity: 0;
+
+    }
+
+    10% {
+
+        opacity: 1;
+
+    }
+
+    70% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform: translateX(1800px) rotate(-25deg);
+        opacity: 0;
+
+    }
+
+}
+body.light-theme .star {
+
+    background-color: rgba(18,55,42,0.6);
+
+}
+
+body.light-theme .shooting-star {
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(18,55,42,0.8)
+    );
 
 }
