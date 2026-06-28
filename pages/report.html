@@ -1,61 +1,481 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Report Issue | CivicConnect</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Font -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-<body class="inner-page">
+    <!-- Styles -->
 
-    <section class="complaint-section">
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
 
-        <div class="container">
+  <body class="inner-page">
+    <!--  
+         Report Hero
+     -->
 
-            <a href="../index.html#report-form" class="dashboard-btn mb-4">
-                ← Back To Home
-            </a>
+    <section class="report-hero">
+      <div class="container">
+        <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
 
-            <div class="about-card mt-4">
+        <div class="report-hero-card">
+          <p class="section-label">CIVICCONNECT PORTAL</p>
 
-                <p class="section-label">
-                    REPORT ISSUE
-                </p>
+          <h1 class="report-title">Report A Civic Issue</h1>
 
-                <h1>
-                    Submit A Civic Complaint
-                </h1>
-
-                <p class="about-text">
-                    This page will be connected with Firebase in Phase 2. For now, use the homepage complaint form to generate a sample complaint.
-                </p>
-
-                <a href="../index.html#report-form" class="hero-btn mt-3">
-                    Go To Complaint Form
-                </a>
-
-            </div>
-
+          <p class="report-description">
+            Help improve your community by reporting civic issues quickly and
+            accurately. Generate a professional complaint, save it securely to
+            the cloud, and track its progress from your dashboard.
+          </p>
         </div>
-
+      </div>
     </section>
 
-</body>
+    <!--  
+         Reporting Progress
+     -->
 
+    <section class="report-progress-section">
+      <div class="container">
+        <div class="progress-card">
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-track-fill" id="progressTrackFill"></div>
+          </div>
+
+          <div class="row g-4 progress-steps-row">
+            <!-- Step 1 -->
+
+            <div class="col-lg-3 col-md-6">
+              <div
+                class="progress-step active-step"
+                id="progressStep1"
+                data-progress-step="1"
+              >
+                <div class="step-number">
+                  <span class="step-number-label">1</span>
+                </div>
+
+                <h5>Choose Category</h5>
+
+                <p>Select the civic issue you wish to report.</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+
+            <div class="col-lg-3 col-md-6">
+              <div
+                class="progress-step"
+                id="progressStep2"
+                data-progress-step="2"
+              >
+                <div class="step-number">
+                  <span class="step-number-label">2</span>
+                </div>
+
+                <h5>Describe Problem</h5>
+
+                <p>Explain the issue with enough detail.</p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+
+            <div class="col-lg-3 col-md-6">
+              <div
+                class="progress-step"
+                id="progressStep3"
+                data-progress-step="3"
+              >
+                <div class="step-number">
+                  <span class="step-number-label">3</span>
+                </div>
+
+                <h5>Choose Language</h5>
+
+                <p>Pick how your complaint should be written.</p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+
+            <div class="col-lg-3 col-md-6">
+              <div
+                class="progress-step"
+                id="progressStep4"
+                data-progress-step="4"
+              >
+                <div class="step-number">
+                  <span class="step-number-label">4</span>
+                </div>
+
+                <h5>View Result</h5>
+
+                <p>Review, copy, and save your generated complaint.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--  
+         Report Wizard
+     -->
+
+    <section class="report-workspace">
+      <div class="container">
+        <div class="workspace-card" id="reportWizard">
+          <input
+            type="hidden"
+            id="complaintCategory"
+            value=""
+          />
+
+          <div class="wizard-panels-container" id="wizardPanelsContainer">
+          <!--  
+                 Wizard Step 1 — Category
+              -->
+
+          <div
+            class="wizard-panel active-wizard-panel"
+            id="wizardStep1"
+            data-wizard-step="1"
+          >
+            <p class="section-label">STEP 1</p>
+
+            <h2 class="report-block-title">Choose Issue Category</h2>
+
+            <p class="report-block-description">
+              Select the civic issue that best matches your complaint.
+            </p>
+
+            <div class="row g-4 mt-2" id="categoryGrid">
+              <div class="col-lg-4 col-md-6">
+                <div class="category-card" data-category="Garbage">
+                  <div class="category-icon">🗑️</div>
+
+                  <h4>Garbage</h4>
+
+                  <p>
+                    Overflowing garbage, waste collection, sanitation and
+                    cleanliness issues.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6">
+                <div class="category-card" data-category="Electricity">
+                  <div class="category-icon">⚡</div>
+
+                  <h4>Electricity</h4>
+
+                  <p>
+                    Power outages, damaged wiring, street lights and electrical
+                    faults.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6">
+                <div class="category-card" data-category="Water">
+                  <div class="category-icon">💧</div>
+
+                  <h4>Water</h4>
+
+                  <p>
+                    Water shortages, leakage, contamination and supply issues.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="category-card" data-category="Gas">
+                  <div class="category-icon">🔥</div>
+
+                  <h4>Gas</h4>
+
+                  <p>Gas load shedding, leakage and low pressure complaints.</p>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="category-card" data-category="Road Damage">
+                  <div class="category-icon">🛣️</div>
+
+                  <h4>Road Damage</h4>
+
+                  <p>
+                    Broken roads, potholes, damaged footpaths and road safety
+                    issues.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p
+              class="wizard-field-error"
+              id="categoryError"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <!--  
+                 Wizard Step 2 — Description
+              -->
+
+          <div
+            class="wizard-panel"
+            id="wizardStep2"
+            data-wizard-step="2"
+          >
+            <p class="section-label">STEP 2</p>
+
+            <h2 class="report-block-title">Describe Your Issue</h2>
+
+            <p class="report-block-description">
+              Explain your civic issue clearly so that the authorities
+              understand the problem.
+            </p>
+
+            <div class="selected-category-display" id="selectedCategoryDisplay">
+              <span class="selected-category-label">Selected category:</span>
+
+              <span class="selected-category-value" id="selectedCategoryLabel">
+                —
+              </span>
+            </div>
+
+            <div class="mb-4 mt-4">
+              <label class="form-label" for="complaintText">
+                Your Complaint
+              </label>
+
+              <textarea
+                id="complaintText"
+                class="form-control"
+                rows="7"
+                maxlength="500"
+                placeholder="Example: Garbage has not been collected in my area for the last 3 days."
+              ></textarea>
+
+              <p
+                class="wizard-field-error"
+                id="complaintTextError"
+                role="alert"
+                aria-live="polite"
+              ></p>
+
+              <div class="character-counter text-end">
+                <span id="characterCount">0</span>
+
+                / 500 characters
+
+                <span class="character-min-hint" id="characterMinHint"></span>
+              </div>
+            </div>
+          </div>
+
+          <!--  
+                 Wizard Step 3 — Language
+              -->
+
+          <div
+            class="wizard-panel"
+            id="wizardStep3"
+            data-wizard-step="3"
+          >
+            <p class="section-label">STEP 3</p>
+
+            <h2 class="report-block-title">Choose Complaint Language</h2>
+
+            <p class="report-block-description">
+              Select the language for your generated complaint letter.
+            </p>
+
+            <div class="language-selector">
+              <button
+                type="button"
+                class="language-btn active-language"
+                data-language="English"
+              >
+                English
+              </button>
+
+              <button
+                type="button"
+                class="language-btn"
+                data-language="Roman Urdu"
+              >
+                Roman Urdu
+              </button>
+
+              <button
+                type="button"
+                class="language-btn"
+                data-language="Urdu"
+              >
+                اردو
+              </button>
+            </div>
+          </div>
+
+          <!--  
+                 Wizard Step 4 — Result
+              -->
+
+          <div
+            class="wizard-panel"
+            id="wizardStep4"
+            data-wizard-step="4"
+          >
+            <p class="section-label">STEP 4</p>
+
+            <h2 class="report-block-title">Generated Complaint</h2>
+
+            <p class="report-block-description">
+              CivicConnect has prepared a professional complaint based on your
+              details. Copy it or submit it to the authorities.
+            </p>
+
+            <div id="resultLoading" class="wizard-loading" style="display: none">
+              <div class="wizard-spinner"></div>
+
+              <p>Generating and saving your complaint…</p>
+            </div>
+
+            <div id="resultCard" class="result-card" style="display: none">
+              <h3 id="resultTitle">Complaint Generated</h3>
+
+              <p id="resultText"></p>
+
+              <div class="result-actions mt-4">
+                <button type="button" class="hero-btn copy-btn">
+                  📋 Copy Complaint
+                </button>
+
+                <button type="button" class="dashboard-btn authority-btn">
+                  📤 Submit To Authorities
+                </button>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <!--  
+                 Wizard Navigation
+              -->
+
+          <div class="wizard-navigation">
+            <button
+              type="button"
+              class="dashboard-btn wizard-nav-btn"
+              id="wizardPrevBtn"
+              disabled
+            >
+              ← Previous
+            </button>
+
+            <p class="wizard-step-counter">
+              Step
+              <span id="currentStepNumber">1</span>
+              of 4
+            </p>
+
+            <button
+              type="button"
+              class="hero-btn wizard-nav-btn"
+              id="wizardNextBtn"
+            >
+              Next →
+            </button>
+          </div>
+
+          <p class="wizard-keyboard-hint">
+            Arrow keys navigate options · Ctrl+Enter continues · Esc goes back
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--  
+     Toast Notifications
+  -->
+
+    <div
+      class="toast-container position-fixed top-0 end-0 p-4"
+      id="toastContainer"
+    ></div>
+
+    <!--  
+     Footer
+  -->
+
+    <footer class="footer-section">
+      <div class="container text-center">
+        <p>© 2026 CivicConnect</p>
+
+        <p class="footer-text">
+          Smart Civic Issue Reporting System for Karachi
+        </p>
+      </div>
+    </footer>
+
+    <!--  
+     jQuery
+  -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!--  
+     Bootstrap
+  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--  
+     Firebase
+  -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <script src="../assets/js/firebase.js"></script>
+
+    <!--  
+     Shared UI
+  -->
+
+    <script src="../assets/js/ui.js"></script>
+
+    <!--  
+     Report Logic
+  -->
+
+    <script src="../assets/js/report.js"></script>
+  </body>
 </html>

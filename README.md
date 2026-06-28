@@ -83,8 +83,7 @@ civic-issue-resolution/
 2. Open the project folder
 3. Open `index.html` in your browser
 
-No server setup is required for Phase 1.
----
+## No server setup is required for Phase 1.
 
 ## Live Demo
 
