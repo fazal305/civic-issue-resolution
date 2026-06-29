@@ -6,6 +6,7 @@ $(document).ready(function () {
   let dashboardState = {
     allComplaints: [],
     filteredComplaints: [],
+    selectedComplaints: [],
     searchDebounceTimer: null,
     currentPage: 1,
     complaintsPerPage: 6,
@@ -757,10 +758,18 @@ $(document).ready(function () {
     );
 
     return `
-            <div class="col-lg-4 col-md-6">
-                <div
-                    class="complaint-card"
+    <div class="col-lg-4 col-md-6">
+        <div
+            class="complaint-card"
+            data-id="${complaint.id}">
+
+            <label class="bulk-select-wrap">
+                <input
+                    type="checkbox"
+                    class="bulk-select-checkbox"
                     data-id="${complaint.id}">
+                <span>Select</span>
+            </label>
                     
                     <div class="complaint-card-top">
                         <span class="category-badge ${categoryClass}">
@@ -1160,12 +1169,159 @@ $(document).ready(function () {
       goToPage(parseInt($(this).data("page"), 10));
     });
   }
+  function updateBulkActionsBar() {
+    let selectedCount = dashboardState.selectedComplaints.length;
 
+    $("#selectedComplaintsCount").text(selectedCount);
+
+    if (selectedCount > 0) {
+      $("#bulkActionsBar").addClass("visible");
+    } else {
+      $("#bulkActionsBar").removeClass("visible");
+    }
+  }
+
+  function toggleComplaintSelection(complaintId, isSelected) {
+    if (isSelected) {
+      if (dashboardState.selectedComplaints.indexOf(complaintId) === -1) {
+        dashboardState.selectedComplaints.push(complaintId);
+      }
+    } else {
+      dashboardState.selectedComplaints =
+        dashboardState.selectedComplaints.filter(function (id) {
+          return id !== complaintId;
+        });
+    }
+
+    $('.complaint-card[data-id="' + complaintId + '"]').toggleClass(
+      "selected",
+      isSelected,
+    );
+
+    updateBulkActionsBar();
+  }
+  function exportSelectedComplaints() {
+    if (dashboardState.selectedComplaints.length === 0) {
+      showToast("Please select at least one complaint to export.", "warning");
+
+      return;
+    }
+
+    let selectedData = dashboardState.allComplaints.filter(
+      function (complaint) {
+        return dashboardState.selectedComplaints.indexOf(complaint.id) !== -1;
+      },
+    );
+
+    let exportText = "CivicConnect Selected Complaints\n";
+    exportText += "================================\n\n";
+
+    selectedData.forEach(function (complaint, index) {
+      exportText += "Complaint " + (index + 1) + "\n";
+      exportText += "ID: " + complaint.id + "\n";
+      exportText += "Category: " + (complaint.category || "N/A") + "\n";
+      exportText += "Status: " + (complaint.status || "Pending") + "\n";
+      exportText += "Language: " + (complaint.language || "English") + "\n";
+      exportText += "Location: " + (complaint.location || "Karachi") + "\n";
+      exportText += "Date: " + formatComplaintDate(complaint.timestamp) + "\n";
+      exportText +=
+        "Complaint Text: " + (complaint.complaintText || "N/A") + "\n";
+      exportText +=
+        "Generated Complaint: " +
+        (complaint.generatedComplaint || "N/A") +
+        "\n";
+      exportText += "\n--------------------------------\n\n";
+    });
+
+    let blob = new Blob([exportText], {
+      type: "text/plain;charset=utf-8",
+    });
+
+    let exportUrl = URL.createObjectURL(blob);
+
+    let downloadLink = document.createElement("a");
+
+    downloadLink.href = exportUrl;
+
+    downloadLink.download = "civicconnect-selected-complaints.txt";
+
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
+
+    URL.revokeObjectURL(exportUrl);
+
+    showToast("Selected complaints exported successfully.", "success");
+  }
   function initializeCardActions() {
+    $("#complaintsContainer").on(
+      "change",
+      ".bulk-select-checkbox",
+      function () {
+        let complaintId = $(this).data("id");
+
+        let isSelected = $(this).is(":checked");
+
+        toggleComplaintSelection(complaintId, isSelected);
+      },
+    );
     $("#complaintsContainer").on("click", ".view-full-btn", function () {
       $(this).closest(".complaint-card").find(".full-complaint").slideToggle();
     });
+    function deleteSelectedComplaints() {
+      if (dashboardState.selectedComplaints.length === 0) {
+        showToast("Please select at least one complaint first.", "warning");
 
+        return;
+      }
+
+      let confirmDelete = window.confirm(
+        "Are you sure you want to delete " +
+          dashboardState.selectedComplaints.length +
+          " selected complaint(s)?",
+      );
+
+      if (!confirmDelete) {
+        return;
+      }
+      $("#bulkDeleteBtn").click(function () {
+        deleteSelectedComplaints();
+      });
+
+      let deletePromises = [];
+      $("#bulkExportBtn").click(function () {
+        exportSelectedComplaints();
+      });
+      dashboardState.selectedComplaints.forEach(function (complaintId) {
+        deletePromises.push(complaintsCollection.doc(complaintId).delete());
+      });
+
+      Promise.all(deletePromises)
+        .then(function () {
+          dashboardState.allComplaints = dashboardState.allComplaints.filter(
+            function (complaint) {
+              return (
+                dashboardState.selectedComplaints.indexOf(complaint.id) === -1
+              );
+            },
+          );
+
+          dashboardState.selectedComplaints = [];
+
+          updateBulkActionsBar();
+
+          filterComplaints(true);
+
+          showToast("Selected complaints deleted successfully.", "success");
+        })
+        .catch(function (error) {
+          console.log(error);
+
+          showToast("Could not delete selected complaints.", "danger");
+        });
+    }
     $("#complaintsContainer").on("click", ".delete-btn", function () {
       let complaintId = $(this).data("id");
 

@@ -178,7 +178,25 @@
         </div>
 
         <p class="dashboard-results-summary" id="searchResultsSummary"></p>
+        <!-- Bulk Actions -->
 
+        <div class="bulk-actions-bar" id="bulkActionsBar">
+          <div class="bulk-actions-info">
+            <strong id="selectedComplaintsCount"> 0 </strong>
+
+            complaints selected
+          </div>
+
+          <div class="bulk-actions-buttons">
+            <button type="button" class="dashboard-btn" id="bulkExportBtn">
+              Export Selected
+            </button>
+
+            <button type="button" class="dashboard-btn" id="bulkDeleteBtn">
+              Delete Selected
+            </button>
+          </div>
+        </div>
         <div class="active-filters-bar" id="activeFiltersBar">
           <span class="active-filters-label">Active filters</span>
 
@@ -195,13 +213,23 @@
 
         <!-- Loading Skeletons -->
 
-        <p
-          class="skeleton-loading-label"
-          id="skeletonLoadingLabel"
+        <div
+          class="dashboard-skeleton-grid"
+          id="dashboardSkeletonGrid"
           aria-live="polite"
         >
-          Loading complaints...
-        </p>
+          <div class="dashboard-skeleton-card"></div>
+
+          <div class="dashboard-skeleton-card"></div>
+
+          <div class="dashboard-skeleton-card"></div>
+
+          <div class="dashboard-skeleton-card"></div>
+
+          <div class="dashboard-skeleton-card"></div>
+
+          <div class="dashboard-skeleton-card"></div>
+        </div>
 
         <!-- Empty State -->
 
