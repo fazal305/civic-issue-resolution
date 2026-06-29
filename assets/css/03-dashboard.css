@@ -844,3 +844,136 @@
     box-shadow 0.25s ease,
     transform 0.25s ease;
 }
+/* Complaint Detail Timeline */
+
+.complaint-timeline {
+  display: grid;
+
+  gap: 22px;
+
+  margin-top: 24px;
+}
+
+.timeline-item {
+  display: grid;
+
+  grid-template-columns: 24px 1fr;
+
+  gap: 16px;
+
+  color: var(--text-gray);
+}
+
+.timeline-dot {
+  width: 18px;
+
+  height: 18px;
+
+  margin-top: 4px;
+
+  border-radius: 50%;
+
+  background-color: var(--navy-border);
+
+  border: 2px solid var(--text-gray);
+}
+
+.timeline-item h5 {
+  color: var(--text-light);
+
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  margin-bottom: 0;
+
+  line-height: 1.7;
+}
+
+.timeline-item.active-timeline .timeline-dot {
+  background-color: var(--teal);
+
+  border-color: var(--teal);
+
+  box-shadow: 0 0 18px var(--teal-glow);
+}
+
+.timeline-item.active-timeline h5 {
+  color: var(--white);
+}
+/*  
+   Print Styles
+  */
+
+@media print {
+
+    body {
+
+        background: var(--white);
+
+        color: #000;
+
+    }
+
+    .dashboard-btn,
+    .hero-btn,
+    .toast-container,
+    .navbar,
+    .footer-section,
+    .footer,
+    #printComplaintBtn,
+    #downloadComplaintBtn {
+
+        display: none !important;
+
+    }
+
+    .about-card {
+
+        box-shadow: none;
+
+        border: 1px solid #ccc;
+
+        background: var(--white);
+
+        color: #000;
+
+    }
+
+    .about-card h1,
+    .about-card h2,
+    .about-card h3,
+    .about-card h4,
+    .about-card h5 {
+
+        color: #000;
+
+    }
+
+    .about-card p {
+
+        color: #222;
+
+    }
+
+    .complaint-status {
+
+        color: #000;
+
+        border: 1px solid #000;
+
+        box-shadow: none;
+
+    }
+
+    .timeline-dot {
+
+        background: #000;
+
+        border-color: #000;
+
+        box-shadow: none;
+
+    }
+
+}
