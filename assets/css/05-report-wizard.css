@@ -532,3 +532,60 @@
   color: var(--text-gray);
   margin-bottom: 0;
 }
+/*  
+   Location Picker
+  */
+
+.location-picker {
+  margin-top: 28px;
+}
+
+.complaint-map {
+  width: 100%;
+
+  height: 360px;
+
+  margin-top: 16px;
+
+  border: 1px solid var(--navy-border);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow: 0 0 24px var(--teal-glow);
+}
+
+.selected-location-text {
+  margin-bottom: 0;
+
+  color: var(--text-light);
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+}
+
+.selected-location-text span {
+  color: var(--teal);
+
+  font-weight: 600;
+}
+
+/* Leaflet Theme */
+
+.leaflet-container {
+  background-color: var(--navy);
+
+  font-family: "Outfit", sans-serif;
+}
+
+.leaflet-popup-content {
+  color: #222;
+
+  font-family: "Outfit", sans-serif;
+}
+
+.leaflet-control-zoom a {
+  color: var(--navy);
+}

@@ -25,6 +25,13 @@
       rel="stylesheet"
     />
 
+    <!-- Leaflet CSS -->
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
     <!-- Styles -->
 
     <link rel="stylesheet" href="../assets/css/style.css" />
@@ -303,6 +310,33 @@
 
                   <span class="character-min-hint" id="characterMinHint"></span>
                 </div>
+                <!-- Location Picker -->
+
+                <div class="location-picker mt-4">
+                  <label class="form-label"> Complaint Location </label>
+
+                  <p class="report-block-description">
+                    Click on the map to select the issue location. Default
+                    location is Karachi.
+                  </p>
+
+                  <input type="hidden" id="complaintLatitude" value="24.8607" />
+
+                  <input
+                    type="hidden"
+                    id="complaintLongitude"
+                    value="67.0011"
+                  />
+
+                  <input type="hidden" id="complaintLocation" value="Karachi" />
+
+                  <div id="complaintMap" class="complaint-map"></div>
+
+                  <p class="selected-location-text mt-3">
+                    📍 Selected Location:
+                    <span id="selectedLocationText"> Karachi </span>
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -465,9 +499,11 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <script src="../assets/js/firebase.js"></script>
 
-    <!--  
-     Shared UI
-  -->
+    <!-- Leaflet JS -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Shared UI -->
 
     <script src="../assets/js/ui.js"></script>
     <script src="../assets/js/auth.js"></script>
