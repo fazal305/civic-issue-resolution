@@ -45,9 +45,23 @@ $(document).ready(function () {
     firebaseAuth
       .createUserWithEmailAndPassword(email, password)
       .then(function (userCredential) {
-        return userCredential.user.updateProfile({
-          displayName: name,
-        });
+        let newUser = userCredential.user;
+
+        return newUser
+          .updateProfile({
+            displayName: name,
+          })
+          .then(function () {
+            return firestoreDatabase.collection("users").doc(newUser.uid).set({
+              name: name,
+
+              email: email,
+
+              role: "citizen",
+
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+          });
       })
       .then(function () {
         showToast("Account created successfully. Please login.", "success");

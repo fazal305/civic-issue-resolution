@@ -69,11 +69,57 @@ $(document).ready(function () {
     });
   }
 
+  function requireAdmin() {
+    firebaseAuth.onAuthStateChanged(function (user) {
+      if (!user) {
+        showToast("Please login first.", "warning");
+
+        setTimeout(function () {
+          window.location.href = "login.html";
+        }, 900);
+
+        return;
+      }
+
+      firestoreDatabase
+        .collection("users")
+        .doc(user.uid)
+        .get()
+        .then(function (document) {
+          if (!document.exists) {
+            showToast("User profile not found.", "danger");
+
+            window.location.href = "complaints.html";
+
+            return;
+          }
+
+          let userData = document.data();
+
+          if (userData.role !== "admin") {
+            showToast("Administrator access required.", "danger");
+
+            setTimeout(function () {
+              window.location.href = "complaints.html";
+            }, 900);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+
+          showToast("Unable to verify permissions.", "danger");
+
+          window.location.href = "complaints.html";
+        });
+    });
+  }
+
   window.civicAuth = {
     getCurrentUser: getCurrentUser,
     isUserLoggedIn: isUserLoggedIn,
     logoutUser: logoutUser,
     requireLogin: requireLogin,
+    requireAdmin: requireAdmin,
   };
 
   watchAuthState();
