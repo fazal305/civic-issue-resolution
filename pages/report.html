@@ -38,7 +38,9 @@
     <section class="report-hero">
       <div class="container">
         <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
-
+        <button type="button" class="dashboard-btn mb-4 ms-2" id="logoutBtn">
+          Logout
+        </button>
         <div class="report-hero-card">
           <p class="section-label">CIVICCONNECT PORTAL</p>
 
@@ -469,9 +471,14 @@
 
     <script src="../assets/js/ui.js"></script>
     <script src="../assets/js/auth.js"></script>
-    <!--  
-     Report Logic
-  -->
+
+    <script>
+      $(document).ready(function () {
+        civicAuth.requireLogin();
+      });
+    </script>
+
+    <!-- Report Logic -->
 
     <script src="../assets/js/report.js"></script>
   </body>

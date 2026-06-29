@@ -18,6 +18,9 @@ $(document).ready(function () {
       .signOut()
       .then(function () {
         showToast("Logged out successfully.", "success");
+        setTimeout(function () {
+          window.location.href = "login.html";
+        }, 900);
       })
       .catch(function (error) {
         console.log(error);
@@ -25,7 +28,9 @@ $(document).ready(function () {
         showToast("Could not log out. Please try again.", "danger");
       });
   }
-
+  $("#logoutBtn").click(function () {
+    logoutUser();
+  });
   function watchAuthState() {
     firebaseAuth.onAuthStateChanged(function (user) {
       let currentPage = window.location.pathname.toLowerCase();
@@ -45,10 +50,30 @@ $(document).ready(function () {
     });
   }
 
+  function requireLogin() {
+    firebaseAuth.onAuthStateChanged(function (user) {
+      if (user) {
+        return;
+      }
+
+      sessionStorage.setItem(
+        "civicRedirectAfterLogin",
+        window.location.pathname + window.location.search,
+      );
+
+      showToast("Please login to continue.", "warning");
+
+      setTimeout(function () {
+        window.location.href = "login.html";
+      }, 900);
+    });
+  }
+
   window.civicAuth = {
     getCurrentUser: getCurrentUser,
     isUserLoggedIn: isUserLoggedIn,
     logoutUser: logoutUser,
+    requireLogin: requireLogin,
   };
 
   watchAuthState();

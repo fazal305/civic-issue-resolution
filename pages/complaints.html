@@ -28,7 +28,9 @@
     <section class="complaints-section">
       <div class="container">
         <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
-
+        <button type="button" class="dashboard-btn mb-4 ms-2" id="logoutBtn">
+          Logout
+        </button>
         <div class="section-heading text-center">
           <p class="section-label">MY COMPLAINTS</p>
 
@@ -335,6 +337,14 @@
     <!-- Shared UI -->
 
     <script src="../assets/js/ui.js"></script>
+
+    <script src="../assets/js/auth.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        civicAuth.requireLogin();
+      });
+    </script>
 
     <!-- Complaints Logic -->
 

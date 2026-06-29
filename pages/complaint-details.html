@@ -43,7 +43,9 @@
         <a href="complaints.html" class="dashboard-btn mb-4">
           ← Back To Dashboard
         </a>
-
+        <button type="button" class="dashboard-btn mb-4 ms-2" id="logoutBtn">
+          Logout
+        </button>
         <div class="about-card" id="complaintDetailsCard">
           <div class="text-center py-5">
             <div class="spinner-border text-info" role="status">
@@ -75,6 +77,14 @@
     <!-- Shared UI -->
 
     <script src="../assets/js/ui.js"></script>
+
+    <script src="../assets/js/auth.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        civicAuth.requireLogin();
+      });
+    </script>
 
     <!-- Complaint Details Logic -->
 

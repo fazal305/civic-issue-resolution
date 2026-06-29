@@ -43,7 +43,9 @@
     <section class="about-section reveal-section">
       <div class="container">
         <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
-
+        <button type="button" class="dashboard-btn mb-4 ms-2" id="logoutBtn">
+          Logout
+        </button>
         <div class="section-heading text-center">
           <p class="section-label">ADMIN DASHBOARD</p>
 
@@ -198,6 +200,14 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
     <script src="../assets/js/firebase.js"></script>
+
+    <script src="../assets/js/auth.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        civicAuth.requireLogin();
+      });
+    </script>
 
     <!-- Admin Logic -->
 

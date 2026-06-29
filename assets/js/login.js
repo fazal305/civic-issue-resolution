@@ -40,7 +40,15 @@ $(document).ready(function () {
         showToast("Logged in successfully.", "success");
 
         setTimeout(function () {
-          window.location.href = "complaints.html";
+          let redirectPage = sessionStorage.getItem("civicRedirectAfterLogin");
+
+          if (redirectPage) {
+            sessionStorage.removeItem("civicRedirectAfterLogin");
+
+            window.location.href = redirectPage;
+          } else {
+            window.location.href = "complaints.html";
+          }
         }, 900);
       })
       .catch(function (error) {
