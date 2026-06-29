@@ -136,10 +136,46 @@
           </div>
         </div>
 
-        <div class="text-center mt-5">
-          <a href="complaints.html" class="hero-btn">
-            View Current Complaints
-          </a>
+        <!-- Admin Live Dashboard -->
+
+        <div class="about-card mt-5">
+          <p class="section-label">LIVE COMPLAINT MANAGEMENT</p>
+
+          <h2 class="section-title">Manage Submitted Complaints</h2>
+
+          <p class="section-description">
+            Admins can review submitted complaints and update their status.
+          </p>
+
+          <div class="admin-stats-grid" id="adminStatsGrid">
+            <div class="admin-stat-card">
+              <span class="admin-stat-label"> Total </span>
+
+              <strong id="adminTotalCount"> 0 </strong>
+            </div>
+
+            <div class="admin-stat-card">
+              <span class="admin-stat-label"> Pending </span>
+
+              <strong id="adminPendingCount"> 0 </strong>
+            </div>
+
+            <div class="admin-stat-card">
+              <span class="admin-stat-label"> In Progress </span>
+
+              <strong id="adminProgressCount"> 0 </strong>
+            </div>
+
+            <div class="admin-stat-card">
+              <span class="admin-stat-label"> Resolved </span>
+
+              <strong id="adminResolvedCount"> 0 </strong>
+            </div>
+          </div>
+
+          <div class="admin-table-wrap mt-4" id="adminTableWrap">
+            <p class="about-text">Loading complaints...</p>
+          </div>
         </div>
       </div>
     </section>
@@ -155,5 +191,16 @@
     <!-- Shared UI -->
 
     <script src="../assets/js/ui.js"></script>
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <script src="../assets/js/firebase.js"></script>
+
+    <!-- Admin Logic -->
+
+    <script src="../assets/js/admin.js"></script>
   </body>
 </html>
