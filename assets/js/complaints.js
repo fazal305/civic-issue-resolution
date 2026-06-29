@@ -312,9 +312,14 @@ $(document).ready(function () {
         " complaints";
     } else if (hasActiveFilters(searchTerms)) {
       summaryText =
-        "Showing " + filteredCount + " of " + totalCount + " complaints";
+        "Showing " +
+        filteredCount +
+        " of " +
+        totalCount +
+        " complaints matching your filters";
     } else {
-      summaryText = "Showing all " + totalCount + " complaints";
+      summaryText =
+        "Showing all " + totalCount + " complaints in your dashboard";
     }
 
     $("#searchResultsSummary").text(summaryText).show();
