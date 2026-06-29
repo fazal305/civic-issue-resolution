@@ -693,3 +693,49 @@
     animation: none;
   }
 }
+/* Dashboard Skeleton Loading */
+
+.dashboard-skeleton-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 24px;
+
+  margin-top: 24px;
+}
+
+.dashboard-skeleton-card {
+  height: 260px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+
+  background-size: 300% 100%;
+
+  border: 1px solid var(--navy-border);
+
+  animation: skeletonLoading 1.3s linear infinite;
+}
+
+@keyframes skeletonLoading {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-skeleton-card {
+    animation: none;
+  }
+}
