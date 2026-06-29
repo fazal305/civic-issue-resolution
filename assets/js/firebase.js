@@ -25,8 +25,13 @@ if (firebase.apps.length === 0) {
 //
 // Firestore
 //
+// Firebase Services
+
+let firebaseAuth = firebase.auth();
 
 let firestoreDatabase = firebase.firestore();
+
+// Firestore Collection
 
 let complaintsCollection = firestoreDatabase.collection("complaints");
 
@@ -44,8 +49,10 @@ console.group("🔥 CivicConnect Firebase");
 
 console.log("Firebase Initialized");
 
-console.log("Project ID:", firebase.app().options.projectId);
+console.log("Project:", firebase.app().options.projectId);
 
-console.log("Firestore:", firestoreDatabase);
+console.log("Authentication Ready:", firebaseAuth);
+
+console.log("Firestore Ready:", firestoreDatabase);
 
 console.groupEnd();
