@@ -14,22 +14,38 @@ let firebaseConfig = {
   appId: "1:612311604202:web:88d7875dd89af859907093",
 };
 
+//
 // Initialize Firebase
+//
 
-firebase.initializeApp(firebaseConfig);
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-// Firestore Database Reference
+//
+// Firestore
+//
 
 let firestoreDatabase = firebase.firestore();
 
-// Firestore Collection
-
 let complaintsCollection = firestoreDatabase.collection("complaints");
 
-// Test Connection
+//
+// Firebase Storage (Future)
+//
+
+// let storage = firebase.storage();
+
+//
+// Debug
+//
+
+console.group("🔥 CivicConnect Firebase");
 
 console.log("Firebase Initialized");
 
-console.log("Project:", firebase.app().options.projectId);
+console.log("Project ID:", firebase.app().options.projectId);
 
-console.log("Firestore Ready:", firestoreDatabase);
+console.log("Firestore:", firestoreDatabase);
+
+console.groupEnd();

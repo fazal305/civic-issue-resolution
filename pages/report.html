@@ -151,238 +151,235 @@
           <input
             type="hidden"
             id="complaintCategory"
+            name="complaintCategory"
             value=""
           />
 
           <div class="wizard-panels-container" id="wizardPanelsContainer">
-          <!--  
+            <!--  
                  Wizard Step 1 — Category
               -->
 
-          <div
-            class="wizard-panel active-wizard-panel"
-            id="wizardStep1"
-            data-wizard-step="1"
-          >
-            <p class="section-label">STEP 1</p>
+            <div
+              class="wizard-panel active-wizard-panel"
+              id="wizardStep1"
+              data-wizard-step="1"
+            >
+              <p class="section-label">STEP 1</p>
 
-            <h2 class="report-block-title">Choose Issue Category</h2>
+              <h2 class="report-block-title">Choose Issue Category</h2>
 
-            <p class="report-block-description">
-              Select the civic issue that best matches your complaint.
-            </p>
+              <p class="report-block-description">
+                Select the civic issue that best matches your complaint.
+              </p>
 
-            <div class="row g-4 mt-2" id="categoryGrid">
-              <div class="col-lg-4 col-md-6">
-                <div class="category-card" data-category="Garbage">
-                  <div class="category-icon">🗑️</div>
+              <div class="row g-4 mt-2" id="categoryGrid">
+                <div class="col-lg-4 col-md-6">
+                  <div class="category-card" data-category="Garbage">
+                    <div class="category-icon">🗑️</div>
 
-                  <h4>Garbage</h4>
+                    <h4>Garbage</h4>
 
-                  <p>
-                    Overflowing garbage, waste collection, sanitation and
-                    cleanliness issues.
-                  </p>
+                    <p>
+                      Overflowing garbage, waste collection, sanitation and
+                      cleanliness issues.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                  <div class="category-card" data-category="Electricity">
+                    <div class="category-icon">⚡</div>
+
+                    <h4>Electricity</h4>
+
+                    <p>
+                      Power outages, damaged wiring, street lights and
+                      electrical faults.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                  <div class="category-card" data-category="Water">
+                    <div class="category-icon">💧</div>
+
+                    <h4>Water</h4>
+
+                    <p>
+                      Water shortages, leakage, contamination and supply issues.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="category-card" data-category="Gas">
+                    <div class="category-icon">🔥</div>
+
+                    <h4>Gas</h4>
+
+                    <p>
+                      Gas load shedding, leakage and low pressure complaints.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="category-card" data-category="Road Damage">
+                    <div class="category-icon">🛣️</div>
+
+                    <h4>Road Damage</h4>
+
+                    <p>
+                      Broken roads, potholes, damaged footpaths and road safety
+                      issues.
+                    </p>
+                  </div>
                 </div>
               </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="category-card" data-category="Electricity">
-                  <div class="category-icon">⚡</div>
-
-                  <h4>Electricity</h4>
-
-                  <p>
-                    Power outages, damaged wiring, street lights and electrical
-                    faults.
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="category-card" data-category="Water">
-                  <div class="category-icon">💧</div>
-
-                  <h4>Water</h4>
-
-                  <p>
-                    Water shortages, leakage, contamination and supply issues.
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="category-card" data-category="Gas">
-                  <div class="category-icon">🔥</div>
-
-                  <h4>Gas</h4>
-
-                  <p>Gas load shedding, leakage and low pressure complaints.</p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="category-card" data-category="Road Damage">
-                  <div class="category-icon">🛣️</div>
-
-                  <h4>Road Damage</h4>
-
-                  <p>
-                    Broken roads, potholes, damaged footpaths and road safety
-                    issues.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <p
-              class="wizard-field-error"
-              id="categoryError"
-              role="alert"
-              aria-live="polite"
-            ></p>
-          </div>
-
-          <!--  
-                 Wizard Step 2 — Description
-              -->
-
-          <div
-            class="wizard-panel"
-            id="wizardStep2"
-            data-wizard-step="2"
-          >
-            <p class="section-label">STEP 2</p>
-
-            <h2 class="report-block-title">Describe Your Issue</h2>
-
-            <p class="report-block-description">
-              Explain your civic issue clearly so that the authorities
-              understand the problem.
-            </p>
-
-            <div class="selected-category-display" id="selectedCategoryDisplay">
-              <span class="selected-category-label">Selected category:</span>
-
-              <span class="selected-category-value" id="selectedCategoryLabel">
-                —
-              </span>
-            </div>
-
-            <div class="mb-4 mt-4">
-              <label class="form-label" for="complaintText">
-                Your Complaint
-              </label>
-
-              <textarea
-                id="complaintText"
-                class="form-control"
-                rows="7"
-                maxlength="500"
-                placeholder="Example: Garbage has not been collected in my area for the last 3 days."
-              ></textarea>
 
               <p
                 class="wizard-field-error"
-                id="complaintTextError"
+                id="categoryError"
                 role="alert"
                 aria-live="polite"
               ></p>
+            </div>
 
-              <div class="character-counter text-end">
-                <span id="characterCount">0</span>
+            <!--  
+                 Wizard Step 2 — Description
+              -->
 
-                / 500 characters
+            <div class="wizard-panel" id="wizardStep2" data-wizard-step="2">
+              <p class="section-label">STEP 2</p>
 
-                <span class="character-min-hint" id="characterMinHint"></span>
+              <h2 class="report-block-title">Describe Your Issue</h2>
+
+              <p class="report-block-description">
+                Explain your civic issue clearly so that the authorities
+                understand the problem.
+              </p>
+
+              <div
+                class="selected-category-display"
+                id="selectedCategoryDisplay"
+              >
+                <span class="selected-category-label">Selected category:</span>
+
+                <span
+                  class="selected-category-value"
+                  id="selectedCategoryLabel"
+                >
+                  —
+                </span>
+              </div>
+
+              <div class="mb-4 mt-4">
+                <label class="form-label" for="complaintText">
+                  Your Complaint
+                </label>
+
+                <textarea
+                  id="complaintText"
+                  class="form-control"
+                  rows="7"
+                  maxlength="500"
+                  placeholder="Example: Garbage has not been collected in my area for the last 3 days."
+                ></textarea>
+
+                <p
+                  class="wizard-field-error"
+                  id="complaintTextError"
+                  role="alert"
+                  aria-live="polite"
+                ></p>
+
+                <div class="character-counter text-end">
+                  <span id="characterCount">0</span>
+
+                  / 500 characters
+
+                  <span class="character-min-hint" id="characterMinHint"></span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!--  
+            <!--  
                  Wizard Step 3 — Language
               -->
 
-          <div
-            class="wizard-panel"
-            id="wizardStep3"
-            data-wizard-step="3"
-          >
-            <p class="section-label">STEP 3</p>
+            <div class="wizard-panel" id="wizardStep3" data-wizard-step="3">
+              <p class="section-label">STEP 3</p>
 
-            <h2 class="report-block-title">Choose Complaint Language</h2>
+              <h2 class="report-block-title">Choose Complaint Language</h2>
 
-            <p class="report-block-description">
-              Select the language for your generated complaint letter.
-            </p>
+              <p class="report-block-description">
+                Select the language for your generated complaint letter.
+              </p>
 
-            <div class="language-selector">
-              <button
-                type="button"
-                class="language-btn active-language"
-                data-language="English"
-              >
-                English
-              </button>
-
-              <button
-                type="button"
-                class="language-btn"
-                data-language="Roman Urdu"
-              >
-                Roman Urdu
-              </button>
-
-              <button
-                type="button"
-                class="language-btn"
-                data-language="Urdu"
-              >
-                اردو
-              </button>
-            </div>
-          </div>
-
-          <!--  
-                 Wizard Step 4 — Result
-              -->
-
-          <div
-            class="wizard-panel"
-            id="wizardStep4"
-            data-wizard-step="4"
-          >
-            <p class="section-label">STEP 4</p>
-
-            <h2 class="report-block-title">Generated Complaint</h2>
-
-            <p class="report-block-description">
-              CivicConnect has prepared a professional complaint based on your
-              details. Copy it or submit it to the authorities.
-            </p>
-
-            <div id="resultLoading" class="wizard-loading" style="display: none">
-              <div class="wizard-spinner"></div>
-
-              <p>Generating and saving your complaint…</p>
-            </div>
-
-            <div id="resultCard" class="result-card" style="display: none">
-              <h3 id="resultTitle">Complaint Generated</h3>
-
-              <p id="resultText"></p>
-
-              <div class="result-actions mt-4">
-                <button type="button" class="hero-btn copy-btn">
-                  📋 Copy Complaint
+              <div class="language-selector">
+                <button
+                  type="button"
+                  class="language-btn active-language"
+                  data-language="English"
+                >
+                  English
                 </button>
 
-                <button type="button" class="dashboard-btn authority-btn">
-                  📤 Submit To Authorities
+                <button
+                  type="button"
+                  class="language-btn"
+                  data-language="Roman Urdu"
+                >
+                  Roman Urdu
+                </button>
+
+                <button type="button" class="language-btn" data-language="Urdu">
+                  اردو
                 </button>
               </div>
             </div>
-          </div>
+
+            <!--  
+                 Wizard Step 4 — Result
+              -->
+
+            <div class="wizard-panel" id="wizardStep4" data-wizard-step="4">
+              <p class="section-label">STEP 4</p>
+
+              <h2 class="report-block-title">Generated Complaint</h2>
+
+              <p class="report-block-description">
+                CivicConnect has prepared a professional complaint based on your
+                details. Copy it or submit it to the authorities.
+              </p>
+
+              <div
+                id="resultLoading"
+                class="wizard-loading"
+                style="display: none"
+              >
+                <div class="wizard-spinner"></div>
+
+                <p>Generating and saving your complaint…</p>
+              </div>
+
+              <div id="resultCard" class="result-card" style="display: none">
+                <h3 id="resultTitle">Complaint Generated</h3>
+
+                <p id="resultText"></p>
+
+                <div class="result-actions mt-4">
+                  <button type="button" class="hero-btn copy-btn">
+                    📋 Copy Complaint
+                  </button>
+
+                  <button type="button" class="dashboard-btn authority-btn">
+                    📤 Submit To Authorities
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!--  

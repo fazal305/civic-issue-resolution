@@ -27,9 +27,7 @@
   <body class="inner-page complaints-page">
     <section class="complaints-section">
       <div class="container">
-        <a href="../index.html" class="dashboard-btn mb-4">
-          ← Back To Home
-        </a>
+        <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
 
         <div class="section-heading text-center">
           <p class="section-label">MY COMPLAINTS</p>
@@ -96,9 +94,7 @@
 
           <div class="dashboard-filters">
             <div class="filter-group">
-              <label class="form-label" for="categoryFilter">
-                Category
-              </label>
+              <label class="form-label" for="categoryFilter"> Category </label>
 
               <select id="categoryFilter" class="form-control dashboard-input">
                 <option value="">All Categories</option>
@@ -130,9 +126,7 @@
             </div>
 
             <div class="filter-group">
-              <label class="form-label" for="languageFilter">
-                Language
-              </label>
+              <label class="form-label" for="languageFilter"> Language </label>
 
               <select id="languageFilter" class="form-control dashboard-input">
                 <option value="">All Languages</option>
@@ -212,10 +206,9 @@
         <!-- Empty State -->
 
         <div
-          class="empty-box"
-          id="emptyBox"
-          role="status"
-          aria-live="polite"
+          class="empty-box-actions empty-box-filter-actions"
+          id="emptyBoxFilterActions"
+          style="display: none"
         >
           <div class="empty-box-card">
             <div class="empty-box-icon-wrap">
@@ -229,8 +222,8 @@
             </h3>
 
             <p class="empty-box-message" id="emptyBoxMessage">
-              You have not submitted any complaints yet. Report an issue in
-              your area and track its progress right here.
+              You have not submitted any complaints yet. Report an issue in your
+              area and track its progress right here.
             </p>
 
             <div class="empty-box-actions" id="emptyBoxPrimaryActions">
@@ -263,21 +256,13 @@
           id="complaintsPagination"
           aria-label="Complaints pagination"
         >
-          <button
-            type="button"
-            class="pagination-btn"
-            id="paginationPrevBtn"
-          >
+          <button type="button" class="pagination-btn" id="paginationPrevBtn">
             ← Previous
           </button>
 
           <div class="pagination-pages" id="paginationPages"></div>
 
-          <button
-            type="button"
-            class="pagination-btn"
-            id="paginationNextBtn"
-          >
+          <button type="button" class="pagination-btn" id="paginationNextBtn">
             Next →
           </button>
         </nav>

@@ -1,22 +1,34 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Character set -->
+    <!-- Character Set -->
+
     <meta charset="UTF-8" />
 
-    <!-- Mobile responsiveness -->
+    <!-- Mobile Responsiveness -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Website title -->
-    <title>Civic Issue and Resolution Website</title>
+    <!-- SEO -->
+
+    <meta
+      name="description"
+      content="CivicConnect helps Pakistani citizens report garbage, electricity, water, gas, and road issues through a multilingual civic complaint platform."
+    />
+
+    <!-- Website Title -->
+
+    <title>CivicConnect | Smart Civic Issue Reporting Platform</title>
 
     <!-- Bootstrap CSS -->
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
 
     <!-- Google Font -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +39,7 @@
     />
 
     <!-- External CSS -->
+
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
@@ -36,35 +49,40 @@
     <div
       class="toast-container position-fixed top-0 end-0 p-4"
       id="toastContainer"
-      style="z-index: 9999"
     ></div>
+
     <!-- Navbar -->
 
     <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
       <div class="container">
         <!-- Logo -->
 
-        <a class="navbar-brand logo-text" href="#">
+        <a class="navbar-brand logo-text" href="#home">
           CIVIC<span>CONNECT</span>
         </a>
 
-        <!-- Mobile toggle -->
+        <!-- Mobile Toggle -->
 
         <button
           class="navbar-toggler custom-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#mainNavbar"
+          aria-controls="mainNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar links -->
+        <!-- Navbar Links -->
 
         <div class="collapse navbar-collapse" id="mainNavbar">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
             <li class="nav-item">
-              <a class="nav-link custom-nav-link active-nav" href="#"> Home </a>
+              <a class="nav-link custom-nav-link active-nav" href="#home">
+                Home
+              </a>
             </li>
 
             <li class="nav-item">
@@ -86,7 +104,20 @@
             </li>
 
             <li class="nav-item">
-              <button class="theme-toggle-btn" id="themeToggleBtn">🌙</button>
+              <a class="nav-link custom-nav-link" href="pages/contact.html">
+                Contact
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <button
+                class="theme-toggle-btn"
+                id="themeToggleBtn"
+                type="button"
+                aria-label="Toggle theme"
+              >
+                🌙
+              </button>
             </li>
           </ul>
         </div>
@@ -98,45 +129,47 @@
     <section class="hero-section" id="home">
       <div class="stars-layer">
         <span class="star"></span>
+
         <span class="star"></span>
+
         <span class="star"></span>
+
         <span class="star"></span>
+
         <span class="star"></span>
+
         <span class="star"></span>
+
         <span class="star"></span>
+
         <span class="star"></span>
 
         <span class="shooting-star"></span>
+
         <span class="shooting-star shooting-star-2"></span>
       </div>
 
       <div class="container">
         <div class="hero-content">
-          <!-- Small label -->
-
           <p class="hero-label">CIVIC TECH FOR PAKISTAN</p>
 
-          <!-- Main heading -->
-
           <h1 class="hero-title">Report Civic Issues Faster & Smarter</h1>
-
-          <!-- Urdu subtitle -->
 
           <p class="hero-subtitle">
             شہری مسائل جیسے کچرا، بجلی، پانی، گیس اور سڑک کی خرابی آسانی سے
             رپورٹ کریں
           </p>
 
-          <!-- Description -->
-
           <p class="hero-description">
             A simple platform where citizens can report public issues in
             English, Roman Urdu, or Urdu and generate a structured complaint.
           </p>
 
-          <!-- Button -->
+          <div class="result-actions">
+            <a href="pages/report.html" class="hero-btn"> Report an Issue </a>
 
-          <a href="pages/report.html" class="hero-btn"> Report an Issue </a>
+            <a href="#how-it-works" class="dashboard-btn"> How It Works </a>
+          </div>
         </div>
       </div>
     </section>
@@ -145,8 +178,6 @@
 
     <section class="category-section reveal-section" id="categories">
       <div class="container">
-        <!-- Section heading -->
-
         <div class="section-heading text-center">
           <p class="section-label">ISSUE CATEGORIES</p>
 
@@ -157,8 +188,6 @@
             wizard.
           </p>
         </div>
-
-        <!-- Category cards -->
 
         <div class="row g-4 mt-4">
           <!-- Garbage -->
@@ -171,10 +200,7 @@
 
               <p>Kachra / کچرا</p>
 
-              <a
-                href="pages/report.html?category=Garbage"
-                class="category-btn"
-              >
+              <a href="pages/report.html?category=Garbage" class="category-btn">
                 Report
               </a>
             </div>
@@ -209,10 +235,7 @@
 
               <p>Water / پانی</p>
 
-              <a
-                href="pages/report.html?category=Water"
-                class="category-btn"
-              >
+              <a href="pages/report.html?category=Water" class="category-btn">
                 Report
               </a>
             </div>
@@ -228,10 +251,7 @@
 
               <p>Gas Supply / گیس</p>
 
-              <a
-                href="pages/report.html?category=Gas"
-                class="category-btn"
-              >
+              <a href="pages/report.html?category=Gas" class="category-btn">
                 Report
               </a>
             </div>
@@ -289,9 +309,7 @@
                 dashboard.
               </p>
 
-              <a href="pages/report.html" class="hero-btn">
-                Report an Issue
-              </a>
+              <a href="pages/report.html" class="hero-btn"> Report an Issue </a>
 
               <a
                 href="pages/complaints.html"
@@ -309,8 +327,6 @@
 
     <section class="how-section reveal-section" id="how-it-works">
       <div class="container">
-        <!-- Section heading -->
-
         <div class="section-heading text-center">
           <p class="section-label">HOW IT WORKS</p>
 
@@ -324,11 +340,7 @@
           </p>
         </div>
 
-        <!-- Steps flow -->
-
         <div class="steps-flow mt-5">
-          <!-- Step 1 -->
-
           <div class="step-box">
             <div class="step-circle">01</div>
 
@@ -336,8 +348,6 @@
 
             <p>Citizen writes or speaks the issue.</p>
           </div>
-
-          <!-- Step 2 -->
 
           <div class="step-box">
             <div class="step-circle">02</div>
@@ -347,8 +357,6 @@
             <p>System identifies the problem type.</p>
           </div>
 
-          <!-- Step 3 -->
-
           <div class="step-box">
             <div class="step-circle">03</div>
 
@@ -357,8 +365,6 @@
             <p>Issue is matched with the right department.</p>
           </div>
 
-          <!-- Step 4 -->
-
           <div class="step-box">
             <div class="step-circle">04</div>
 
@@ -366,8 +372,6 @@
 
             <p>A structured complaint is created.</p>
           </div>
-
-          <!-- Step 5 -->
 
           <div class="step-box">
             <div class="step-circle">05</div>
@@ -380,7 +384,7 @@
       </div>
     </section>
 
-    <!-- My Complaints -->
+    <!-- My Complaints Preview -->
 
     <section class="complaints-section reveal-section" id="complaints">
       <div class="container">
@@ -447,47 +451,10 @@
           </div>
         </div>
 
-        <div class="sample-data-wrapper mt-5">
-          <div class="sample-data-card" id="garbage-sample">
-            <h3>Garbage Collection Issue</h3>
-
-            <p><strong>Status:</strong> Pending</p>
-
-            <p><strong>Area:</strong> North Karachi</p>
-
-            <p>
-              <strong>Sample Complaint:</strong> Garbage has not been collected
-              for several days, causing bad smell and health concerns for nearby
-              residents.
-            </p>
-          </div>
-
-          <div class="sample-data-card" id="water-sample">
-            <h3>Water Supply Complaint</h3>
-
-            <p><strong>Status:</strong> In Progress</p>
-
-            <p><strong>Area:</strong> Gulshan-e-Iqbal</p>
-
-            <p>
-              <strong>Sample Complaint:</strong> Water supply has been
-              unavailable in the area for multiple days, creating difficulty for
-              households.
-            </p>
-          </div>
-
-          <div class="sample-data-card" id="road-sample">
-            <h3>Road Damage Complaint</h3>
-
-            <p><strong>Status:</strong> Resolved</p>
-
-            <p><strong>Area:</strong> Shahrah-e-Faisal</p>
-
-            <p>
-              <strong>Sample Complaint:</strong> Road potholes were repaired and
-              the complaint was marked as resolved.
-            </p>
-          </div>
+        <div class="text-center mt-5">
+          <a href="pages/complaints.html" class="hero-btn">
+            Open Full Dashboard
+          </a>
         </div>
       </div>
     </section>
@@ -497,8 +464,6 @@
     <section class="about-section reveal-section" id="about">
       <div class="container">
         <div class="row align-items-center g-5">
-          <!-- Left -->
-
           <div class="col-lg-6">
             <p class="section-label">ABOUT PLATFORM</p>
 
@@ -517,9 +482,11 @@
               The platform supports English, Roman Urdu, and Urdu complaint
               generation to make reporting easier for everyone.
             </p>
-          </div>
 
-          <!-- Right -->
+            <a href="pages/about.html" class="dashboard-btn mt-3">
+              Learn More
+            </a>
+          </div>
 
           <div class="col-lg-6">
             <div class="about-card">
@@ -551,8 +518,6 @@
     <footer class="site-footer">
       <div class="container">
         <div class="footer-content">
-          <!-- Footer brand -->
-
           <div>
             <h3 class="footer-logo">CIVIC<span>CONNECT</span></h3>
 
@@ -561,15 +526,11 @@
             </p>
           </div>
 
-          <!-- Footer team -->
-
           <div class="footer-team">
             <p>Team Members</p>
 
             <h4>Sufyan · Fazal · Sana</h4>
           </div>
-
-          <!-- Footer note -->
 
           <div class="footer-note">
             <p>Aptech Vision Project</p>
@@ -579,21 +540,26 @@
     </footer>
 
     <!-- jQuery -->
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <!-- Bootstrap -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Firebase -->
+
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
     <script src="assets/js/firebase.js"></script>
 
     <!-- Shared UI -->
 
     <script src="assets/js/ui.js"></script>
 
-    <!-- Homepage logic -->
+    <!-- Homepage Logic -->
 
     <script src="assets/js/main.js"></script>
   </body>
