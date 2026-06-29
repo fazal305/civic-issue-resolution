@@ -28,8 +28,17 @@ $(document).ready(function () {
 
   function watchAuthState() {
     firebaseAuth.onAuthStateChanged(function (user) {
+      let currentPage = window.location.pathname.toLowerCase();
+
       if (user) {
         console.log("Logged in:", user.email);
+
+        if (
+          currentPage.indexOf("login.html") !== -1 ||
+          currentPage.indexOf("signup.html") !== -1
+        ) {
+          window.location.href = "complaints.html";
+        }
       } else {
         console.log("No user logged in.");
       }
