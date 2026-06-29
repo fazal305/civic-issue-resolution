@@ -212,13 +212,33 @@ function generateComplaint(category, complaintText, language) {
 }
 
 function saveComplaint(category, complaintText, language, generatedComplaint) {
+  let currentUser = firebaseAuth.currentUser;
+
+  if (!currentUser) {
+    showToast("Please login before submitting a complaint.", "warning");
+
+    return $.Deferred().reject().promise();
+  }
+
   return complaintsCollection.add({
+    uid: currentUser.uid,
+
+    userEmail: currentUser.email,
+
+    userName: currentUser.displayName || "Citizen",
+
     category: category,
+
     complaintText: complaintText,
+
     language: language,
+
     generatedComplaint: generatedComplaint,
+
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+
     status: "Pending",
+
     location: "Karachi",
   });
 }

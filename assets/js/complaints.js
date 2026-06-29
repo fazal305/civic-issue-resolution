@@ -793,12 +793,18 @@ $(document).ready(function () {
                         ${metaLine}
                     </p>
 
-                    <div class="dashboard-actions">
-                        <button
-                            type="button"
-                            class="dashboard-btn view-full-btn">
-                            View Full
-                        </button>
+                   <div class="dashboard-actions">
+    <a
+        href="complaint-details.html?id=${complaint.id}"
+        class="dashboard-btn">
+        Open Details
+    </a>
+
+    <button
+        type="button"
+        class="dashboard-btn view-full-btn">
+        View Full
+    </button>
 
                         <button
                             type="button"
@@ -1010,7 +1016,16 @@ $(document).ready(function () {
   function loadComplaints() {
     showLoadingState();
 
+    let currentUser = firebaseAuth.currentUser;
+
+    if (!currentUser) {
+      showToast("Please login to view your complaints.", "warning");
+
+      return;
+    }
+
     complaintsCollection
+      .where("uid", "==", currentUser.uid)
       .get()
       .then(function (snapshot) {
         dashboardState.allComplaints = [];
