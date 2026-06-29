@@ -9,18 +9,31 @@ function updateProgressIndicator(step, previousStep) {
 
   $(".progress-step").each(function () {
     let stepNumber = $(this).data("progress-step");
+
     let $label = $(this).find(".step-number-label");
 
-    $(this).removeClass("active-step completed-step just-completed");
+    $(this)
+      .removeClass("active-step completed-step just-completed")
+      .removeAttr("aria-current");
 
     if (stepNumber < step) {
       $(this).addClass("completed-step");
+
       $label.text("✓");
+
+      $(this).attr("aria-label", "Step " + stepNumber + " completed");
     } else if (stepNumber === step) {
       $(this).addClass("active-step");
+
       $label.text(stepNumber);
+
+      $(this)
+        .attr("aria-current", "step")
+        .attr("aria-label", "Current step " + stepNumber);
     } else {
       $label.text(stepNumber);
+
+      $(this).attr("aria-label", "Step " + stepNumber + " not completed");
     }
   });
 
@@ -31,7 +44,7 @@ function updateProgressIndicator(step, previousStep) {
 
     setTimeout(function () {
       $completedStep.removeClass("just-completed");
-    }, 600);
+    }, 650);
   }
 
   $("#currentStepNumber").text(step);
@@ -221,11 +234,7 @@ function generateAndSaveComplaint() {
   let category = $("#complaintCategory").val();
   let complaintText = $("#complaintText").val().trim();
   let language = $("#reportWizard .active-language").data("language");
-  let generatedComplaint = generateComplaint(
-    category,
-    complaintText,
-    language,
-  );
+  let generatedComplaint = generateComplaint(category, complaintText, language);
 
   goToStep(4);
 
@@ -508,13 +517,19 @@ function initializeKeyboardNavigation() {
 
     if (key === "ArrowRight" || key === "ArrowDown") {
       event.preventDefault();
-      $buttons.eq((index + 1) % $buttons.length).focus().trigger("click");
+      $buttons
+        .eq((index + 1) % $buttons.length)
+        .focus()
+        .trigger("click");
       return;
     }
 
     if (key === "ArrowLeft" || key === "ArrowUp") {
       event.preventDefault();
-      $buttons.eq((index - 1 + $buttons.length) % $buttons.length).focus().trigger("click");
+      $buttons
+        .eq((index - 1 + $buttons.length) % $buttons.length)
+        .focus()
+        .trigger("click");
     }
   });
 }
