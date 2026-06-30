@@ -31,10 +31,11 @@ let firebaseAuth = firebase.auth();
 
 let firestoreDatabase = firebase.firestore();
 
+let firebaseStorage = firebase.storage();
+
 // Firestore Collection
 
 let complaintsCollection = firestoreDatabase.collection("complaints");
-
 //
 // Firebase Storage (Future)
 //
@@ -54,5 +55,7 @@ console.log("Project:", firebase.app().options.projectId);
 console.log("Authentication Ready:", firebaseAuth);
 
 console.log("Firestore Ready:", firestoreDatabase);
+
+console.log("Firebase Storage Ready:", firebaseStorage);
 
 console.groupEnd();

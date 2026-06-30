@@ -70,7 +70,37 @@ $(document).ready(function () {
     let status = complaint.status || "Pending";
 
     let statusClass = getStatusClass(status);
+    let imagesHtml = "";
 
+    if (complaint.imageUrls && complaint.imageUrls.length > 0) {
+      complaint.imageUrls.forEach(function (imageUrl) {
+        imagesHtml += `
+
+            <a
+                href="${imageUrl}"
+                target="_blank"
+                class="complaint-image-link">
+
+                <img
+                    src="${imageUrl}"
+                    alt="Complaint evidence photo"
+                    class="complaint-detail-image">
+
+            </a>
+
+        `;
+      });
+    } else {
+      imagesHtml = `
+
+        <p class="about-text">
+
+            No evidence photos were uploaded with this complaint.
+
+        </p>
+
+    `;
+    }
     $("#complaintDetailsCard").html(`
 
             <span class="complaint-status ${statusClass}">
@@ -168,7 +198,19 @@ $(document).ready(function () {
                 ${complaint.generatedComplaint || "Generated complaint text is not available."}
 
             </p>
+<hr>
 
+<h4>
+
+    Evidence Photos
+
+</h4>
+
+<div class="complaint-images-grid">
+
+    ${imagesHtml}
+
+</div>
             <hr>
 
             <h4>

@@ -336,6 +336,28 @@
                     📍 Selected Location:
                     <span id="selectedLocationText"> Karachi </span>
                   </p>
+                  <!-- Evidence Upload -->
+
+                  <div class="evidence-upload mt-4">
+                    <label class="form-label" for="complaintImages">
+                      Upload Evidence Photos
+                    </label>
+
+                    <p class="report-block-description">
+                      Attach clear photos of the issue. You can upload up to 3
+                      images.
+                    </p>
+
+                    <input
+                      type="file"
+                      id="complaintImages"
+                      class="form-control"
+                      accept="image/*"
+                      multiple
+                    />
+
+                    <div class="image-preview-grid" id="imagePreviewGrid"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -497,6 +519,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
     <script src="../assets/js/firebase.js"></script>
 
     <!-- Leaflet JS -->

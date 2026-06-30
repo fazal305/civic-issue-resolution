@@ -136,10 +136,15 @@ $(document).ready(function () {
 
 <th>
 
-    Date
+    Photos
 
 </th>
-                        </th>
+
+<th>
+
+    Date
+
+</th>                        </th>
 
                         <th>
 
@@ -188,6 +193,12 @@ $(document).ready(function () {
 
     ${escapeHtml(complaint.latitude || "N/A")},
     ${escapeHtml(complaint.longitude || "N/A")}
+
+</td>
+
+<td>
+
+    ${complaint.imageUrls && complaint.imageUrls.length ? complaint.imageUrls.length : 0}
 
 </td>
 

@@ -589,3 +589,102 @@
 .leaflet-control-zoom a {
   color: var(--navy);
 }
+/*  
+   Evidence Upload
+  */
+
+.evidence-upload {
+  margin-top: 28px;
+}
+
+.evidence-upload .form-control {
+  padding: 12px;
+
+  background-color: var(--navy-light);
+
+  border: 1px solid var(--navy-border);
+
+  color: var(--text-light);
+
+  border-radius: 14px;
+}
+
+.evidence-upload .form-control:focus {
+  border-color: var(--teal);
+
+  box-shadow: 0 0 18px var(--teal-glow);
+}
+
+.image-preview-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+  gap: 16px;
+
+  margin-top: 20px;
+}
+
+.image-preview-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid var(--navy-border);
+
+  border-radius: 16px;
+
+  background-color: var(--navy-light);
+
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+}
+
+.image-preview-card img {
+  display: block;
+
+  width: 100%;
+
+  height: 140px;
+
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+
+  top: 8px;
+
+  right: 8px;
+
+  width: 30px;
+
+  height: 30px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background-color: rgba(0, 0, 0, 0.75);
+
+  color: var(--white);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.remove-image-btn:hover {
+  background-color: var(--teal);
+
+  transform: scale(1.08);
+}
+
+.image-upload-note {
+  margin-top: 12px;
+
+  color: var(--text-gray);
+
+  font-size: 0.9rem;
+}

@@ -1,4 +1,9 @@
 let currentStep = 1;
+let selectedComplaintImages = [];
+
+let MAX_COMPLAINT_IMAGES = 3;
+
+let MAX_IMAGE_SIZE_MB = 3;
 let MIN_COMPLAINT_LENGTH = 20;
 let TOTAL_WIZARD_STEPS = 4;
 
@@ -210,7 +215,43 @@ function generateComplaint(category, complaintText, language) {
 
   return generatedComplaint;
 }
+function uploadComplaintImages() {
+  let currentUser = firebaseAuth.currentUser;
 
+  if (selectedComplaintImages.length === 0) {
+    return $.Deferred().resolve([]).promise();
+  }
+
+  if (!currentUser) {
+    return $.Deferred().reject("User not logged in").promise();
+  }
+
+  let uploadPromises = [];
+
+  selectedComplaintImages.forEach(function (file, index) {
+    let filePath =
+      "complaint-images/" +
+      currentUser.uid +
+      "/" +
+      Date.now() +
+      "-" +
+      index +
+      "-" +
+      file.name;
+
+    let storageReference = firebaseStorage.ref(filePath);
+
+    let uploadTask = storageReference.put(file);
+
+    let uploadPromise = uploadTask.then(function (snapshot) {
+      return snapshot.ref.getDownloadURL();
+    });
+
+    uploadPromises.push(uploadPromise);
+  });
+
+  return Promise.all(uploadPromises);
+}
 function saveComplaint(category, complaintText, language, generatedComplaint) {
   let currentUser = firebaseAuth.currentUser;
 
@@ -220,30 +261,34 @@ function saveComplaint(category, complaintText, language, generatedComplaint) {
     return $.Deferred().reject().promise();
   }
 
-  return complaintsCollection.add({
-    uid: currentUser.uid,
+  return uploadComplaintImages().then(function (imageUrls) {
+    return complaintsCollection.add({
+      uid: currentUser.uid,
 
-    userEmail: currentUser.email,
+      userEmail: currentUser.email,
 
-    userName: currentUser.displayName || "Citizen",
+      userName: currentUser.displayName || "Citizen",
 
-    category: category,
+      category: category,
 
-    complaintText: complaintText,
+      complaintText: complaintText,
 
-    language: language,
+      language: language,
 
-    generatedComplaint: generatedComplaint,
+      generatedComplaint: generatedComplaint,
 
-    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      imageUrls: imageUrls,
 
-    status: "Pending",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 
-    location: $("#complaintLocation").val() || "Karachi",
+      status: "Pending",
 
-    latitude: $("#complaintLatitude").val(),
+      location: $("#complaintLocation").val() || "Karachi",
 
-    longitude: $("#complaintLongitude").val(),
+      latitude: $("#complaintLatitude").val(),
+
+      longitude: $("#complaintLongitude").val(),
+    });
   });
 }
 
@@ -252,6 +297,11 @@ function showResult(category, generatedComplaint) {
   $("#resultTitle").text("Complaint Saved Successfully ✅");
   $("#resultText").text(generatedComplaint);
   $("#resultCard").fadeIn(400);
+  selectedComplaintImages = [];
+
+  $("#imagePreviewGrid").html("");
+
+  $("#complaintImages").val("");
 }
 
 function generateAndSaveComplaint() {
@@ -623,6 +673,74 @@ function initializeComplaintMap() {
     complaintMap.invalidateSize();
   }, 500);
 }
+function initializeImageUpload() {
+  if ($("#complaintImages").length === 0) {
+    return;
+  }
+
+  function renderImagePreviews() {
+    let previewHtml = "";
+
+    selectedComplaintImages.forEach(function (file, index) {
+      let imageUrl = URL.createObjectURL(file);
+
+      previewHtml += `
+        <div class="image-preview-card">
+          <img
+            src="${imageUrl}"
+            alt="Complaint evidence preview">
+
+          <button
+            type="button"
+            class="remove-image-btn"
+            data-index="${index}">
+            ×
+          </button>
+        </div>
+      `;
+    });
+
+    $("#imagePreviewGrid").html(previewHtml);
+  }
+
+  $("#complaintImages").change(function () {
+    let files = Array.from(this.files);
+
+    files.forEach(function (file) {
+      if (selectedComplaintImages.length >= MAX_COMPLAINT_IMAGES) {
+        showToast("You can upload up to 3 images only.", "warning");
+
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        showToast("Only image files are allowed.", "warning");
+
+        return;
+      }
+
+      if (file.size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+        showToast("Each image must be 3 MB or smaller.", "warning");
+
+        return;
+      }
+
+      selectedComplaintImages.push(file);
+    });
+
+    $("#complaintImages").val("");
+
+    renderImagePreviews();
+  });
+
+  $("#imagePreviewGrid").on("click", ".remove-image-btn", function () {
+    let imageIndex = $(this).data("index");
+
+    selectedComplaintImages.splice(imageIndex, 1);
+
+    renderImagePreviews();
+  });
+}
 function initializeWizard() {
   $("#wizardNextBtn").click(function () {
     advanceWizard();
@@ -668,5 +786,7 @@ $(document).ready(function () {
   initializeWizard();
   initializeKeyboardNavigation();
   initializeComplaintMap();
+
+  initializeImageUpload();
   applyCategoryFromUrl();
 });

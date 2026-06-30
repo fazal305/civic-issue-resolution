@@ -1150,3 +1150,42 @@
 .auth-card .about-text {
   color: var(--text-gray);
 }
+/* Complaint Detail Images */
+
+.complaint-images-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+  gap: 16px;
+
+  margin-top: 20px;
+}
+
+.complaint-image-link {
+  display: block;
+
+  overflow: hidden;
+
+  border: 1px solid var(--navy-border);
+
+  border-radius: 16px;
+
+  box-shadow: 0 0 18px var(--teal-glow);
+}
+
+.complaint-detail-image {
+  display: block;
+
+  width: 100%;
+
+  height: 160px;
+
+  object-fit: cover;
+
+  transition: transform 0.25s ease;
+}
+
+.complaint-image-link:hover .complaint-detail-image {
+  transform: scale(1.05);
+}
