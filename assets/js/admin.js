@@ -124,14 +124,21 @@ $(document).ready(function () {
 
                         <th>
 
-                            Location
+    Location
 
-                        </th>
+</th>
 
-                        <th>
+<th>
 
-                            Date
+    Coordinates
 
+</th>
+
+<th>
+
+    Date
+
+</th>
                         </th>
 
                         <th>
@@ -171,17 +178,24 @@ $(document).ready(function () {
 
                     </td>
 
-                    <td>
+                   <td>
 
-                        ${escapeHtml(complaint.location || "Karachi")}
+    ${escapeHtml(complaint.location || "Karachi")}
 
-                    </td>
+</td>
 
-                    <td>
+<td>
 
-                        ${formatComplaintDate(complaint.timestamp)}
+    ${escapeHtml(complaint.latitude || "N/A")},
+    ${escapeHtml(complaint.longitude || "N/A")}
 
-                    </td>
+</td>
+
+<td>
+
+    ${formatComplaintDate(complaint.timestamp)}
+
+</td>
 
                     <td>
 

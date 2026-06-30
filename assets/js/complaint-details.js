@@ -120,12 +120,26 @@ $(document).ready(function () {
 
             </p>
 
-            <p>
+           <p>
 
-                <strong>Location:</strong>
-                ${complaint.location || "Karachi"}
+    <strong>Location:</strong>
+    ${complaint.location || "Karachi"}
 
-            </p>
+</p>
+
+<p>
+
+    <strong>Latitude:</strong>
+    ${complaint.latitude || "N/A"}
+
+</p>
+
+<p>
+
+    <strong>Longitude:</strong>
+    ${complaint.longitude || "N/A"}
+
+</p>
 
             <p>
 
@@ -253,7 +267,14 @@ $(document).ready(function () {
                    Save As PDF
 
                 </button>
+<a
+    href="https://www.openstreetmap.org/?mlat=${complaint.latitude || 24.8607}&mlon=${complaint.longitude || 67.0011}#map=16/${complaint.latitude || 24.8607}/${complaint.longitude || 67.0011}"
+    target="_blank"
+    class="dashboard-btn">
 
+    View On Map
+
+</a>
             </div>
 
         `);

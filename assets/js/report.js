@@ -239,7 +239,11 @@ function saveComplaint(category, complaintText, language, generatedComplaint) {
 
     status: "Pending",
 
-    location: "Karachi",
+    location: $("#complaintLocation").val() || "Karachi",
+
+    latitude: $("#complaintLatitude").val(),
+
+    longitude: $("#complaintLongitude").val(),
   });
 }
 
