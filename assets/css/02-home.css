@@ -12,7 +12,12 @@
       rgba(173, 188, 159, 0.28),
       transparent 35%
     ),
-    linear-gradient(135deg, #12372a 0%, #436850 55%, #0f2a1d 100%);
+    linear-gradient(
+      135deg,
+      var(--brand-green-dark) 0%,
+      var(--brand-green) 55%,
+      var(--brand-green-dark) 100%
+    );
   padding-top: 140px;
   overflow: hidden;
 }
@@ -240,7 +245,7 @@
 /* Inputs */
 
 .form-control {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--overlay-light);
   border: 1px solid rgba(255, 255, 255, 0.16);
   color: var(--white);
   padding: 14px 16px;
@@ -272,7 +277,7 @@ select.form-control option {
 }
 
 .language-btn {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--overlay-light);
   color: var(--white);
   padding: 10px 18px;
   border-radius: 50px;

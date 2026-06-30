@@ -262,7 +262,7 @@
 }
 
 #reportWizard .category-card.selected-category {
-  background: rgba(0, 194, 178, 0.12);
+  background: var(--teal-soft-bg);
 }
 
 #reportWizard .category-icon {
@@ -288,7 +288,7 @@
   gap: 10px;
   padding: 12px 20px;
   border-radius: 50px;
-  background: rgba(0, 194, 178, 0.12);
+  background: var(--teal-soft-bg);
   border: 1px solid var(--teal);
 }
 

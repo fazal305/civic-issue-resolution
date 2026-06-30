@@ -1,31 +1,27 @@
 # Firebase Setup Guide — CivicConnect
 
-This guide explains how Firebase is used in the CivicConnect project.
+CivicConnect uses Firebase through CDN scripts only.
 
-CivicConnect uses Firebase through CDN scripts only. No npm, no build tools, and no backend server are required.
+No npm, no React, no build tools, and no backend server are used.
 
 ---
 
-## 1. Firebase Services Used
+## Firebase Services Used
 
-Currently used:
+Current services:
 
 - Firebase App
-- Firebase Firestore
-
-Planned for later:
-
 - Firebase Authentication
+- Cloud Firestore
 - Firebase Storage
-- Firebase Hosting
 
 ---
 
-## 2. Current Firebase SDK
+## Firebase CDN Scripts
 
-The project uses the Firebase Compat SDK.
+Pages that use Firebase should load the required compat scripts.
 
-These scripts are included in the HTML pages that need Firebase:
+### Firestore only
 
 ```html
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>

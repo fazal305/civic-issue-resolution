@@ -229,6 +229,10 @@ function uploadComplaintImages() {
   let uploadPromises = [];
 
   selectedComplaintImages.forEach(function (file, index) {
+    let safeFileName = file.name
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9.-]/g, "");
+
     let filePath =
       "complaint-images/" +
       currentUser.uid +
@@ -237,7 +241,7 @@ function uploadComplaintImages() {
       "-" +
       index +
       "-" +
-      file.name;
+      safeFileName;
 
     let storageReference = firebaseStorage.ref(filePath);
 

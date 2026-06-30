@@ -523,17 +523,17 @@
 
 .category-electricity {
   background-color: rgba(245, 158, 11, 0.15);
-  color: #d97706;
+  color: var(--status-warning);
 }
 
 .category-water {
   background-color: rgba(59, 130, 246, 0.15);
-  color: #2563eb;
+  color: var(--status-info);
 }
 
 .category-gas {
   background-color: rgba(239, 68, 68, 0.15);
-  color: #dc2626;
+  color: var(--danger);
 }
 
 .category-road {

@@ -692,7 +692,7 @@ body:not(:has(.hero-section)) section,
 
 .civic-toast .toast-header {
   background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--overlay-light);
   color: var(--white);
 }
 
