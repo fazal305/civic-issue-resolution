@@ -18,6 +18,7 @@ $(document).ready(function () {
       .signOut()
       .then(function () {
         showToast("Logged out successfully.", "success");
+
         setTimeout(function () {
           window.location.href = "login.html";
         }, 900);
@@ -28,9 +29,7 @@ $(document).ready(function () {
         showToast("Could not log out. Please try again.", "danger");
       });
   }
-  $("#logoutBtn").click(function () {
-    logoutUser();
-  });
+
   function watchAuthState() {
     firebaseAuth.onAuthStateChanged(function (user) {
       let currentPage = window.location.pathname.toLowerCase();
@@ -113,6 +112,10 @@ $(document).ready(function () {
         });
     });
   }
+
+  $("#logoutBtn").click(function () {
+    logoutUser();
+  });
 
   window.civicAuth = {
     getCurrentUser: getCurrentUser,

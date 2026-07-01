@@ -21,18 +21,6 @@ $(document).ready(function () {
     return "pending-status";
   }
 
-  function formatComplaintDate(timestamp) {
-    if (!timestamp || !timestamp.toDate) {
-      return "Just now";
-    }
-
-    return timestamp.toDate().toLocaleDateString("en-PK", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  }
-
   function showMissingComplaint() {
     $("#complaintDetailsCard").html(`
 
