@@ -28,3 +28,16 @@ Pages that use Firebase should load the required compat scripts.
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 ```
+
+## Firebase Storage Plan Note
+
+Firebase Storage requires the Blaze pay-as-you-go plan for many new Firebase projects.
+
+For this project, image upload UI and JavaScript structure are prepared, but the feature is currently hidden and disabled to keep the application free for student/demo use.
+
+To enable image uploads later:
+
+- Upgrade the Firebase project to Blaze
+- Remove `d-none` from the evidence upload section in `pages/report.html`
+- Restore upload logic in `assets/js/report-upload.js`
+- Publish Firebase Storage security rules
