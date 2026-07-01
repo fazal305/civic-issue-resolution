@@ -3,7 +3,11 @@ function initializeComplaintMap() {
     return;
   }
 
-  let karachiCoordinates = [24.8607, 67.0011];
+  let defaultLatitude = 24.8607;
+
+  let defaultLongitude = 67.0011;
+
+  let karachiCoordinates = [defaultLatitude, defaultLongitude];
 
   let complaintMap = L.map("complaintMap").setView(karachiCoordinates, 12);
 
@@ -28,6 +32,8 @@ function initializeComplaintMap() {
 
     complaintMarker.setLatLng([latitude, longitude]);
   }
+
+  updateSelectedLocation(defaultLatitude, defaultLongitude);
 
   complaintMap.on("click", function (event) {
     updateSelectedLocation(event.latlng.lat, event.latlng.lng);

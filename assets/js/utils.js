@@ -1,7 +1,5 @@
 /*
- 
-CivicConnect Shared Utilities
- 
+  CivicConnect Shared Utilities
 */
 
 function escapeHtml(text) {
@@ -18,32 +16,53 @@ function formatComplaintDate(timestamp) {
   }
 
   if (timestamp.toDate) {
-    return timestamp.toDate().toLocaleString();
+    return timestamp.toDate().toLocaleDateString("en-PK", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
   }
 
-  return new Date(timestamp).toLocaleString();
+  return new Date(timestamp).toLocaleDateString("en-PK", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 function getStatusClass(status) {
-  switch (status) {
-    case "Pending":
-      return "pending-status";
-
-    case "In Progress":
-      return "progress-status";
-
-    case "Resolved":
-      return "resolved-status";
-
-    default:
-      return "pending-status";
+  if (status === "In Progress") {
+    return "progress-status";
   }
+
+  if (status === "Resolved") {
+    return "resolved-status";
+  }
+
+  return "pending-status";
 }
 
-function showLoading($element) {
-  $element.prop("disabled", true);
+function truncateText(text, limit) {
+  if (!text) {
+    return "";
+  }
+
+  if (text.length <= limit) {
+    return text;
+  }
+
+  return text.substring(0, limit) + "...";
+}
+
+function showLoading($element, loadingText) {
+  $element
+    .data("original-text", $element.text())
+    .text(loadingText || "Loading...")
+    .prop("disabled", true);
 }
 
 function hideLoading($element) {
-  $element.prop("disabled", false);
+  let originalText = $element.data("original-text");
+
+  $element.text(originalText || $element.text()).prop("disabled", false);
 }

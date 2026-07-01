@@ -2,33 +2,56 @@ let currentStep = 1;
 
 let selectedComplaintImages = [];
 
-let MAX_COMPLAINT_IMAGES = 3;
+let REPORT_CONFIG = {
+  maxComplaintImages: 3,
+  maxImageSizeMb: 3,
+  minComplaintLength: 20,
+  totalWizardSteps: 4,
+};
 
-let MAX_IMAGE_SIZE_MB = 3;
+let MAX_COMPLAINT_IMAGES = REPORT_CONFIG.maxComplaintImages;
 
-let MIN_COMPLAINT_LENGTH = 20;
+let MAX_IMAGE_SIZE_MB = REPORT_CONFIG.maxImageSizeMb;
 
-let TOTAL_WIZARD_STEPS = 4;
+let MIN_COMPLAINT_LENGTH = REPORT_CONFIG.minComplaintLength;
+
+let TOTAL_WIZARD_STEPS = REPORT_CONFIG.totalWizardSteps;
 
 function initializeCopyButton() {
-  $(".copy-btn").click(function () {
-    let complaint = $("#resultText").text();
+  $(".copy-btn")
+    .off("click")
+    .on("click", function () {
+      let complaint = $("#resultText").text();
 
-    navigator.clipboard
-      .writeText(complaint)
-      .then(function () {
-        showToast("Complaint copied to clipboard!", "success");
-      })
-      .catch(function () {
-        showToast("Unable to copy complaint.", "danger");
-      });
-  });
+      if (!complaint) {
+        showToast("No complaint text available to copy.", "warning");
+
+        return;
+      }
+
+      if (!navigator.clipboard) {
+        showToast("Clipboard is not supported in this browser.", "danger");
+
+        return;
+      }
+
+      navigator.clipboard
+        .writeText(complaint)
+        .then(function () {
+          showToast("Complaint copied to clipboard!", "success");
+        })
+        .catch(function () {
+          showToast("Unable to copy complaint.", "danger");
+        });
+    });
 }
 
 function initializeAuthorityButton() {
-  $(".authority-btn").click(function () {
-    showToast("Feature coming soon.", "info");
-  });
+  $(".authority-btn")
+    .off("click")
+    .on("click", function () {
+      showToast("Submission guidance is coming soon.", "info");
+    });
 }
 
 $(document).ready(function () {

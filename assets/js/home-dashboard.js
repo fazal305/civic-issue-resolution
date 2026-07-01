@@ -35,6 +35,22 @@ $(document).ready(function () {
     return $("<div>").text(text).html();
   }
 
+  function renderLoadingState() {
+    $("#homepageComplaintsPreview").html(`
+
+      <div class="col-12 text-center">
+
+        <p class="complaint-text">
+
+          Loading recent complaints...
+
+        </p>
+
+      </div>
+
+    `);
+  }
+
   function renderEmptyPreview() {
     $("#homepageComplaintsPreview").html(`
 
@@ -56,8 +72,7 @@ $(document).ready(function () {
 
           <p class="complaint-text">
 
-            Recent complaints will appear here once citizens start reporting
-            civic issues.
+            Recent complaints will appear here once citizens start reporting civic issues.
 
           </p>
 
@@ -88,20 +103,23 @@ $(document).ready(function () {
     complaints.forEach(function (complaint) {
       let status = complaint.status || "Pending";
 
-      let statusClass = getStatusClass(status);
-
       let previewText =
         complaint.complaintText ||
         complaint.generatedComplaint ||
         "No complaint description available.";
 
+      let preview =
+        previewText.length > 110
+          ? previewText.substring(0, 110) + "..."
+          : previewText;
+
       cardsHtml += `
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-4">
 
           <div class="complaint-card">
 
-            <span class="complaint-status ${statusClass}">
+            <span class="complaint-status ${getStatusClass(status)}">
 
               ${escapeHomeHtml(status)}
 
@@ -115,15 +133,17 @@ $(document).ready(function () {
 
             <p>
 
-              ${escapeHomeHtml(previewText.substring(0, 110))}...
+              ${escapeHomeHtml(preview)}
 
             </p>
 
             <p class="complaint-meta">
 
               ${escapeHomeHtml(complaint.location || "Karachi")}
-              ·
-              ${escapeHomeHtml(formatHomeDate(complaint.timestamp))}
+
+              &bull;
+
+              ${formatHomeDate(complaint.timestamp)}
 
             </p>
 
@@ -144,7 +164,28 @@ $(document).ready(function () {
 
     $("#homepageComplaintsPreview").html(cardsHtml);
   }
+
   function listenHomepageComplaints() {
+    if (typeof civicFirestoreService === "undefined") {
+      $("#homepageComplaintsPreview").html(`
+
+        <div class="col-12 text-center">
+
+          <p class="complaint-text">
+
+            Firestore service is unavailable.
+
+          </p>
+
+        </div>
+
+      `);
+
+      return;
+    }
+
+    renderLoadingState();
+
     civicFirestoreService.listenLatestComplaints(
       3,
 
@@ -162,24 +203,23 @@ $(document).ready(function () {
         renderHomepageComplaints(complaints);
       },
 
-      function (error) {
-        console.log(error);
-
+      function () {
         $("#homepageComplaintsPreview").html(`
 
-        <div class="col-12 text-center">
+          <div class="col-12 text-center">
 
-          <p class="complaint-text">
+            <p class="complaint-text">
 
-            Could not load recent complaints.
+              Could not load recent complaints.
 
-          </p>
+            </p>
 
-        </div>
+          </div>
 
-      `);
+        `);
       },
     );
   }
+
   listenHomepageComplaints();
 });

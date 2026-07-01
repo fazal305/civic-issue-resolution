@@ -1,16 +1,16 @@
 # CivicConnect Development Roadmap
 
-Version: 0.2.0
+**Version:** 0.9.0
 
-Last Updated: June 2026
+**Last Updated:** June 2026
 
 ---
 
 # Project Goal
 
-CivicConnect is a civic technology platform that allows citizens to report municipal issues in Karachi.
+CivicConnect is a civic-tech web application that helps citizens in Karachi report municipal issues digitally.
 
-Current supported issue categories:
+Supported complaint categories:
 
 - Garbage
 - Electricity
@@ -18,13 +18,13 @@ Current supported issue categories:
 - Gas
 - Road Damage
 
-Users can submit complaints in:
+Supported languages:
 
 - English
 - Roman Urdu
 - Urdu
 
-Complaints are stored in Firebase Firestore.
+All complaints are securely stored in Firebase Firestore.
 
 ---
 
@@ -35,399 +35,319 @@ Complaints are stored in Firebase Firestore.
 ### Core Website
 
 - Responsive homepage
-- About page
-- Contact page
-- Category detail pages
-- Report page
+- Report wizard
 - Complaint dashboard
-
----
-
-### Theme
-
-- Dark mode
-- Light mode
-- Theme persistence
-- CSS variable system
+- Complaint details page
+- Admin dashboard
+- Login page
+- Signup page
+- Custom 404 page
+- Theme toggle
+- Live homepage complaint preview
 
 ---
 
 ### Complaint Wizard
 
-- Multi-step interface
+- Multi-step wizard
 - Progress indicator
-- Category selection
-- Complaint text
+- Animated transitions
+- Inline validation
 - Character counter
-- Language selection
-- Generated complaint
+- Keyboard navigation
+- Category deep linking
+- Complaint generation
 - Copy complaint
 - Firebase save
+- Interactive location picker (Leaflet + OpenStreetMap)
 
 ---
 
-### Validation
+### Complaint Management
 
-- Inline validation
-- Character requirement
-- Disabled Next button
-- Error messages
-- Shake animation
+- Complaint dashboard
+- Search
+- Status filters
+- Pagination
+- Delete complaint
+- Bulk selection
+- Bulk delete
+- Complaint details page
+- Print complaint
+- Save as PDF
 
 ---
 
-### Accessibility
+### Administration
 
-- Keyboard navigation
-- Focus states
-- Enter / Escape shortcuts
-- Ctrl + Enter
-- Arrow navigation
+- View all complaints
+- Live Firestore updates
+- Statistics cards
+- Status management
+
+---
+
+### Notifications
+
+- Local notification center
+- Unread counter
+- Mark all as read
+- Clear notifications
+- Complaint shortcut links
+
+---
+
+### Authentication
+
+- Email/password login
+- Signup
+- Protected pages
+- Admin role checking
+
+---
+
+### User Experience
+
+- Dark mode
+- Light mode
+- Theme persistence
+- Toast notifications
+- Scroll reveal animations
+- Skeleton loading
+- Empty states
+- Responsive design
 
 ---
 
 ### Firebase
 
-- Firestore integration
-- Complaint collection
-- Timestamp support
-- Default status
-- Default location
+- Authentication
+- Firestore
+- Realtime listeners
+- Shared Firestore service layer
 
 ---
 
-### Complaint Dashboard
+### Documentation
 
-- Complaint cards
-- Search
-- Pagination
-- Status badges
-- Filters
-- Delete complaint
-- View full complaint
-- Empty state
+- Firebase setup guide
+- Project roadmap
+- README
+- Folder organization
 
 ---
 
-# Phase 1
-
-## Project Foundation
-
-Status:
-
-Completed
-
-Features
-
-- Responsive layout
-- Theme
-- Homepage
-- Firebase
-- Complaint generation
-
----
-
-# Phase 2
-
-## User Experience Improvements
-
-Status:
-
-In Progress
-
-Completed
-
-- Multi-step wizard
-- Animated transitions
-- Keyboard support
-- Character counter
-- Dashboard pagination
-- Better status badges
-- Search improvements
-
-Remaining
-
-- Animated progress bar polish
-- Skeleton loading improvements
-- Better empty state
-- Highlight search matches
-- Better filter experience
-
----
-
-# Phase 3
-
-## Complaint Detail Page
-
-Status
-
-Planned
-
-Features
-
-- View complaint
-- Timeline
-- Metadata
-- Print
-- Download PDF
-
----
-
-# Phase 4
-
-## Admin Dashboard
-
-Status
-
-Planned
-
-Features
-
-- View all complaints
-- Statistics
-- Charts
-- Status updates
-- Complaint management
-
----
-
-# Phase 5
-
-## Authentication
-
-Status
-
-Planned
-
-Firebase Authentication
-
-Citizen
-
-- Register
-- Login
-- Profile
-
-Administrator
-
-- Login
-- Protected dashboard
-
----
-
-# Phase 6
-
-## Maps
-
-Status
-
-Planned
-
-Leaflet
-
-OpenStreetMap
-
-Features
-
-- Pick location
-- Save latitude
-- Save longitude
-- Interactive map
-
----
-
-# Phase 7
+# In Progress
 
 ## Image Uploads
 
-Status
+Current Status:
 
-Planned
+Feature Complete (Disabled)
 
-Firebase Storage
+Reason:
 
-Features
+Firebase Storage is intentionally disabled to keep the project compatible with the free Firebase Spark plan.
 
-- Multiple photos
-- Preview
-- Remove image
-- Upload progress
+Prepared Components:
 
----
+- Upload UI
+- Preview system
+- Validation
+- Feature flag
+- Upload helper
 
-# Phase 8
+To enable:
 
-## Notifications
+- Upgrade Firebase to Blaze
+- Enable Firebase Storage
+- Set:
 
-Status
-
-Planned
-
-Features
-
-- Realtime updates
-- Email notifications
-- Push notifications
-- Complaint status alerts
+```javascript
+IMAGE_UPLOADS_ENABLED = true;
+```
 
 ---
 
-# Phase 9
+# Planned
 
-## Firestore Improvements
+## Complaint Submission Guidance
 
-Status
+After generating a complaint:
 
-Planned
-
-Features
-
-- Realtime listeners
-- Server-side pagination
-- Better queries
-- Production security rules
+- Department information
+- Official website
+- Helpline numbers
+- Email
+- Office address
+- Step-by-step submission guide
+- Open official portal button
 
 ---
 
-# Phase 10
+## Complaint Editing
 
-## Production Release
+Users will be able to:
 
-Status
+- Edit complaint
+- Update description
+- Change location
+- Save changes
 
-Planned
+---
 
-Features
+## Department Portal
 
-- Offline support
-- Progressive Web App
-- Performance optimization
-- Accessibility audit
-- SEO
-- Custom 404 page
+Future administrative features:
+
+- Department dashboard
+- Complaint assignment
+- Internal comments
+- Resolution tracking
+
+---
+
+## Analytics
+
+Possible additions:
+
+- Complaint statistics
+- Charts
+- Heat maps
+- Monthly reports
+
+---
+
+## Progressive Web App
+
+Future improvements:
+
+- Offline mode
+- Installable application
+- Background sync
 
 ---
 
 # Future Ideas
 
-Possible additions
-
-- Complaint editing
-- Complaint history
-- Department assignment
+- GIS complaint heatmap
 - AI complaint improvement
-- Urdu translation improvements
-- Complaint analytics
-- GIS heat map
+- Better Urdu translation
+- SMS notifications
+- Email notifications
+- Push notifications
+- Complaint history
 - Public complaint map
 - Department response portal
-- SMS notifications
 
 ---
 
 # Current JavaScript Architecture
 
+```
 assets/js/
-
-```
-firebase.js
 ```
 
-Firebase initialization
+### Core
 
-```
-ui.js
-```
+- firebase.js
+- firestore-service.js
+- ui.js
+- utils.js
+- loader.js
 
-Shared UI
+### Homepage
 
-```
-main.js
-```
+- main.js
+- home-dashboard.js
 
-Homepage
+### Report Wizard
 
-```
-report.js
-```
+- report.js
+- report-wizard.js
+- report-generator.js
+- report-map.js
+- report-upload.js
 
-Complaint wizard
+### Dashboard
 
-```
-complaints.js
-```
+- complaints.js
+- complaint-details.js
 
-Complaint dashboard
+### Admin
+
+- admin.js
+
+### Authentication
+
+- auth.js
+- login.js
+- signup.js
+
+### Notifications
+
+- notifications.js
 
 ---
 
 # CSS Architecture
 
+```
 assets/css/
-
-```
-style.css
 ```
 
-Imports
-
-```
-01-base.css
-```
-
-Variables
-
-Typography
-
-Reset
-
-```
-02-home.css
-```
-
-Homepage
-
-```
-03-dashboard.css
-```
-
-Dashboard
-
-```
-04-shared-ui.css
-```
-
-Shared UI
-
-```
-05-report-wizard.css
-```
-
-Wizard
-
-```
-06-responsive.css
-```
-
-Responsive rules
+- 01-base.css
+- 02-home.css
+- 03-dashboard.css
+- 04-shared-ui.css
+- 05-report-wizard.css
+- 06-responsive.css
+- style.css
 
 ---
 
-# Target Release
+# Version Roadmap
 
-Version 0.3
+## Version 0.9
 
-Goal
+Completed
 
-Finish all user-facing features.
+- Report Wizard
+- Dashboard
+- Admin Panel
+- Authentication
+- Notifications
+- Maps
+- Homepage Preview
+- Complaint Details
+- Responsive UI
 
-Version 0.4
+---
 
-Goal
+## Version 1.0
 
-Authentication, maps, image uploads.
+Goals
 
-Version 1.0
+- Submission Guidance
+- Final UI Polish
+- Accessibility Improvements
+- Production Firestore Rules
+- Final Documentation
 
-Goal
+---
 
-Production-ready civic reporting platform.
+## Version 1.1
+
+Goals
+
+- Enable Firebase Storage
+- Image Uploads
+- Complaint Editing
+
+---
+
+## Version 2.0
+
+Long-term Vision
+
+Transform CivicConnect into a production-ready civic engagement platform for municipalities with department portals, analytics, maps, notifications, and citizen engagement tools.

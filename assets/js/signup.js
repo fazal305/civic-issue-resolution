@@ -3,12 +3,16 @@ $(document).ready(function () {
     return;
   }
 
+  if (typeof firebaseAuth === "undefined") {
+    showToast("Authentication service is unavailable.", "danger");
+
+    return;
+  }
+
   function setSignupLoading(isLoading) {
-    if (isLoading) {
-      $("#signupBtn").text("Creating Account...").prop("disabled", true);
-    } else {
-      $("#signupBtn").text("Create Account").prop("disabled", false);
-    }
+    $("#signupBtn")
+      .prop("disabled", isLoading)
+      .text(isLoading ? "Creating Account..." : "Create Account");
   }
 
   function validateSignupForm(name, email, password) {
@@ -25,6 +29,25 @@ $(document).ready(function () {
     }
 
     return true;
+  }
+
+  function getSignupErrorMessage(errorCode) {
+    switch (errorCode) {
+      case "auth/email-already-in-use":
+        return "An account with this email already exists.";
+
+      case "auth/invalid-email":
+        return "Please enter a valid email address.";
+
+      case "auth/weak-password":
+        return "Password must be at least 6 characters long.";
+
+      case "auth/network-request-failed":
+        return "Network error. Please check your internet connection.";
+
+      default:
+        return "Unable to create your account. Please try again.";
+    }
   }
 
   $("#signupForm").submit(function (event) {
@@ -73,11 +96,9 @@ $(document).ready(function () {
         }, 1200);
       })
       .catch(function (error) {
-        console.log(error);
-
-        showToast(error.message, "danger");
+        showToast(getSignupErrorMessage(error.code), "danger");
       })
-      .finally(function () {
+      .then(function () {
         setSignupLoading(false);
       });
   });

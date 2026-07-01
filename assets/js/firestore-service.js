@@ -5,33 +5,43 @@ let civicFirestoreService = {
       .limit(limitCount)
       .get();
   },
+
   listenLatestComplaints: function (limitCount, callback, errorCallback) {
     return complaintsCollection
       .orderBy("timestamp", "desc")
       .limit(limitCount)
       .onSnapshot(callback, errorCallback);
   },
+
   getUserComplaints: function (userId) {
     return complaintsCollection
       .where("uid", "==", userId)
       .orderBy("timestamp", "desc")
       .get();
   },
+
   listenUserComplaints: function (userId, callback, errorCallback) {
     return complaintsCollection
       .where("uid", "==", userId)
       .orderBy("timestamp", "desc")
       .onSnapshot(callback, errorCallback);
   },
+
   getAllComplaints: function () {
     return complaintsCollection.orderBy("timestamp", "desc").get();
   },
+
   listenAllComplaints: function (callback, errorCallback) {
     return complaintsCollection
       .orderBy("timestamp", "desc")
       .onSnapshot(callback, errorCallback);
   },
+
   getComplaintById: function (complaintId) {
+    if (!complaintId) {
+      return Promise.reject(new Error("Complaint ID is required."));
+    }
+
     return complaintsCollection.doc(complaintId).get();
   },
 
@@ -43,6 +53,10 @@ let civicFirestoreService = {
     return complaintsCollection.doc(complaintId).update({
       status: newStatus,
     });
+  },
+
+  updateComplaint: function (complaintId, complaintData) {
+    return complaintsCollection.doc(complaintId).update(complaintData);
   },
 
   deleteComplaint: function (complaintId) {

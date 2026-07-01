@@ -3,12 +3,16 @@ $(document).ready(function () {
     return;
   }
 
+  if (typeof firebaseAuth === "undefined") {
+    showToast("Authentication service is unavailable.", "danger");
+
+    return;
+  }
+
   function setLoginLoading(isLoading) {
-    if (isLoading) {
-      $("#loginBtn").text("Logging In...").prop("disabled", true);
-    } else {
-      $("#loginBtn").text("Login").prop("disabled", false);
-    }
+    $("#loginBtn")
+      .prop("disabled", isLoading)
+      .text(isLoading ? "Logging In..." : "Login");
   }
 
   function validateLoginForm(email, password) {
@@ -19,6 +23,27 @@ $(document).ready(function () {
     }
 
     return true;
+  }
+
+  function getLoginErrorMessage(errorCode) {
+    switch (errorCode) {
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+      case "auth/invalid-credential":
+        return "Incorrect email or password.";
+
+      case "auth/invalid-email":
+        return "Please enter a valid email address.";
+
+      case "auth/too-many-requests":
+        return "Too many login attempts. Please try again later.";
+
+      case "auth/network-request-failed":
+        return "Network error. Please check your internet connection.";
+
+      default:
+        return "Unable to sign in. Please try again.";
+    }
   }
 
   $("#loginForm").submit(function (event) {
@@ -52,11 +77,9 @@ $(document).ready(function () {
         }, 900);
       })
       .catch(function (error) {
-        console.log(error);
-
-        showToast(error.message, "danger");
+        showToast(getLoginErrorMessage(error.code), "danger");
       })
-      .finally(function () {
+      .then(function () {
         setLoginLoading(false);
       });
   });

@@ -43,171 +43,147 @@ $(document).ready(function () {
 
       optionsHtml += `
 
-                <option
-                    value="${status}"
-                    ${selected}>
+        <option
+          value="${status}"
+          ${selected}>
 
-                    ${status}
+          ${status}
 
-                </option>
+        </option>
 
-            `;
+      `;
     });
 
     return optionsHtml;
+  }
+
+  function getImageCount(complaint) {
+    if (complaint.imageUrls && complaint.imageUrls.length) {
+      return complaint.imageUrls.length;
+    }
+
+    return 0;
   }
 
   function buildAdminTable() {
     if (adminComplaints.length === 0) {
       $("#adminTableWrap").html(`
 
-                <p class="about-text">
+        <p class="about-text">
 
-                    No complaints have been submitted yet.
+          No complaints have been submitted yet.
 
-                </p>
+        </p>
 
-            `);
+      `);
 
       return;
     }
 
     let tableHtml = `
 
-            <table class="admin-table">
+      <table class="admin-table">
 
-                <thead>
+        <thead>
 
-                    <tr>
+          <tr>
 
-                        <th>
+            <th>Category</th>
 
-                            Category
+            <th>Complaint</th>
 
-                        </th>
+            <th>Language</th>
 
-                        <th>
+            <th>Location</th>
 
-                            Complaint
+            <th>Coordinates</th>
 
-                        </th>
+            <th>Photos</th>
 
-                        <th>
+            <th>Date</th>
 
-                            Language
+            <th>Status</th>
 
-                        </th>
+          </tr>
 
-                        <th>
+        </thead>
 
-    Location
+        <tbody>
 
-</th>
-
-<th>
-
-    Coordinates
-
-</th>
-
-<th>
-
-    Photos
-
-</th>
-
-<th>
-
-    Date
-
-</th>                        </th>
-
-                        <th>
-
-                            Status
-
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-        `;
+    `;
 
     adminComplaints.forEach(function (complaint) {
       tableHtml += `
 
-                <tr>
+        <tr>
 
-                    <td>
+          <td>
 
-                        ${escapeHtml(complaint.category || "N/A")}
+            ${escapeHtml(complaint.category || "N/A")}
 
-                    </td>
+          </td>
 
-                    <td>
+          <td>
 
-                        ${escapeHtml((complaint.complaintText || "").substring(0, 80))}...
+            ${escapeHtml((complaint.complaintText || "").substring(0, 80))}...
 
-                    </td>
+          </td>
 
-                    <td>
+          <td>
 
-                        ${escapeHtml(complaint.language || "English")}
+            ${escapeHtml(complaint.language || "English")}
 
-                    </td>
+          </td>
 
-                   <td>
+          <td>
 
-    ${escapeHtml(complaint.location || "Karachi")}
+            ${escapeHtml(complaint.location || "Karachi")}
 
-</td>
+          </td>
 
-<td>
+          <td>
 
-    ${escapeHtml(complaint.latitude || "N/A")},
-    ${escapeHtml(complaint.longitude || "N/A")}
+            ${escapeHtml(complaint.latitude || "N/A")},
+            ${escapeHtml(complaint.longitude || "N/A")}
 
-</td>
+          </td>
 
-<td>
+          <td>
 
-    ${complaint.imageUrls && complaint.imageUrls.length ? complaint.imageUrls.length : 0}
+            ${getImageCount(complaint)}
 
-</td>
+          </td>
 
-<td>
+          <td>
 
-    ${formatComplaintDate(complaint.timestamp)}
+            ${formatComplaintDate(complaint.timestamp)}
 
-</td>
+          </td>
 
-                    <td>
+          <td>
 
-                        <select
-                            class="form-control dashboard-input admin-status-select"
-                            data-id="${complaint.id}">
+            <select
+              class="form-control dashboard-input admin-status-select"
+              data-id="${complaint.id}">
 
-                            ${buildStatusOptions(complaint.status || "Pending")}
+              ${buildStatusOptions(complaint.status || "Pending")}
 
-                        </select>
+            </select>
 
-                    </td>
+          </td>
 
-                </tr>
+        </tr>
 
-            `;
+      `;
     });
 
     tableHtml += `
 
-                </tbody>
+        </tbody>
 
-            </table>
+      </table>
 
-        `;
+    `;
 
     $("#adminTableWrap").html(tableHtml);
   }
@@ -215,13 +191,13 @@ $(document).ready(function () {
   function loadAdminComplaints() {
     $("#adminTableWrap").html(`
 
-            <p class="about-text">
+      <p class="about-text">
 
-                Loading complaints...
+        Loading complaints...
 
-            </p>
+      </p>
 
-        `);
+    `);
 
     civicFirestoreService.listenAllComplaints(
       function (snapshot) {
@@ -247,13 +223,13 @@ $(document).ready(function () {
 
         $("#adminTableWrap").html(`
 
-        <p class="about-text">
+          <p class="about-text">
 
-          Could not load complaints. Please refresh the page.
+            Could not load complaints. Please refresh the page.
 
-        </p>
+          </p>
 
-      `);
+        `);
       },
     );
   }
@@ -262,22 +238,12 @@ $(document).ready(function () {
     civicFirestoreService
       .updateComplaintStatus(complaintId, newStatus)
       .then(function () {
-        adminComplaints.forEach(function (complaint) {
-          if (complaint.id === complaintId) {
-            complaint.status = newStatus;
-          }
-        });
-
-        updateAdminStats();
-
         showToast("Complaint status updated.", "success");
       })
       .catch(function (error) {
         console.log(error);
 
         showToast("Could not update complaint status.", "danger");
-
-        loadAdminComplaints();
       });
   }
 

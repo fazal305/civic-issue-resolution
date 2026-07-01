@@ -1306,6 +1306,44 @@ $(document).ready(function () {
 
     showToast("Selected complaints exported successfully.", "success");
   }
+  function deleteSelectedComplaints() {
+    if (dashboardState.selectedComplaints.length === 0) {
+      showToast("Please select at least one complaint first.", "warning");
+
+      return;
+    }
+
+    let confirmDelete = window.confirm(
+      "Are you sure you want to delete " +
+        dashboardState.selectedComplaints.length +
+        " selected complaint(s)?",
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    let deletePromises = [];
+
+    dashboardState.selectedComplaints.forEach(function (complaintId) {
+      deletePromises.push(civicFirestoreService.deleteComplaint(complaintId));
+    });
+
+    Promise.all(deletePromises)
+      .then(function () {
+        dashboardState.selectedComplaints = [];
+
+        updateBulkActionsBar();
+
+        showToast("Selected complaints deleted successfully.", "success");
+      })
+      .catch(function (error) {
+        console.log(error);
+
+        showToast("Could not delete selected complaints.", "danger");
+      });
+  }
+
   function initializeCardActions() {
     $("#complaintsContainer").on(
       "change",
@@ -1318,61 +1356,11 @@ $(document).ready(function () {
         toggleComplaintSelection(complaintId, isSelected);
       },
     );
+
     $("#complaintsContainer").on("click", ".view-full-btn", function () {
       $(this).closest(".complaint-card").find(".full-complaint").slideToggle();
     });
-    function deleteSelectedComplaints() {
-      if (dashboardState.selectedComplaints.length === 0) {
-        showToast("Please select at least one complaint first.", "warning");
 
-        return;
-      }
-
-      let confirmDelete = window.confirm(
-        "Are you sure you want to delete " +
-          dashboardState.selectedComplaints.length +
-          " selected complaint(s)?",
-      );
-
-      if (!confirmDelete) {
-        return;
-      }
-      $("#bulkDeleteBtn").click(function () {
-        deleteSelectedComplaints();
-      });
-
-      let deletePromises = [];
-      $("#bulkExportBtn").click(function () {
-        exportSelectedComplaints();
-      });
-      dashboardState.selectedComplaints.forEach(function (complaintId) {
-        deletePromises.push(complaintsCollection.doc(complaintId).delete());
-      });
-
-      Promise.all(deletePromises)
-        .then(function () {
-          dashboardState.allComplaints = dashboardState.allComplaints.filter(
-            function (complaint) {
-              return (
-                dashboardState.selectedComplaints.indexOf(complaint.id) === -1
-              );
-            },
-          );
-
-          dashboardState.selectedComplaints = [];
-
-          updateBulkActionsBar();
-
-          filterComplaints(true);
-
-          showToast("Selected complaints deleted successfully.", "success");
-        })
-        .catch(function (error) {
-          console.log(error);
-
-          showToast("Could not delete selected complaints.", "danger");
-        });
-    }
     $("#complaintsContainer").on("click", ".delete-btn", function () {
       let complaintId = $(this).data("id");
 
@@ -1386,8 +1374,15 @@ $(document).ready(function () {
 
       deleteComplaint(complaintId);
     });
-  }
 
+    $("#bulkDeleteBtn").click(function () {
+      deleteSelectedComplaints();
+    });
+
+    $("#bulkExportBtn").click(function () {
+      exportSelectedComplaints();
+    });
+  }
   initializeSearch();
 
   initializeFilters();

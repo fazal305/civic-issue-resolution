@@ -25,6 +25,23 @@
   </head>
 
   <body class="inner-page complaints-page">
+    <div id="pageLoader">
+      <div class="loader-content">
+        <div class="loader-logo">
+          <img
+            src="../assets/images/logo-icon.png"
+            alt="CivicConnect Logo"
+            class="loader-logo-image"
+          />
+        </div>
+
+        <h2>CivicConnect</h2>
+
+        <p>Connecting Citizens with Civic Services...</p>
+
+        <div class="loader-spinner"></div>
+      </div>
+    </div>
     <section class="complaints-section">
       <div class="container">
         <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
@@ -263,11 +280,38 @@
 
         <!-- Empty State -->
 
-        <div
-          class="empty-box-actions empty-box-filter-actions"
-          id="emptyBoxFilterActions"
-          style="display: none"
-        >
+       <div class="empty-box" id="emptyBox">
+  <div class="empty-box-card">
+    <div class="empty-box-icon-wrap">
+      <span class="empty-box-icon" aria-hidden="true">🛰️</span>
+    </div>
+
+    <p class="section-label empty-box-label">NO COMPLAINTS FOUND</p>
+
+    <h3 class="empty-box-title" id="emptyBoxTitle">No Complaints Yet</h3>
+
+    <p class="empty-box-message" id="emptyBoxMessage">
+      No civic complaints are currently visible here. Submit your first issue or
+      adjust your filters to continue tracking local problems.
+    </p>
+
+    <div class="empty-box-actions" id="emptyBoxPrimaryActions">
+      <a href="report.html" class="hero-btn empty-box-cta">
+        Report Your First Issue
+      </a>
+    </div>
+
+    <div class="empty-box-actions" id="emptyBoxFilterActions">
+      <button
+        type="button"
+        class="dashboard-btn empty-box-clear-btn"
+        id="emptyClearFiltersBtn"
+      >
+        Clear filters
+      </button>
+    </div>
+  </div>
+</div>
           <div class="empty-box-card">
             <div class="empty-box-icon-wrap">
               <span class="empty-box-icon" aria-hidden="true">🛰️</span>
@@ -356,11 +400,15 @@
 
     <!-- Firebase -->
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+   <script src="../assets/js/loader.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
-    <script src="../assets/js/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="../assets/js/firebase.js"></script>
     <script src="../assets/js/firestore-service.js"></script>
     <!-- Shared UI -->
 

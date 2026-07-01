@@ -43,7 +43,68 @@
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
-  <body>
+ <body>
+
+  <div id="pageLoader">
+
+    <div class="loader-content">
+
+      <div class="loader-logo">
+
+        <img
+    src="assets/images/logo-icon.png"
+    alt="CivicConnect"
+    class="loader-logo-image">
+
+      </div>
+
+      <h2>
+
+        CivicConnect
+
+      </h2>
+
+      <p>
+
+        Connecting Citizens with Civic Services...
+
+      </p>
+
+      <div class="loader-spinner"></div>
+
+    </div>
+
+  </div>
+    <div id="pageLoader">
+
+    <div class="loader-content">
+
+        <div class="loader-logo">
+
+            <img
+    src="assets/images/logo-icon.png"
+    alt="CivicConnect"
+    class="loader-logo-image">
+
+        </div>
+
+        <h2>
+
+            CivicConnect
+
+        </h2>
+
+        <p>
+
+            Connecting Citizens with Civic Services...
+
+        </p>
+
+        <div class="loader-spinner"></div>
+
+    </div>
+
+</div>
     <!-- Toast Container -->
 
     <div
@@ -57,9 +118,10 @@
       <div class="container">
         <!-- Logo -->
 
-        <a class="navbar-brand logo-text" href="#home">
-          CIVIC<span>CONNECT</span>
-        </a>
+     <img
+    src="assets/images/logo-horizontal.png"
+    alt="CivicConnect Logo"
+    class="navbar-logo">
 
         <!-- Mobile Toggle -->
 
@@ -539,7 +601,10 @@
       <div class="container">
         <div class="footer-content">
           <div>
-            <h3 class="footer-logo">CIVIC<span>CONNECT</span></h3>
+     <img
+    src="assets/images/logo-horizontal.png"
+    alt="CivicConnect Logo"
+    class="footer-logo">
 
             <p class="footer-text">
               A civic tech project for reporting public issues in Pakistan.
@@ -571,18 +636,27 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-    <script src="assets/js/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="assets/js/firebase.js"></script>
 <script src="assets/js/firestore-service.js"></script>
-    <!-- Shared UI -->
+   <!-- Shared UI -->
 
-    <script src="assets/js/ui.js"></script>
-    <!-- Homepage Dashboard Data -->
+<script src="assets/js/ui.js"></script>
 
-    <script src="assets/js/home-dashboard.js"></script>
-    <!-- Homepage Logic -->
+<!-- Homepage Dashboard Data -->
 
-    <script src="assets/js/main.js"></script>
+<script src="assets/js/home-dashboard.js"></script>
+
+<!-- Page Loader -->
+
+<script src="assets/js/loader.js"></script>
+
+<!-- Homepage Logic -->
+
+<script src="assets/js/main.js"></script>
+    
   </body>
 </html>

@@ -3,25 +3,34 @@ function generateComplaint(category, complaintText, language) {
 
   if (language === "English") {
     generatedComplaint =
-      "To the concerned authorities, I would like to report a " +
+      "To the concerned authorities,\n\n" +
+      "I would like to report a " +
       category +
       " issue in my area. " +
       complaintText +
-      ". This issue has been affecting the residents and requires immediate attention. I request prompt action. Thank you.";
+      ". This issue is affecting local residents and requires immediate attention.\n\n" +
+      "I request the concerned department to take prompt action.\n\n" +
+      "Thank you.";
   } else if (language === "Roman Urdu") {
     generatedComplaint =
-      "Mutalliqah Adhikariyon ko, Main apne ilaake mein " +
+      "Mutalliqah idaray ke naam,\n\n" +
+      "Main apne ilaqay mein " +
       category +
-      " ki masla report karna chahta hoon. " +
+      " ka masla report karna chahta hoon. " +
       complaintText +
-      ". Yeh masla rehne walon ko affect kar raha hai aur fori tawajjoh ki zaroorat hai. Kripya jaldi action lein. Shukriya.";
+      ". Yeh masla ilaqay ke logon ko mutasir kar raha hai aur is par fori tawajjoh ki zaroorat hai.\n\n" +
+      "Barah-e-karam is maslay par jald az jald action liya jaye.\n\n" +
+      "Shukriya.";
   } else {
     generatedComplaint =
-      "متعلقہ حکام کو، میں اپنے علاقے میں " +
+      "متعلقہ ادارے کے نام،\n\n" +
+      "میں اپنے علاقے میں " +
       category +
-      " کی مشکل رپورٹ کرنا چاہتا ہوں۔ " +
+      " کا مسئلہ رپورٹ کرنا چاہتا ہوں۔ " +
       complaintText +
-      "۔ یہ مسئلہ مقامی لوگوں کو متاثر کر رہا ہے اور فوری توجہ کی ضرورت ہے۔ برائے کرم فوری اقدام کریں۔ شکریہ۔";
+      "۔ یہ مسئلہ مقامی رہائشیوں کو متاثر کر رہا ہے اور اس پر فوری توجہ کی ضرورت ہے۔\n\n" +
+      "براہِ کرم اس مسئلے پر جلد از جلد کارروائی کی جائے۔\n\n" +
+      "شکریہ۔";
   }
 
   return generatedComplaint;
@@ -37,34 +46,32 @@ function saveComplaint(category, complaintText, language, generatedComplaint) {
   }
 
   return uploadComplaintImages().then(function (imageUrls) {
-    return complaintsCollection.add({
+    let complaintData = {
       uid: currentUser.uid,
-
       userEmail: currentUser.email,
-
       userName: currentUser.displayName || "Citizen",
-
       category: category,
-
       complaintText: complaintText,
-
       language: language,
-
       generatedComplaint: generatedComplaint,
-
       imageUrls: imageUrls,
-
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-
       status: "Pending",
-
       location: $("#complaintLocation").val() || "Karachi",
-
       latitude: $("#complaintLatitude").val(),
-
       longitude: $("#complaintLongitude").val(),
-    });
+    };
+
+    return civicFirestoreService.createComplaint(complaintData);
   });
+}
+
+function resetImageUploadState() {
+  selectedComplaintImages = [];
+
+  $("#imagePreviewGrid").html("");
+
+  $("#complaintImages").val("");
 }
 
 function showResult(category, generatedComplaint) {
@@ -76,11 +83,13 @@ function showResult(category, generatedComplaint) {
 
   $("#resultCard").fadeIn(400);
 
-  selectedComplaintImages = [];
+  resetImageUploadState();
+}
 
-  $("#imagePreviewGrid").html("");
+function setWizardSubmitting(isSubmitting) {
+  $("#wizardNextBtn").prop("disabled", isSubmitting);
 
-  $("#complaintImages").val("");
+  $("#wizardPrevBtn").prop("disabled", isSubmitting);
 }
 
 function generateAndSaveComplaint() {
@@ -98,27 +107,21 @@ function generateAndSaveComplaint() {
 
   $("#resultCard").hide();
 
-  $("#wizardNextBtn").prop("disabled", true);
-
-  $("#wizardPrevBtn").prop("disabled", true);
+  setWizardSubmitting(true);
 
   saveComplaint(category, complaintText, language, generatedComplaint)
     .then(function () {
       showResult(category, generatedComplaint);
     })
-    .catch(function (error) {
-      console.log(error);
-
+    .catch(function () {
       $("#resultLoading").hide();
 
       showToast("Could not save the complaint. Please try again.", "danger");
 
       goToStep(3);
     })
-    .finally(function () {
-      $("#wizardNextBtn").prop("disabled", false);
-
-      $("#wizardPrevBtn").prop("disabled", false);
+    .then(function () {
+      setWizardSubmitting(false);
 
       updateNavigation(currentStep);
     });

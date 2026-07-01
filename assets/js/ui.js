@@ -28,21 +28,16 @@ function showToast(message, type) {
 
   if (toastType === "success") {
     toastData.icon = "✅";
-
     toastData.title = "Success";
   } else if (toastType === "warning") {
     toastData.icon = "⚠️";
-
     toastData.title = "Warning";
   } else if (toastType === "danger") {
     toastData.icon = "❌";
-
     toastData.title = "Error";
   }
 
-  if ($("#toastContainer").length === 0) {
-    console.log(toastData.title + ": " + message);
-
+  if ($("#toastContainer").length === 0 || typeof bootstrap === "undefined") {
     return;
   }
 
@@ -50,50 +45,50 @@ function showToast(message, type) {
 
   let toastHtml = `
 
-        <div
-            id="${toastId}"
-            class="toast civic-toast ${toastType}"
-            role="alert"
-            data-bs-delay="4000">
+    <div
+      id="${toastId}"
+      class="toast civic-toast ${toastType}"
+      role="alert"
+      data-bs-delay="4000">
 
-            <div class="toast-header">
+      <div class="toast-header">
 
-                <span class="toast-icon">
+        <span class="toast-icon">
 
-                    ${toastData.icon}
+          ${toastData.icon}
 
-                </span>
+        </span>
 
-                <strong class="me-auto">
+        <strong class="me-auto">
 
-                    ${toastData.title}
+          ${toastData.title}
 
-                </strong>
+        </strong>
 
-                <small>
+        <small>
 
-                    Just now
+          Just now
 
-                </small>
+        </small>
 
-                <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="toast">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="toast">
 
-                </button>
+        </button>
 
-            </div>
+      </div>
 
-            <div class="toast-body">
+      <div class="toast-body">
 
-                ${escapeToastHtml(message)}
+        ${escapeToastHtml(message)}
 
-            </div>
+      </div>
 
-        </div>
+    </div>
 
-    `;
+  `;
 
   $("#toastContainer").append(toastHtml);
 
@@ -125,7 +120,7 @@ function initializeTheme() {
 
   $("#themeToggleBtn")
     .off("click")
-    .click(function () {
+    .on("click", function () {
       $("body").toggleClass("light-theme");
 
       if ($("body").hasClass("light-theme")) {
@@ -165,15 +160,17 @@ function initializeScrollReveal() {
 
   revealSections();
 
-  $(window).scroll(function () {
-    if (revealQueued) {
-      return;
-    }
+  $(window)
+    .off("scroll.civicReveal")
+    .on("scroll.civicReveal", function () {
+      if (revealQueued) {
+        return;
+      }
 
-    revealQueued = true;
+      revealQueued = true;
 
-    window.requestAnimationFrame(revealSections);
-  });
+      window.requestAnimationFrame(revealSections);
+    });
 }
 
 //

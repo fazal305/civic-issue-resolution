@@ -1,175 +1,189 @@
-let CIVIC_NOTIFICATIONS_KEY = "civicConnectNotifications";
+$(document).ready(function () {
+  let CIVIC_NOTIFICATIONS_KEY = "civicConnectNotifications";
 
-function getStoredNotifications() {
-  let storedNotifications = localStorage.getItem(CIVIC_NOTIFICATIONS_KEY);
+  let MAX_NOTIFICATIONS = 20;
 
-  if (!storedNotifications) {
-    return [];
+  function getStoredNotifications() {
+    let storedNotifications = localStorage.getItem(CIVIC_NOTIFICATIONS_KEY);
+
+    if (!storedNotifications) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(storedNotifications);
+    } catch {
+      return [];
+    }
   }
 
-  try {
-    return JSON.parse(storedNotifications);
-  } catch (error) {
-    console.log(error);
-
-    return [];
-  }
-}
-
-function saveStoredNotifications(notifications) {
-  localStorage.setItem(CIVIC_NOTIFICATIONS_KEY, JSON.stringify(notifications));
-}
-
-function addCivicNotification(message, type, complaintId) {
-  let notifications = getStoredNotifications();
-
-  let notification = {
-    id: Date.now(),
-
-    message: message,
-
-    type: type || "info",
-
-    read: false,
-
-    createdAt: new Date().toISOString(),
-
-    complaintId: complaintId || "",
-  };
-
-  notifications.unshift(notification);
-
-  notifications = notifications.slice(0, 20);
-
-  saveStoredNotifications(notifications);
-
-  renderNotificationCenter();
-
-  return notification;
-}
-
-function formatNotificationTime(dateString) {
-  let notificationDate = new Date(dateString);
-
-  let now = new Date();
-
-  let diffMs = now - notificationDate;
-
-  let diffSeconds = Math.floor(diffMs / 1000);
-
-  let diffMinutes = Math.floor(diffSeconds / 60);
-
-  let diffHours = Math.floor(diffMinutes / 60);
-
-  let diffDays = Math.floor(diffHours / 24);
-
-  if (diffSeconds < 60) {
-    return "Just now";
+  function saveStoredNotifications(notifications) {
+    localStorage.setItem(
+      CIVIC_NOTIFICATIONS_KEY,
+      JSON.stringify(notifications),
+    );
   }
 
-  if (diffMinutes < 60) {
-    return diffMinutes + " minute(s) ago";
+  function updateUnreadBadge(notifications) {
+    let unreadCount = notifications.filter(function (notification) {
+      return !notification.read;
+    }).length;
+
+    $("#notificationCount").text(unreadCount);
+
+    $("#notificationCount").toggleClass("hidden", unreadCount === 0);
   }
 
-  if (diffHours < 24) {
-    return diffHours + " hour(s) ago";
+  function addCivicNotification(message, type, complaintId) {
+    let notifications = getStoredNotifications();
+
+    notifications.unshift({
+      id: Date.now(),
+
+      message: message,
+
+      type: type || "info",
+
+      read: false,
+
+      createdAt: new Date().toISOString(),
+
+      complaintId: complaintId || "",
+    });
+
+    notifications = notifications.slice(0, MAX_NOTIFICATIONS);
+
+    saveStoredNotifications(notifications);
+
+    renderNotificationCenter();
   }
 
-  if (diffDays < 7) {
-    return diffDays + " day(s) ago";
+  function formatNotificationTime(dateString) {
+    let notificationDate = new Date(dateString);
+
+    let diffSeconds = Math.floor(
+      (Date.now() - notificationDate.getTime()) / 1000,
+    );
+
+    if (diffSeconds < 60) {
+      return "Just now";
+    }
+
+    if (diffSeconds < 3600) {
+      return Math.floor(diffSeconds / 60) + " minute(s) ago";
+    }
+
+    if (diffSeconds < 86400) {
+      return Math.floor(diffSeconds / 3600) + " hour(s) ago";
+    }
+
+    if (diffSeconds < 604800) {
+      return Math.floor(diffSeconds / 86400) + " day(s) ago";
+    }
+
+    return notificationDate.toLocaleDateString();
   }
 
-  return notificationDate.toLocaleDateString();
-}
-function getNotificationIcon(type) {
-  if (type === "success") {
-    return "✅";
+  function getNotificationIcon(type) {
+    switch (type) {
+      case "success":
+        return "✅";
+
+      case "warning":
+        return "⚠️";
+
+      case "danger":
+        return "❌";
+
+      default:
+        return "ℹ️";
+    }
   }
 
-  if (type === "warning") {
-    return "⚠️";
+  function markAllNotificationsRead() {
+    let notifications = getStoredNotifications();
+
+    notifications.forEach(function (notification) {
+      notification.read = true;
+    });
+
+    saveStoredNotifications(notifications);
+
+    renderNotificationCenter();
   }
 
-  if (type === "danger") {
-    return "❌";
-  }
+  function renderNotificationCenter() {
+    let notifications = getStoredNotifications();
 
-  return "ℹ️";
-}
-function renderNotificationCenter() {
-  let notifications = getStoredNotifications();
+    updateUnreadBadge(notifications);
 
-  let unreadCount = notifications.filter(function (notification) {
-    return !notification.read;
-  }).length;
+    if (notifications.length === 0) {
+      $("#notificationList").html(`
 
-  $("#notificationCount").text(unreadCount);
+        <p class="notification-empty">
 
-  if (unreadCount === 0) {
-    $("#notificationCount").addClass("hidden");
-  } else {
-    $("#notificationCount").removeClass("hidden");
-  }
+          No notifications yet.
 
-  if (notifications.length === 0) {
-    $("#notificationList").html(`
+        </p>
 
-      <p class="notification-empty">
+      `);
 
-        No notifications yet.
+      return;
+    }
 
-      </p>
+    let html = "";
 
-    `);
+    notifications.forEach(function (notification) {
+      html += `
 
-    return;
-  }
+        <div
+          class="notification-item ${notification.read ? "" : "unread"}"
+          data-complaint-id="${notification.complaintId}">
 
-  let html = "";
+          <div class="notification-message">
 
-  notifications.forEach(function (notification) {
-    html += `
+            <span class="notification-icon">
 
-  <div
-    class="notification-item ${notification.read ? "" : "unread"}"
-    data-complaint-id="${notification.complaintId}">
+              ${getNotificationIcon(notification.type)}
 
-       <div class="notification-message">
+            </span>
 
-  <span class="notification-icon">
+            <span>
 
-    ${getNotificationIcon(notification.type)}
+              ${$("<div>").text(notification.message).html()}
 
-  </span>
+            </span>
 
-  <span>
+          </div>
 
-    ${$("<div>").text(notification.message).html()}
+          <div class="notification-time">
 
-  </span>
+            ${formatNotificationTime(notification.createdAt)}
 
-</div>
-
-        <div class="notification-time">
-
-          ${formatNotificationTime(notification.createdAt)}
+          </div>
 
         </div>
 
-      </div>
+      `;
+    });
 
-    `;
-  });
+    $("#notificationList").html(html);
+  }
 
-  $("#notificationList").html(html);
-}
+  window.addCivicNotification = addCivicNotification;
 
-$(document).ready(function () {
   if ($("#notificationCenter").length === 0) {
     return;
   }
 
   renderNotificationCenter();
+
+  $("#notificationBellBtn").click(function () {
+    $("#notificationPanel").toggleClass("visible");
+
+    markAllNotificationsRead();
+  });
+
   $("#notificationList").on("click", ".notification-item", function () {
     let complaintId = $(this).data("complaint-id");
 
@@ -179,34 +193,15 @@ $(document).ready(function () {
 
     window.location.href = "complaint-details.html?id=" + complaintId;
   });
-  $("#notificationBellBtn").click(function () {
-    $("#notificationPanel").toggleClass("visible");
 
-    let notifications = getStoredNotifications();
-
-    notifications.forEach(function (notification) {
-      notification.read = true;
-    });
-
-    saveStoredNotifications(notifications);
-
-    renderNotificationCenter();
-  });
   $("#clearAllNotificationsBtn").click(function () {
     localStorage.removeItem(CIVIC_NOTIFICATIONS_KEY);
 
     renderNotificationCenter();
   });
+
   $("#markAllReadBtn").click(function () {
-    let notifications = getStoredNotifications();
-
-    notifications.forEach(function (notification) {
-      notification.read = true;
-    });
-
-    saveStoredNotifications(notifications);
-
-    renderNotificationCenter();
+    markAllNotificationsRead();
   });
 
   $(document).click(function (event) {

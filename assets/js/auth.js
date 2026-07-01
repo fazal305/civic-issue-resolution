@@ -1,7 +1,5 @@
 $(document).ready(function () {
   if (typeof firebaseAuth === "undefined") {
-    console.log("Firebase Auth is not loaded on this page.");
-
     return;
   }
 
@@ -13,6 +11,24 @@ $(document).ready(function () {
     return getCurrentUser() !== null;
   }
 
+  function getPageBasePath() {
+    let currentPath = window.location.pathname.toLowerCase();
+
+    if (currentPath.indexOf("/pages/") !== -1) {
+      return "";
+    }
+
+    return "pages/";
+  }
+
+  function redirectToLogin() {
+    window.location.href = getPageBasePath() + "login.html";
+  }
+
+  function redirectToDashboard() {
+    window.location.href = getPageBasePath() + "complaints.html";
+  }
+
   function logoutUser() {
     firebaseAuth
       .signOut()
@@ -20,7 +36,7 @@ $(document).ready(function () {
         showToast("Logged out successfully.", "success");
 
         setTimeout(function () {
-          window.location.href = "login.html";
+          redirectToLogin();
         }, 900);
       })
       .catch(function (error) {
@@ -34,17 +50,12 @@ $(document).ready(function () {
     firebaseAuth.onAuthStateChanged(function (user) {
       let currentPage = window.location.pathname.toLowerCase();
 
-      if (user) {
-        console.log("Logged in:", user.email);
-
-        if (
-          currentPage.indexOf("login.html") !== -1 ||
-          currentPage.indexOf("signup.html") !== -1
-        ) {
-          window.location.href = "complaints.html";
-        }
-      } else {
-        console.log("No user logged in.");
+      if (
+        user &&
+        (currentPage.indexOf("login.html") !== -1 ||
+          currentPage.indexOf("signup.html") !== -1)
+      ) {
+        redirectToDashboard();
       }
     });
   }
@@ -63,7 +74,7 @@ $(document).ready(function () {
       showToast("Please login to continue.", "warning");
 
       setTimeout(function () {
-        window.location.href = "login.html";
+        redirectToLogin();
       }, 900);
     });
   }
@@ -74,7 +85,7 @@ $(document).ready(function () {
         showToast("Please login first.", "warning");
 
         setTimeout(function () {
-          window.location.href = "login.html";
+          redirectToLogin();
         }, 900);
 
         return;
@@ -88,7 +99,7 @@ $(document).ready(function () {
           if (!document.exists) {
             showToast("User profile not found.", "danger");
 
-            window.location.href = "complaints.html";
+            redirectToDashboard();
 
             return;
           }
@@ -99,7 +110,7 @@ $(document).ready(function () {
             showToast("Administrator access required.", "danger");
 
             setTimeout(function () {
-              window.location.href = "complaints.html";
+              redirectToDashboard();
             }, 900);
           }
         })
@@ -108,7 +119,7 @@ $(document).ready(function () {
 
           showToast("Unable to verify permissions.", "danger");
 
-          window.location.href = "complaints.html";
+          redirectToDashboard();
         });
     });
   }

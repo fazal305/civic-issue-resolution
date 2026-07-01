@@ -1,6 +1,10 @@
 /* CivicConnect Main Stylesheet */
 
-/* Keep imports in this order to preserve the original cascade. */
+/*
+| Import Order
+| Keep these imports in this exact order.
+| The cascade depends on it.
+*/
 
 @import url("01-base.css");
 @import url("02-home.css");

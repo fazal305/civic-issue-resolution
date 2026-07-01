@@ -14,18 +14,26 @@
   --navy: #081c2d;
   --navy-light: #0e2a40;
   --navy-border: rgba(255, 255, 255, 0.1);
+  --navy-navbar: rgba(8, 28, 45, 0.95);
+  --dashboard-border-soft: rgba(18, 55, 42, 0.08);
+  --dashboard-border-medium: rgba(18, 55, 42, 0.12);
+  --dashboard-pill-bg: rgba(18, 55, 42, 0.08);
   --teal: #00c2b2;
   --teal-hover: #00a99a;
   --teal-glow: rgba(0, 194, 178, 0.35);
-  --white: #ffffff;
-  --text-light: #dce6ee;
-  --text-gray: #b8c7d4;
-  --section-label-color: #59d8cf;
+  --teal-soft-bg: rgba(0, 194, 178, 0.12);
+  --teal-soft-border: rgba(0, 194, 178, 0.2);
+  --teal-focus-ring: rgba(0, 194, 178, 0.15);
 
+  --white: #ffffff;
   --black: #000000;
   --dark-gray: #222222;
   --medium-gray: #666666;
   --light-gray: #f5f7f0;
+
+  --text-light: #dce6ee;
+  --text-gray: #b8c7d4;
+  --section-label-color: #59d8cf;
 
   --brand-green-dark: #12372a;
   --brand-green: #436850;
@@ -40,10 +48,6 @@
   --overlay-soft: rgba(0, 0, 0, 0.25);
   --overlay-light: rgba(255, 255, 255, 0.08);
 
-  --teal-soft-bg: rgba(0, 194, 178, 0.12);
-  --teal-soft-border: rgba(0, 194, 178, 0.2);
-  --teal-focus-ring: rgba(0, 194, 178, 0.15);
-
   --status-warning: #d97706;
   --status-info: #2563eb;
   --status-success: #16a34a;
@@ -51,7 +55,7 @@
   --status-danger-hover: #bb2d3b;
   --status-edit: #ffc107;
   --status-edit-hover: #e0a800;
-  --navy-navbar: rgba(8, 28, 45, 0.95);
+
   --status-pending-bg: rgba(217, 119, 6, 0.14);
   --status-pending-border: rgba(217, 119, 6, 0.38);
   --status-pending-glow: rgba(217, 119, 6, 0.28);
@@ -133,17 +137,12 @@ button {
 /* Navbar */
 
 .custom-navbar {
-  background-color: color-mix(in srgb, var(--navy) 95%, transparent);
-  backdrop-filter: blur(10px);
-  padding: 18px 0;
-  border-bottom: 1px solid var(--navy-border);
-}
-.custom-navbar {
   background-color: var(--navy-navbar);
   backdrop-filter: blur(10px);
   padding: 18px 0;
   border-bottom: 1px solid var(--navy-border);
 }
+
 /* Logo */
 
 .logo-text {
@@ -155,6 +154,11 @@ button {
 
 .logo-text span {
   color: var(--teal);
+}
+
+.navbar-logo {
+  height: 54px;
+  width: auto;
 }
 
 /* Navbar links */

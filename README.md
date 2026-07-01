@@ -1,3 +1,8 @@
+<p align="center">
+
+<img src="assets/images/logo-horizontal.png" width="320">
+
+</p>
 # CivicConnect – Smart Civic Issue Reporting Platform
 
 A modern civic-tech web application that enables Pakistani citizens to report municipal issues such as garbage collection, electricity outages, water shortages, gas supply problems, and road damage through an intuitive multilingual interface.

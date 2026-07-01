@@ -479,13 +479,17 @@ function initializeKeyboardNavigation() {
 }
 
 function initializeWizard() {
-  $("#wizardNextBtn").click(function () {
-    advanceWizard();
-  });
+  $("#wizardNextBtn")
+    .off("click")
+    .on("click", function () {
+      advanceWizard();
+    });
 
-  $("#wizardPrevBtn").click(function () {
-    goBackWizard();
-  });
+  $("#wizardPrevBtn")
+    .off("click")
+    .on("click", function () {
+      goBackWizard();
+    });
 
   updateProgressIndicator(1);
   updateNavigation(1);
@@ -494,14 +498,17 @@ function initializeWizard() {
 
 function applyCategoryFromUrl() {
   let urlParams = new URLSearchParams(window.location.search);
+
   let category = urlParams.get("category");
 
   if (!category) {
     return;
   }
 
+  let safeCategory = category.replace(/"/g, '\\"');
+
   let categoryCard = $(
-    '#reportWizard .category-card[data-category="' + category + '"]',
+    '#reportWizard .category-card[data-category="' + safeCategory + '"]',
   );
 
   if (categoryCard.length) {

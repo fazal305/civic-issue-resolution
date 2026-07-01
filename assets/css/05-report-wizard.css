@@ -60,15 +60,10 @@
 
 .progress-track-fill {
   height: 100%;
-
   width: 0%;
-
   background: linear-gradient(90deg, var(--teal-hover), var(--teal));
-
   border-radius: 4px;
-
   box-shadow: 0 0 14px var(--teal-glow);
-
   transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -133,15 +128,10 @@
 
 .progress-step.active-step .step-number {
   background: var(--teal);
-
   color: var(--navy);
-
   border-color: var(--teal);
-
   box-shadow: 0 0 30px var(--teal-glow);
-
   transform: scale(1.08);
-
   animation: progressStepPulse 2.2s ease-in-out infinite;
 }
 
@@ -470,7 +460,7 @@
 
 #complaintText.is-invalid {
   border-color: var(--status-danger);
-  box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 0 0.2rem var(--status-progress-glow);
 }
 
 #categoryGrid.wizard-shake {
@@ -522,7 +512,7 @@
 
 .footer-section,
 .site-footer {
-  background-color: #0f2a1d;
+  background-color: var(--brand-green-dark);
   color: var(--white);
   padding: 45px 0;
 }
@@ -532,9 +522,8 @@
   color: var(--text-gray);
   margin-bottom: 0;
 }
-/*  
-   Location Picker
-  */
+
+/* Location Picker */
 
 .location-picker {
   margin-top: 28px;
@@ -542,33 +531,23 @@
 
 .complaint-map {
   width: 100%;
-
   height: 360px;
-
   margin-top: 16px;
-
   border: 1px solid var(--navy-border);
-
   border-radius: 18px;
-
   overflow: hidden;
-
   box-shadow: 0 0 24px var(--teal-glow);
 }
 
 .selected-location-text {
   margin-bottom: 0;
-
   color: var(--text-light);
-
   font-size: 0.95rem;
-
   font-weight: 500;
 }
 
 .selected-location-text span {
   color: var(--teal);
-
   font-weight: 600;
 }
 
@@ -576,22 +555,19 @@
 
 .leaflet-container {
   background-color: var(--navy);
-
   font-family: "Outfit", sans-serif;
 }
 
 .leaflet-popup-content {
-  color: #222;
-
+  color: var(--dark-gray);
   font-family: "Outfit", sans-serif;
 }
 
 .leaflet-control-zoom a {
   color: var(--navy);
 }
-/*  
-   Evidence Upload
-  */
+
+/* Evidence Upload */
 
 .evidence-upload {
   margin-top: 28px;
@@ -599,77 +575,51 @@
 
 .evidence-upload .form-control {
   padding: 12px;
-
   background-color: var(--navy-light);
-
   border: 1px solid var(--navy-border);
-
   color: var(--text-light);
-
   border-radius: 14px;
 }
 
 .evidence-upload .form-control:focus {
   border-color: var(--teal);
-
   box-shadow: 0 0 18px var(--teal-glow);
 }
 
 .image-preview-grid {
   display: grid;
-
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-
   gap: 16px;
-
   margin-top: 20px;
 }
 
 .image-preview-card {
   position: relative;
-
   overflow: hidden;
-
   border: 1px solid var(--navy-border);
-
   border-radius: 16px;
-
   background-color: var(--navy-light);
-
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 16px var(--overlay-soft);
 }
 
 .image-preview-card img {
   display: block;
-
   width: 100%;
-
   height: 140px;
-
   object-fit: cover;
 }
 
 .remove-image-btn {
   position: absolute;
-
   top: 8px;
-
   right: 8px;
-
   width: 30px;
-
   height: 30px;
-
   border: none;
-
   border-radius: 50%;
-
-  background-color: rgba(0, 0, 0, 0.75);
-
+  background-color: var(--overlay-dark);
   color: var(--white);
-
   cursor: pointer;
-
   transition:
     background-color 0.25s ease,
     transform 0.25s ease;
@@ -677,14 +627,11 @@
 
 .remove-image-btn:hover {
   background-color: var(--teal);
-
   transform: scale(1.08);
 }
 
 .image-upload-note {
   margin-top: 12px;
-
   color: var(--text-gray);
-
   font-size: 0.9rem;
 }
