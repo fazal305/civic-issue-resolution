@@ -178,7 +178,45 @@
             <div class="quick-filter-pills" id="languageQuickFilters"></div>
           </div>
         </div>
+        <!-- Notification Center -->
 
+        <div class="notification-center" id="notificationCenter">
+          <button
+            type="button"
+            class="notification-bell-btn"
+            id="notificationBellBtn"
+            aria-label="Open notifications"
+          >
+            🔔
+
+            <span class="notification-count" id="notificationCount"> 0 </span>
+          </button>
+
+          <div class="notification-panel" id="notificationPanel">
+            <div class="notification-panel-header">
+              <h3>Notifications</h3>
+
+              <button
+                type="button"
+                class="notification-clear-btn"
+                id="markAllReadBtn"
+              >
+                Mark all read
+              </button>
+              <button
+                type="button"
+                class="notification-clear-btn"
+                id="clearAllNotificationsBtn"
+              >
+                Clear all
+              </button>
+            </div>
+
+            <div class="notification-list" id="notificationList">
+              <p class="notification-empty">No notifications yet.</p>
+            </div>
+          </div>
+        </div>
         <p class="dashboard-results-summary" id="searchResultsSummary"></p>
         <!-- Bulk Actions -->
 
@@ -323,7 +361,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
     <script src="../assets/js/firebase.js"></script>
-
+    <script src="../assets/js/firestore-service.js"></script>
     <!-- Shared UI -->
 
     <script src="../assets/js/ui.js"></script>
@@ -337,7 +375,9 @@
         civicAuth.requireLogin();
       });
     </script>
+    <!-- Notifications -->
 
+    <script src="../assets/js/notifications.js"></script>
     <!-- Complaints Logic -->
 
     <script src="../assets/js/complaints.js"></script>

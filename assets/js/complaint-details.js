@@ -319,9 +319,8 @@ $(document).ready(function () {
       return;
     }
 
-    complaintsCollection
-      .doc(complaintId)
-      .get()
+    civicFirestoreService
+      .getComplaintById(complaintId)
       .then(function (doc) {
         if (!doc.exists) {
           showMissingComplaint();

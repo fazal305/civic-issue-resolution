@@ -7,6 +7,8 @@ $(document).ready(function () {
     allComplaints: [],
     filteredComplaints: [],
     selectedComplaints: [],
+    knownComplaintStatuses: {},
+    hasLoadedInitialSnapshot: false,
     searchDebounceTimer: null,
     currentPage: 1,
     complaintsPerPage: 6,
@@ -1012,7 +1014,39 @@ $(document).ready(function () {
       return secondTime - firstTime;
     });
   }
+  function checkForStatusNotifications(complaints) {
+    if (!dashboardState.hasLoadedInitialSnapshot) {
+      complaints.forEach(function (complaint) {
+        dashboardState.knownComplaintStatuses[complaint.id] =
+          complaint.status || "Pending";
+      });
 
+      dashboardState.hasLoadedInitialSnapshot = true;
+
+      return;
+    }
+
+    complaints.forEach(function (complaint) {
+      let oldStatus = dashboardState.knownComplaintStatuses[complaint.id];
+
+      let newStatus = complaint.status || "Pending";
+
+      if (oldStatus && oldStatus !== newStatus) {
+        let notificationMessage =
+          "Your " +
+          (complaint.category || "civic") +
+          " complaint is now " +
+          newStatus +
+          ".";
+
+        showToast(notificationMessage, "info");
+
+        addCivicNotification(notificationMessage, "info", complaint.id);
+      }
+
+      dashboardState.knownComplaintStatuses[complaint.id] = newStatus;
+    });
+  }
   function loadComplaints() {
     showLoadingState();
 
@@ -1039,6 +1073,8 @@ $(document).ready(function () {
 
           dashboardState.allComplaints.push(complaintData);
         });
+
+        checkForStatusNotifications(dashboardState.allComplaints);
 
         filterComplaints(true);
       },
