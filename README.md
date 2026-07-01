@@ -1,13 +1,12 @@
 <p align="center">
-
-<img src="assets/images/logo-horizontal.png" width="320">
-
+  <img src="assets/images/logo-horizontal.png" width="320" alt="CivicConnect Logo">
 </p>
+
 # CivicConnect – Smart Civic Issue Reporting Platform
 
-A modern civic-tech web application that enables Pakistani citizens to report municipal issues such as garbage collection, electricity outages, water shortages, gas supply problems, and road damage through an intuitive multilingual interface.
+CivicConnect is a modern civic-tech web application that enables Pakistani citizens to report municipal issues such as garbage collection, electricity outages, water shortages, gas supply problems, and road damage through a clean, multilingual interface.
 
-CivicConnect is being developed as an **Aptech Vision / Grand Finale Project** with a focus on accessibility, responsive design, and real-world civic problem solving. The platform allows users to generate structured complaints, store them in Firebase Firestore, and manage them through an interactive dashboard.
+Developed as an **Aptech Vision / Grand Finale Project**, CivicConnect focuses on accessibility, responsive design, and practical civic problem solving. Users can generate professional complaint letters, save them to Firebase Firestore, and manage them through an interactive dashboard.
 
 ---
 
@@ -15,69 +14,45 @@ CivicConnect is being developed as an **Aptech Vision / Grand Finale Project** w
 
 https://fazal305.github.io/civic-issue-resolution/
 
----
-
 # GitHub Repository
 
 https://github.com/fazal305/civic-issue-resolution
 
 ---
 
-# Project Objectives
+# Features
 
-The primary goal of CivicConnect is to simplify civic issue reporting for citizens by providing a modern, user-friendly reporting platform.
-
-The project aims to:
-
-- Report municipal issues online
-- Support English, Roman Urdu, and Urdu
-- Generate professionally formatted complaint letters
-- Store complaints securely in Firebase Firestore
-- Allow citizens to track complaint status
-- Provide an intuitive dashboard with search and filtering
-- Build a scalable foundation for future authentication and administration
-
----
-
-# Current Features
-
-## Complaint Reporting Wizard
+## Complaint Reporting
 
 - Multi-step reporting wizard
-- Progress indicator
-- Inline validation
+- English, Roman Urdu and Urdu support
 - Live character counter
+- Inline validation
 - Keyboard navigation
-- Responsive design
-- Auto category selection
-- Complaint preview
+- Category auto-selection
+- OpenStreetMap location picker
+- Professional complaint generation
+- Copy complaint
+- Firebase Firestore storage
 
 ## Complaint Dashboard
 
-- Firebase Firestore integration
-- Search complaints
-- Category filtering
-- Status filtering
-- Language filtering
-- Date filtering
-- Quick filter chips
+- Search and filters
 - Pagination
-- Empty state
-- Skeleton loading
 - Status badges
-- Complaint preview
-- View full complaint
-- Delete complaint
+- Delete complaints
+- Dynamic complaint details page
+- Complaint timeline
+- Print and Save as PDF
+- OpenStreetMap location link
 
 ## User Experience
 
+- Responsive design
 - Dark / Light theme
-- Responsive layout
 - Scroll reveal animations
 - Bootstrap toast notifications
-- Accessible keyboard navigation
 - Mobile-friendly interface
-- Modern civic-tech design
 
 ---
 
@@ -91,33 +66,16 @@ The project aims to:
 
 ---
 
-# Languages Supported
-
-- English
-- Roman Urdu
-- Urdu
-
----
-
-# Technologies Used
-
-## Frontend
+# Technologies
 
 - HTML5
 - CSS3
 - JavaScript (ES6)
 - jQuery 3.7.1
 - Bootstrap 5.3.3
-
-## Backend
-
-- Firebase Firestore
-- Firebase Compat SDK (CDN)
-
-## Fonts
-
-- Google Fonts
-- Outfit
+- Firebase Firestore (Compat SDK)
+- Leaflet
+- OpenStreetMap
 
 ---
 
@@ -125,157 +83,96 @@ The project aims to:
 
 ```text
 civic-issue-resolution/
-
-│
 ├── index.html
-│
+├── 404.html
 ├── assets/
 │   ├── css/
-│   │   └── style.css
-│   │
 │   ├── js/
-│   │   ├── complaints.js
-│   │   ├── firebase.js
-│   │   ├── main.js
-│   │   ├── report.js
-│   │   └── ui.js
-│   │
 │   └── images/
-│
 ├── pages/
 │   ├── about.html
 │   ├── admin.html
+│   ├── complaint-details.html
 │   ├── complaints.html
 │   ├── contact.html
-│   ├── garbage-details.html
+│   ├── login.html
 │   ├── report.html
-│   ├── road-details.html
-│   └── water-details.html
-│
+│   └── signup.html
 ├── docs/
-│   ├── firebase-setup.md
-│   └── roadmap.md
-│
-├── .gitignore
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
 
 # Firebase
 
-The project uses Firebase Firestore for cloud data storage.
-
-Current implementation:
-
-- Save complaints
-- Load complaints
-- Delete complaints
+- Firestore integration
+- Complaint storage
+- Server timestamps
 - Status tracking
-- Timestamp support
-
----
-
-# Planned Features
-
-The project roadmap includes:
-
-- Animated wizard progress bar
-- Complaint detail page
-- Admin dashboard
-- Firebase Authentication
-- Citizen login
-- Admin login
-- Protected routes
-- Leaflet + OpenStreetMap integration
-- Image uploads
-- Firebase Storage
-- Real-time Firestore listeners
-- Push notifications
-- PDF export
-- Print support
-- Offline support
-- Progressive Web App (PWA)
-- Production security rules
-- Performance optimization
+- Dynamic complaint details
 
 ## Image Upload Note
 
-The project includes prepared UI and JavaScript structure for complaint evidence image uploads.
+Image upload UI and code are prepared but intentionally hidden.
 
-However, Firebase Storage requires the Blaze pay-as-you-go plan for new Firebase projects. To keep the project free for student/demo use, image uploads are currently hidden and disabled.
+Firebase Storage generally requires the Blaze plan for new projects, so uploads are disabled to keep the project free for student demonstrations.
 
-The feature can be enabled later by:
+To enable later:
 
-- Upgrading the Firebase project to Blaze
-- Removing `d-none` from the evidence upload section in `report.html`
-- Restoring Firebase Storage upload logic in `assets/js/report-upload.js`
-
----
-
-# Team Members
-
-- Sufyan
-- Fazal Abbas
-- Sana
+- Upgrade to Firebase Blaze
+- Restore upload logic in `assets/js/report-upload.js`
+- Remove the hidden class from the upload section in `pages/report.html`
 
 ---
 
 # Local Development
 
-Clone the repository:
-
 ```bash
-git clone <repository-url>
+git clone https://github.com/fazal305/civic-issue-resolution.git
+cd civic-issue-resolution
 ```
 
-Open the project folder:
+Open with Live Server or any local web server.
 
-```text
-civic-issue-resolution
-```
-
-Open `index.html` using your preferred browser or Live Server.
-
-No build tools or package managers are required.
+No build tools are required.
 
 ---
 
-# Browser Support
+# Team
 
-- Google Chrome
-- Microsoft Edge
-- Mozilla Firefox
-- Brave
+- Fazal Abbas
+- Sufyan
+- Sana
 
 ---
 
 # License
 
-This project was developed for educational purposes as part of the Aptech Vision Project and Grand Finale Exhibition.
+Released under the MIT License.
 
 ---
 
 # Acknowledgements
 
-Special thanks to:
-
 - Aptech Learning Pakistan
 - Firebase
 - Bootstrap
-- Google Fonts
 - jQuery
-
-for providing the technologies used in this project.
-
----
-
-## Grand Finale Vision
-
-This project is being prepared for presentation in the Aptech Grand Finale exhibition as a civic technology solution focused on improving communication between citizens and public service departments in Pakistan.
+- Google Fonts
 
 ---
 
-## Status
+# Status
 
-Phase 1 — Frontend Development In Progress
+**Version 0.9**
+
+- Responsive frontend complete
+- Firebase Firestore integration complete
+- Complaint reporting wizard complete
+- Complaint dashboard complete
+- Dynamic complaint details complete
+- Authentication implemented
+- Admin dashboard implemented
+- Image upload prepared (disabled for free plan compatibility)

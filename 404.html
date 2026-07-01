@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>404 - Page Not Found | CivicConnect</title>
+    <meta property="og:title" content="404 | CivicConnect" />
 
+    <meta
+      property="og:description"
+      content="The page you requested could not be found."
+    />
+
+    <meta property="og:type" content="website" />
     <meta
       name="description"
       content="The CivicConnect page you are looking for could not be found."
     />
-
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,12 +37,9 @@
   </head>
 
   <body>
-    <section
-      class="hero-section d-flex align-items-center"
-      style="min-height: 100vh"
-    >
+    <section class="hero-section hero-error-section d-flex align-items-center">
       <div class="container text-center">
-        <div class="about-card mx-auto" style="max-width: 760px">
+        <div class="about-card mx-auto error-card">
           <div style="font-size: 4rem; margin-bottom: 1rem" aria-hidden="true">
             <img
               src="assets/images/logo-icon.png"
@@ -43,12 +47,12 @@
               class="error-logo"
             />
           </div>
-
+          <h1 class="hero-title display-1" tabindex="-1">404</h1>
           <p class="section-label">PAGE NOT FOUND</p>
 
           <h1 class="hero-title display-1">404</h1>
 
-          <p class="hero-description mx-auto" style="max-width: 680px">
+          <p class="hero-description mx-auto error-description">
             The page you're looking for doesn't exist, may have been moved, or
             the link is incorrect.
           </p>
@@ -69,7 +73,7 @@
         </div>
       </div>
     </section>
-    <script src="assets/js/loader.js"></script>
+
     <script>
       let secondsRemaining = 8;
 
@@ -83,7 +87,7 @@
         if (secondsRemaining <= 0) {
           clearInterval(countdownTimer);
 
-          window.location.href = "index.html";
+          window.location.replace("index.html");
         }
       }, 1000);
     </script>

@@ -1,97 +1,120 @@
-#  
+#
 # Operating System
-#  
+#
 
 .DS_Store
 Thumbs.db
 desktop.ini
+._*
+$RECYCLE.BIN/
 
-#  
+#
 # Visual Studio Code
-#  
+#
 
 .vscode/
 
-#  
+#
+# JetBrains IDEs
+#
+
+.idea/
+
+#
 # Node (Future Use)
-#  
+#
 
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-#  
+#
 # Environment Files
-#  
+#
 
 .env
 .env.*
+!.env.example
 
-#  
+#
 # Temporary Files
-#  
+#
 
 *.tmp
 *.temp
 *.bak
 *.swp
+*.swo
 
-#  
+#
 # Logs
-#  
+#
 
 *.log
 logs/
 
-#  
+#
 # Cache
-#  
+#
 
 .cache/
 .parcel-cache/
 
-#  
+#
 # Build Output
-#  
+#
 
 dist/
 build/
 
-#  
-# Coverage Reports
-#  
+#
+# Coverage
+#
 
 coverage/
 
-#  
+#
 # Firebase
-#  
+#
 
 .firebase/
+firebase-debug.log
+.firebaserc.local
 
-#  
-# Mac Resource Forks
-#  
+#
+# Live Server
+#
 
-._*
+.history/
 
-#  
-# Windows Recycle Bin Metadata
-#  
-
-$RECYCLE.BIN/
-
-#  
-# Archive Files
-#  
+#
+# Archives
+#
 
 *.zip
 *.7z
 *.rar
+*.tar
+*.gz
 
-#  
-# IDE Files
-#  
+#
+# Local Database Files
+#
 
-.idea/
+*.sqlite
+*.db
+
+#
+# macOS
+#
+
+.AppleDouble
+.LSOverride
+
+#
+# Windows
+#
+
+ehthumbs.db
