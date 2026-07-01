@@ -1,43 +1,5 @@
 function uploadComplaintImages() {
-  let currentUser = firebaseAuth.currentUser;
-
-  if (selectedComplaintImages.length === 0) {
-    return $.Deferred().resolve([]).promise();
-  }
-
-  if (!currentUser) {
-    return $.Deferred().reject("User not logged in").promise();
-  }
-
-  let uploadPromises = [];
-
-  selectedComplaintImages.forEach(function (file, index) {
-    let safeFileName = file.name
-      .replace(/\s+/g, "-")
-      .replace(/[^a-zA-Z0-9.-]/g, "");
-
-    let filePath =
-      "complaint-images/" +
-      currentUser.uid +
-      "/" +
-      Date.now() +
-      "-" +
-      index +
-      "-" +
-      safeFileName;
-
-    let storageReference = firebaseStorage.ref(filePath);
-
-    let uploadTask = storageReference.put(file);
-
-    let uploadPromise = uploadTask.then(function (snapshot) {
-      return snapshot.ref.getDownloadURL();
-    });
-
-    uploadPromises.push(uploadPromise);
-  });
-
-  return Promise.all(uploadPromises);
+  return $.Deferred().resolve([]).promise();
 }
 
 function initializeImageUpload() {
