@@ -144,42 +144,42 @@ $(document).ready(function () {
 
     $("#homepageComplaintsPreview").html(cardsHtml);
   }
+  function listenHomepageComplaints() {
+    civicFirestoreService.listenLatestComplaints(
+      3,
 
-  function loadHomepageComplaints() {
-    complaintsCollection
-      .orderBy("timestamp", "desc")
-      .limit(3)
-      .get()
-      .then(function (snapshot) {
+      function (snapshot) {
         let complaints = [];
 
-        snapshot.forEach(function (doc) {
-          let complaintData = doc.data();
+        snapshot.forEach(function (document) {
+          let complaintData = document.data();
 
-          complaintData.id = doc.id;
+          complaintData.id = document.id;
 
           complaints.push(complaintData);
         });
+
         renderHomepageComplaints(complaints);
-      })
-      .catch(function (error) {
+      },
+
+      function (error) {
         console.log(error);
 
         $("#homepageComplaintsPreview").html(`
 
-          <div class="col-12 text-center">
+        <div class="col-12 text-center">
 
-            <p class="complaint-text">
+          <p class="complaint-text">
 
-              Could not load recent complaints right now.
+            Could not load recent complaints.
 
-            </p>
+          </p>
 
-          </div>
+        </div>
 
-        `);
-      });
+      `);
+      },
+    );
   }
-
-  loadHomepageComplaints();
+  listenHomepageComplaints();
 });

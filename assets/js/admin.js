@@ -223,9 +223,8 @@ $(document).ready(function () {
 
         `);
 
-    complaintsCollection
-      .get()
-      .then(function (snapshot) {
+    civicFirestoreService.listenAllComplaints(
+      function (snapshot) {
         adminComplaints = [];
 
         snapshot.forEach(function (doc) {
@@ -236,47 +235,32 @@ $(document).ready(function () {
           adminComplaints.push(complaintData);
         });
 
-        adminComplaints.sort(function (first, second) {
-          let firstTime =
-            first.timestamp && first.timestamp.toDate
-              ? first.timestamp.toDate().getTime()
-              : 0;
-
-          let secondTime =
-            second.timestamp && second.timestamp.toDate
-              ? second.timestamp.toDate().getTime()
-              : 0;
-
-          return secondTime - firstTime;
-        });
-
         updateAdminStats();
 
         buildAdminTable();
-      })
-      .catch(function (error) {
+      },
+
+      function (error) {
         console.log(error);
 
         showToast("Could not load admin complaints.", "danger");
 
         $("#adminTableWrap").html(`
 
-                    <p class="about-text">
+        <p class="about-text">
 
-                        Could not load complaints. Please refresh the page.
+          Could not load complaints. Please refresh the page.
 
-                    </p>
+        </p>
 
-                `);
-      });
+      `);
+      },
+    );
   }
 
   function updateComplaintStatus(complaintId, newStatus) {
-    complaintsCollection
-      .doc(complaintId)
-      .update({
-        status: newStatus,
-      })
+    civicFirestoreService
+      .updateComplaintStatus(complaintId, newStatus)
       .then(function () {
         adminComplaints.forEach(function (complaint) {
           if (complaint.id === complaintId) {

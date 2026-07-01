@@ -1021,13 +1021,15 @@ $(document).ready(function () {
     if (!currentUser) {
       showToast("Please login to view your complaints.", "warning");
 
+      hideLoadingState();
+
       return;
     }
 
-    complaintsCollection
-      .where("uid", "==", currentUser.uid)
-      .get()
-      .then(function (snapshot) {
+    civicFirestoreService.listenUserComplaints(
+      currentUser.uid,
+
+      function (snapshot) {
         dashboardState.allComplaints = [];
 
         snapshot.forEach(function (doc) {
@@ -1038,13 +1040,10 @@ $(document).ready(function () {
           dashboardState.allComplaints.push(complaintData);
         });
 
-        dashboardState.allComplaints = sortComplaintsByDate(
-          dashboardState.allComplaints,
-        );
+        filterComplaints(true);
+      },
 
-        filterComplaints();
-      })
-      .catch(function (error) {
+      function (error) {
         console.log(error);
 
         hideLoadingState();
@@ -1052,7 +1051,8 @@ $(document).ready(function () {
         showEmptyState("Could not load complaints. Please refresh the page.");
 
         showToast("Failed to load complaints from the database.", "danger");
-      });
+      },
+    );
   }
 
   function deleteComplaint(complaintId) {
