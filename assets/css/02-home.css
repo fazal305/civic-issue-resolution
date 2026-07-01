@@ -21,7 +21,21 @@
   padding-top: 140px;
   overflow: hidden;
 }
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
+  background: var(--white);
+  padding: 32px;
+  border-radius: 24px;
+
+  min-height: 290px;
+
+  transition: 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
 /* Hero content */
 
 .hero-content {
@@ -159,40 +173,54 @@
 /* Category icon */
 
 .category-icon {
-  width: 70px;
-  height: 70px;
-  background-color: rgba(173, 188, 159, 0.22);
-  border-radius: 22px;
+  width: 90px;
+  height: 90px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  margin-bottom: 25px;
-}
 
+  font-size: 2.3rem;
+
+  margin-bottom: 24px;
+
+  border-radius: 22px;
+
+  background: var(--light-gray);
+}
 /* Category text */
 
 .category-card h3,
 .complaint-card h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .category-card p,
 .complaint-card p {
   color: var(--green-muted);
-  margin-bottom: 25px;
+  margin-bottom: 24px;
 }
-
 .category-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: var(--navy);
   color: var(--white);
+
   padding: 11px 24px;
+
   border-radius: 50px;
+
   font-weight: 600;
+
   transition: 0.3s ease;
+
+  margin-top: auto;
+
+  width: fit-content;
 }
 
 .category-card:hover .category-btn {
