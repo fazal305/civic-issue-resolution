@@ -96,7 +96,10 @@ $(document).ready(function () {
         }, 1200);
       })
       .catch(function (error) {
-        showToast(getSignupErrorMessage(error.code), "danger");
+        showToast(
+          error.code + " — " + getSignupErrorMessage(error.code),
+          "danger",
+        );
       })
       .then(function () {
         setSignupLoading(false);
