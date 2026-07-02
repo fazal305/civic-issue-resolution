@@ -65,7 +65,7 @@ function initializeAiImproveButton() {
 
       $("#aiImproveBtn")
         .prop("disabled", true)
-        .text("🤖 AI is improving your complaint...");
+        .text("🤖 Civic AI is analyzing your complaint...");
 
       showToast("Analyzing complaint...", "info");
 
@@ -104,7 +104,10 @@ function initializeAiImproveButton() {
 
         $("#aiImproveBtn").prop("disabled", false).text("✨ Improve Complaint");
 
-        showToast("AI analysis completed successfully.", "success");
+        showToast(
+          "Civic AI analyzed your complaint and generated an improved version.",
+          "success",
+        );
       }, 1500);
     });
 }
