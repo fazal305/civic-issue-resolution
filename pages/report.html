@@ -442,11 +442,69 @@
               <div id="resultCard" class="result-card" style="display: none">
                 <h3 id="resultTitle">Complaint Generated</h3>
 
+                <div
+                  class="ai-analysis-card"
+                  id="aiAnalysisCard"
+                  style="display: none"
+                >
+                  <p class="section-label">AI ANALYSIS</p>
+                  <p class="ai-analysis-note">
+                    This analysis is generated locally by CivicConnect and works
+                    without an API key.
+                  </p>
+                  <div class="ai-analysis-grid">
+                    <div class="ai-analysis-item">
+                      <span>🏛 Department</span>
+                      <strong id="aiDepartment">—</strong>
+                    </div>
+
+                    <div class="ai-analysis-item">
+                      <span>⚡ Urgency</span>
+                      <strong id="aiUrgency">—</strong>
+                    </div>
+
+                    <div class="ai-analysis-item">
+                      <span>📝 Writing Quality</span>
+                      <strong id="aiWritingQuality">—</strong>
+                    </div>
+
+                    <div class="ai-analysis-item">
+                      <span>🎯 Confidence</span>
+                      <strong id="aiConfidence">—</strong>
+                    </div>
+                    <div class="ai-analysis-item ai-analysis-wide">
+                      <span>🧠 Category Check</span>
+                      <strong id="aiCategorySuggestion">—</strong>
+
+                      <button
+                        type="button"
+                        class="dashboard-btn ai-apply-category-btn"
+                        id="aiApplyCategoryBtn"
+                        style="display: none"
+                      >
+                        Apply Suggested Category
+                      </button>
+                    </div>
+                    <div class="ai-analysis-item ai-analysis-wide">
+                      <span>💡 Writing Suggestion</span>
+                      <strong id="aiWritingSuggestion">—</strong>
+                    </div>
+                  </div>
+                </div>
+
                 <p id="resultText"></p>
 
                 <div class="result-actions mt-4">
                   <button type="button" class="hero-btn copy-btn">
                     📋 Copy Complaint
+                  </button>
+
+                  <button
+                    type="button"
+                    class="dashboard-btn ai-improve-btn"
+                    id="aiImproveBtn"
+                  >
+                    ✨ Improve Complaint
                   </button>
 
                   <button type="button" class="dashboard-btn authority-btn">
@@ -563,6 +621,8 @@
     <!-- Report Modules -->
 
     <script src="../assets/js/report-wizard.js"></script>
+
+    <script src="../assets/js/ai-complaint.js"></script>
 
     <script src="../assets/js/report-generator.js"></script>
 

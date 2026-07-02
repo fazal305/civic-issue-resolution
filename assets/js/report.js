@@ -53,7 +53,84 @@ function initializeAuthorityButton() {
       showToast("Submission guidance is coming soon.", "info");
     });
 }
+function initializeAiImproveButton() {
+  $("#aiImproveBtn")
+    .off("click")
+    .on("click", function () {
+      let category = $("#complaintCategory").val();
 
+      let complaintText = $("#complaintText").val().trim();
+
+      let language = $("#reportWizard .active-language").data("language");
+
+      $("#aiImproveBtn")
+        .prop("disabled", true)
+        .text("🤖 AI is improving your complaint...");
+
+      showToast("Analyzing complaint...", "info");
+
+      setTimeout(function () {
+        let aiResult = improveComplaintWithLocalAi(
+          category,
+          complaintText,
+          language,
+        );
+
+        $("#resultText").text(aiResult.complaint);
+
+        let analysis = aiResult.analysis;
+        $("#aiDepartment").text(analysis.department);
+
+        $("#aiUrgency").text(analysis.urgency);
+
+        $("#aiWritingQuality").text(analysis.writingQuality);
+
+        $("#aiConfidence").text(analysis.confidence);
+        $("#aiCategorySuggestion").text(analysis.categorySuggestion);
+        $("#aiWritingSuggestion").text(analysis.writingSuggestion);
+        if (
+          analysis.detectedCategory &&
+          analysis.detectedCategory !== category
+        ) {
+          $("#aiApplyCategoryBtn")
+            .show()
+            .data("category", analysis.detectedCategory);
+        } else {
+          $("#aiApplyCategoryBtn").hide();
+        }
+        $("#aiAnalysisCard").hide().fadeIn(500);
+
+        $("#resultText").hide().text(aiResult.complaint).fadeIn(500);
+
+        $("#aiImproveBtn").prop("disabled", false).text("✨ Improve Complaint");
+
+        showToast("AI analysis completed successfully.", "success");
+      }, 1500);
+    });
+}
+function initializeAiApplyCategoryButton() {
+  $("#aiApplyCategoryBtn")
+    .off("click")
+    .on("click", function () {
+      let suggestedCategory = $(this).data("category");
+
+      if (!suggestedCategory) {
+        return;
+      }
+
+      let categoryCard = $(
+        '#reportWizard .category-card[data-category="' +
+          suggestedCategory +
+          '"]',
+      );
+
+      if (categoryCard.length) {
+        selectCategory(categoryCard);
+
+        showToast("Suggested category applied.", "success");
+      }
+    });
+}
 $(document).ready(function () {
   if ($("#reportWizard").length === 0) {
     return;
@@ -68,7 +145,8 @@ $(document).ready(function () {
   initializeCopyButton();
 
   initializeAuthorityButton();
-
+  initializeAiImproveButton();
+  initializeAiApplyCategoryButton();
   initializeWizard();
 
   initializeKeyboardNavigation();
