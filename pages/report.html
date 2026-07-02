@@ -504,12 +504,68 @@
                     class="dashboard-btn ai-improve-btn"
                     id="aiImproveBtn"
                   >
-                    ✨ Improve Complaint
+                    🤖 Analyze & Improve
                   </button>
 
                   <button type="button" class="dashboard-btn authority-btn">
                     📤 Submit To Authorities
                   </button>
+                </div>
+                <div class="department-guide-card" id="departmentGuideCard">
+                  <p class="section-label">WHAT TO DO NEXT</p>
+
+                  <h4 id="guideDepartmentName">Responsible Department</h4>
+
+                  <p class="about-text" id="guideDepartmentNote">
+                    Follow the official complaint channel below.
+                  </p>
+
+                  <div class="department-guide-grid">
+                    <div class="department-guide-item">
+                      <span>☎ Helpline</span>
+                      <strong id="guideHelpline">—</strong>
+                    </div>
+
+                    <div class="department-guide-item">
+                      <span>🌐 Official Website</span>
+                      <a href="#" target="_blank" id="guideWebsite"
+                        >Open Portal</a
+                      >
+                    </div>
+                  </div>
+
+                  <ol class="department-guide-steps">
+                    <li>Copy your generated complaint.</li>
+                    <li>
+                      Open the official department portal or contact helpline.
+                    </li>
+                    <li>Enter your name, CNIC, address, and issue details.</li>
+                    <li>Paste the complaint text into the description box.</li>
+                    <li>Submit and save your complaint reference number.</li>
+                  </ol>
+
+                  <div class="result-actions mt-4">
+                    <button type="button" class="hero-btn copy-btn">
+                      📋 Copy Complaint
+                    </button>
+
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="dashboard-btn"
+                      id="guidePortalBtn"
+                    >
+                      Open Official Portal
+                    </a>
+
+                    <button
+                      type="button"
+                      class="dashboard-btn"
+                      id="guideReportAnotherBtn"
+                    >
+                      Report Another Issue
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -619,18 +675,17 @@
     </script>
 
     <!-- Report Modules -->
-
     <script src="../assets/js/report-wizard.js"></script>
 
     <script src="../assets/js/ai-complaint.js"></script>
+
+    <script src="../assets/js/department-guide.js"></script>
 
     <script src="../assets/js/report-generator.js"></script>
 
     <script src="../assets/js/report-map.js"></script>
 
     <script src="../assets/js/report-upload.js"></script>
-
-    <!-- Report Initializer -->
 
     <script src="../assets/js/report.js"></script>
   </body>

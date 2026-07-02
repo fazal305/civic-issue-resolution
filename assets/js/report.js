@@ -10,12 +10,31 @@ let REPORT_CONFIG = {
 };
 
 let MAX_COMPLAINT_IMAGES = REPORT_CONFIG.maxComplaintImages;
-
 let MAX_IMAGE_SIZE_MB = REPORT_CONFIG.maxImageSizeMb;
-
 let MIN_COMPLAINT_LENGTH = REPORT_CONFIG.minComplaintLength;
-
 let TOTAL_WIZARD_STEPS = REPORT_CONFIG.totalWizardSteps;
+
+function showDepartmentGuide(category) {
+  if (typeof getDepartmentGuide === "undefined") {
+    return;
+  }
+
+  let guide = getDepartmentGuide(category);
+
+  $("#guideDepartmentName").text(guide.department);
+
+  $("#guideDepartmentNote").text(guide.note);
+
+  $("#guideHelpline").text(guide.helpline);
+
+  $("#guideWebsite")
+    .attr("href", guide.website);
+
+  $("#guidePortalBtn")
+    .attr("href", guide.website);
+
+  $("#departmentGuideCard").fadeIn(300);
+}
 
 function initializeCopyButton() {
   $(".copy-btn")
@@ -24,21 +43,14 @@ function initializeCopyButton() {
       let complaint = $("#resultText").text();
 
       if (!complaint) {
-        showToast("No complaint text available to copy.", "warning");
-
-        return;
-      }
-
-      if (!navigator.clipboard) {
-        showToast("Clipboard is not supported in this browser.", "danger");
-
+        showToast("No complaint text available.", "warning");
         return;
       }
 
       navigator.clipboard
         .writeText(complaint)
         .then(function () {
-          showToast("Complaint copied to clipboard!", "success");
+          showToast("Complaint copied successfully.", "success");
         })
         .catch(function () {
           showToast("Unable to copy complaint.", "danger");
@@ -50,9 +62,15 @@ function initializeAuthorityButton() {
   $(".authority-btn")
     .off("click")
     .on("click", function () {
-      showToast("Submission guidance is coming soon.", "info");
+      $("html, body").animate(
+        {
+          scrollTop: $("#departmentGuideCard").offset().top - 80,
+        },
+        500
+      );
     });
 }
+
 function initializeAiImproveButton() {
   $("#aiImproveBtn")
     .off("click")
@@ -62,6 +80,11 @@ function initializeAiImproveButton() {
       let complaintText = $("#complaintText").val().trim();
 
       let language = $("#reportWizard .active-language").data("language");
+
+      if (!complaintText) {
+        showToast("Please write your complaint first.", "warning");
+        return;
+      }
 
       $("#aiImproveBtn")
         .prop("disabled", true)
@@ -73,12 +96,16 @@ function initializeAiImproveButton() {
         let aiResult = improveComplaintWithLocalAi(
           category,
           complaintText,
-          language,
+          language
         );
 
-        $("#resultText").text(aiResult.complaint);
-
         let analysis = aiResult.analysis;
+
+        $("#resultText")
+          .hide()
+          .text(aiResult.complaint)
+          .fadeIn(500);
+
         $("#aiDepartment").text(analysis.department);
 
         $("#aiUrgency").text(analysis.urgency);
@@ -86,8 +113,15 @@ function initializeAiImproveButton() {
         $("#aiWritingQuality").text(analysis.writingQuality);
 
         $("#aiConfidence").text(analysis.confidence);
-        $("#aiCategorySuggestion").text(analysis.categorySuggestion);
-        $("#aiWritingSuggestion").text(analysis.writingSuggestion);
+
+        $("#aiCategorySuggestion").text(
+          analysis.categorySuggestion
+        );
+
+        $("#aiWritingSuggestion").text(
+          analysis.writingSuggestion
+        );
+
         if (
           analysis.detectedCategory &&
           analysis.detectedCategory !== category
@@ -98,19 +132,27 @@ function initializeAiImproveButton() {
         } else {
           $("#aiApplyCategoryBtn").hide();
         }
-        $("#aiAnalysisCard").hide().fadeIn(500);
 
-        $("#resultText").hide().text(aiResult.complaint).fadeIn(500);
+        $("#aiAnalysisCard")
+          .hide()
+          .fadeIn(500);
 
-        $("#aiImproveBtn").prop("disabled", false).text("✨ Improve Complaint");
+        showDepartmentGuide(
+          analysis.detectedCategory || category
+        );
+
+        $("#aiImproveBtn")
+          .prop("disabled", false)
+          .text("🤖 Analyze & Improve");
 
         showToast(
-          "Civic AI analyzed your complaint and generated an improved version.",
-          "success",
+          "Civic AI analyzed your complaint successfully.",
+          "success"
         );
       }, 1500);
     });
 }
+
 function initializeAiApplyCategoryButton() {
   $("#aiApplyCategoryBtn")
     .off("click")
@@ -121,23 +163,39 @@ function initializeAiApplyCategoryButton() {
         return;
       }
 
-      let categoryCard = $(
+      let card = $(
         '#reportWizard .category-card[data-category="' +
-          suggestedCategory +
-          '"]',
+        suggestedCategory +
+        '"]'
       );
 
-      if (categoryCard.length) {
-        selectCategory(categoryCard);
+      if (card.length) {
+        selectCategory(card);
 
-        showToast("Suggested category applied.", "success");
+        showDepartmentGuide(suggestedCategory);
+
+        showToast(
+          "Suggested category applied.",
+          "success"
+        );
       }
     });
 }
+
+function initializeReportAnotherButton() {
+  $("#guideReportAnotherBtn")
+    .off("click")
+    .on("click", function () {
+      location.reload();
+    });
+}
+
 $(document).ready(function () {
   if ($("#reportWizard").length === 0) {
     return;
   }
+
+  $("#departmentGuideCard").hide();
 
   initializeCategorySelection();
 
@@ -148,8 +206,13 @@ $(document).ready(function () {
   initializeCopyButton();
 
   initializeAuthorityButton();
+
   initializeAiImproveButton();
+
   initializeAiApplyCategoryButton();
+
+  initializeReportAnotherButton();
+
   initializeWizard();
 
   initializeKeyboardNavigation();
