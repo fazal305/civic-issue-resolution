@@ -1,6 +1,4 @@
-function generateComplaint(category, complaintText, language) {
-  let deferred = $.Deferred();
-
+function generateComplaintFallback(category, complaintText, language) {
   let categoryTranslations = {
     English: {
       Garbage: "Garbage Collection",
@@ -28,20 +26,16 @@ function generateComplaint(category, complaintText, language) {
   };
 
   let translatedCategory =
-    (categoryTranslations[language] &&
-      categoryTranslations[language][category]) ||
-    category;
+    categoryTranslations[language][category] || category;
 
   let issueDescription = cleanComplaintText(
     complaintText,
     category,
-    language,
+    language
   );
 
-  let complaint = "";
-
   if (language === "English") {
-    complaint =
+    return (
       "To: Concerned Department\n\n" +
       "Subject: Formal Complaint Regarding " +
       translatedCategory +
@@ -53,14 +47,14 @@ function generateComplaint(category, complaintText, language) {
       "Issue Details:\n" +
       issueDescription +
       "\n\n" +
-      "This issue has caused considerable inconvenience to local residents and requires immediate attention. I kindly request your department to investigate the matter and take appropriate action as soon as possible.\n\n" +
-      "Thank you for your time and cooperation.\n\n" +
-      "Yours faithfully,\n\n" +
-      "Citizen";
+      "This issue requires immediate attention. I kindly request your department to investigate and resolve the matter as soon as possible.\n\n" +
+      "Thank you.\n\n" +
+      "Yours faithfully,\nCitizen"
+    );
   }
 
-  else if (language === "Roman Urdu") {
-    complaint =
+  if (language === "Roman Urdu") {
+    return (
       "Mutaliqa Afsar Sahab,\n\n" +
       "Subject: " +
       translatedCategory +
@@ -72,32 +66,28 @@ function generateComplaint(category, complaintText, language) {
       "Maslay ki Tafseel:\n" +
       issueDescription +
       "\n\n" +
-      "Yeh masla ilaqay ke rehne walon ke liye rozana mushkilat paida kar raha hai. Barah-e-karam is maslay ko jald az jald hal karne ke liye zaroori iqdamat kiye jayen.\n\n" +
-      "Aap ke taawun ka shukriya.\n\n" +
-      "Darkhwast Guzar";
+      "Barah-e-karam is maslay ko jald az jald hal karne ke liye zaroori iqdamat kiye jayen.\n\n" +
+      "Shukriya.\n\n" +
+      "Darkhwast Guzar"
+    );
   }
 
-  else {
-    complaint =
-      "متعلقہ افسر صاحب،\n\n" +
-      "موضوع: " +
-      translatedCategory +
-      " سے متعلق شکایت\n\n" +
-      "السلام علیکم،\n\n" +
-      "میں اپنے علاقے میں " +
-      translatedCategory +
-      " سے متعلق ایک شکایت درج کروانا چاہتا ہوں۔\n\n" +
-      "مسئلے کی تفصیل:\n" +
-      issueDescription +
-      "\n\n" +
-      "یہ مسئلہ علاقے کے رہائشیوں کے لیے شدید پریشانی کا باعث بن رہا ہے۔ براہ کرم جلد از جلد مناسب کارروائی کرتے ہوئے اس مسئلے کو حل کیا جائے۔\n\n" +
-      "آپ کے تعاون کا شکریہ۔\n\n" +
-      "درخواست گزار";
-  }
-
-  deferred.resolve(complaint);
-
-  return deferred.promise();
+  return (
+    "متعلقہ افسر صاحب،\n\n" +
+    "موضوع: " +
+    translatedCategory +
+    " سے متعلق شکایت\n\n" +
+    "السلام علیکم،\n\n" +
+    "میں اپنے علاقے میں " +
+    translatedCategory +
+    " سے متعلق ایک شکایت درج کروانا چاہتا ہوں۔\n\n" +
+    "مسئلے کی تفصیل:\n" +
+    issueDescription +
+    "\n\n" +
+    "براہ کرم اس مسئلے کو جلد از جلد حل کرنے کے لیے مناسب کارروائی کی جائے۔\n\n" +
+    "شکریہ۔\n\n" +
+    "درخواست گزار"
+  );
 }
 
 function saveComplaint(category, complaintText, language, generatedComplaint) {

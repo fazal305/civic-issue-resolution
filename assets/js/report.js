@@ -93,11 +93,56 @@ function initializeAiImproveButton() {
       showToast("Analyzing complaint...", "info");
 
       setTimeout(function () {
-        let aiResult = improveComplaintWithLocalAi(
-          category,
-          complaintText,
-          language
-        );
+        let aiResult = {
+          complaint: "",
+          analysis: buildAiAnalysis(category, complaintText)
+        };
+
+        generateComplaint(category, complaintText, language)
+          .then(function (aiComplaint) {
+            aiResult.complaint = aiComplaint;
+
+            let analysis = aiResult.analysis;
+
+            $("#resultText").hide().text(aiResult.complaint).fadeIn(500);
+
+            $("#aiDepartment").text(analysis.department);
+            $("#aiUrgency").text(analysis.urgency);
+            $("#aiWritingQuality").text(analysis.writingQuality);
+            $("#aiConfidence").text(analysis.confidence);
+            $("#aiCategorySuggestion").text(analysis.categorySuggestion);
+            $("#aiWritingSuggestion").text(analysis.writingSuggestion);
+
+            if (analysis.detectedCategory && analysis.detectedCategory !== category) {
+              $("#aiApplyCategoryBtn")
+                .show()
+                .data("category", analysis.detectedCategory);
+            } else {
+              $("#aiApplyCategoryBtn").hide();
+            }
+
+            $("#aiAnalysisCard").hide().fadeIn(500);
+
+            showDepartmentGuide(analysis.detectedCategory || category);
+
+            $("#aiImproveBtn")
+              .prop("disabled", false)
+              .text("🤖 Analyze & Improve");
+
+            showToast(
+              "Civic AI analyzed your complaint successfully.",
+              "success"
+            );
+          })
+          .catch(function () {
+            $("#aiImproveBtn")
+              .prop("disabled", false)
+              .text("🤖 Analyze & Improve");
+
+            showToast("AI improvement failed. Please try again.", "danger");
+          });
+
+        return;
 
         let analysis = aiResult.analysis;
 
