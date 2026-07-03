@@ -1,23 +1,158 @@
 $(document).ready(function () {
+  /*
+    Stop if admin dashboard is not on this page
+  */
+
   if ($("#adminTableWrap").length === 0) {
     return;
   }
 
+  /*
+    Admin state
+  */
+
   let adminComplaints = [];
+
+  let filteredComplaints = [];
+
+  let expandedComplaintId = "";
+
+  /*
+    Create admin controls if missing
+  */
+
+  function ensureAdminControls() {
+    if ($("#adminControls").length !== 0) {
+      return;
+    }
+
+    $("#adminTableWrap").before(`
+
+      <div
+        class="admin-actions-bar"
+        id="adminControls">
+
+        <div class="admin-filter-grid">
+
+          <input
+            type="text"
+            class="dashboard-input"
+            id="adminSearchInput"
+            placeholder="Search complaints or category">
+
+          <select
+            class="dashboard-input"
+            id="adminCategoryFilter">
+
+            <option value="All">All Categories</option>
+            <option value="Garbage">Garbage</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Water">Water</option>
+            <option value="Gas">Gas</option>
+            <option value="Road Damage">Road Damage</option>
+
+          </select>
+
+          <select
+            class="dashboard-input"
+            id="adminStatusFilter">
+
+            <option value="All">All Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+
+          </select>
+
+        </div>
+
+        <button
+          type="button"
+          class="hero-btn"
+          id="adminDownloadCsvBtn">
+
+          Download CSV
+
+        </button>
+
+      </div>
+
+    `);
+  }
+
+  /*
+    Helpers
+  */
+
+  function getSafeStatus(status) {
+    if (status === "Resolved") {
+      return "Resolved";
+    }
+
+    if (status === "In Progress") {
+      return "In Progress";
+    }
+
+    return "Pending";
+  }
+
+  function getStatusClass(status) {
+    if (status === "Resolved") {
+      return "resolved-status";
+    }
+
+    if (status === "In Progress") {
+      return "progress-status";
+    }
+
+    return "pending-status";
+  }
+
+  function getComplaintText(complaint) {
+    return (
+      complaint.generatedComplaint ||
+      complaint.complaintText ||
+      "No complaint text available."
+    );
+  }
+
+  function getCategoryBreakdown() {
+    let categories = {};
+
+    adminComplaints.forEach(function (complaint) {
+      let category = complaint.category || "Other";
+
+      if (!categories[category]) {
+        categories[category] = 0;
+      }
+
+      categories[category]++;
+    });
+
+    return Object.keys(categories)
+      .map(function (category) {
+        return category + ": " + categories[category];
+      })
+      .join(" | ");
+  }
+
+  /*
+    Update admin statistics
+  */
 
   function updateAdminStats() {
     let total = adminComplaints.length;
 
     let pending = adminComplaints.filter(function (complaint) {
-      return complaint.status === "Pending";
+      return getSafeStatus(complaint.status) === "Pending";
     }).length;
 
     let progress = adminComplaints.filter(function (complaint) {
-      return complaint.status === "In Progress";
+      return getSafeStatus(complaint.status) === "In Progress";
     }).length;
 
     let resolved = adminComplaints.filter(function (complaint) {
-      return complaint.status === "Resolved";
+      return getSafeStatus(complaint.status) === "Resolved";
     }).length;
 
     $("#adminTotalCount").text(total);
@@ -27,53 +162,99 @@ $(document).ready(function () {
     $("#adminProgressCount").text(progress);
 
     $("#adminResolvedCount").text(resolved);
+
+    if ($("#adminCategoryCount").length !== 0) {
+      $("#adminCategoryCount").text(getCategoryBreakdown() || "0");
+    }
   }
 
-  function buildStatusOptions(currentStatus) {
-    let statuses = ["Pending", "In Progress", "Resolved"];
+  /*
+    Apply filters
+  */
 
-    let optionsHtml = "";
+  function applyAdminFilters() {
+    let searchTerm = ($("#adminSearchInput").val() || "").toLowerCase().trim();
 
-    statuses.forEach(function (status) {
-      let selected = "";
+    let categoryFilter = $("#adminCategoryFilter").val() || "All";
 
-      if (status === currentStatus) {
-        selected = "selected";
-      }
+    let statusFilter = $("#adminStatusFilter").val() || "All";
 
-      optionsHtml += `
+    filteredComplaints = adminComplaints.filter(function (complaint) {
+      let category = complaint.category || "";
 
-        <option
-          value="${status}"
-          ${selected}>
+      let status = getSafeStatus(complaint.status);
 
-          ${status}
+      let text = getComplaintText(complaint).toLowerCase();
 
-        </option>
+      let matchesSearch =
+        searchTerm === "" ||
+        text.indexOf(searchTerm) !== -1 ||
+        category.toLowerCase().indexOf(searchTerm) !== -1;
 
-      `;
+      let matchesCategory =
+        categoryFilter === "All" || category === categoryFilter;
+
+      let matchesStatus = statusFilter === "All" || status === statusFilter;
+
+      return matchesSearch && matchesCategory && matchesStatus;
     });
 
-    return optionsHtml;
+    buildAdminTable();
   }
 
-  function getImageCount(complaint) {
-    if (complaint.imageUrls && complaint.imageUrls.length) {
-      return complaint.imageUrls.length;
-    }
-
-    return 0;
-  }
+  /*
+    Build admin table
+  */
 
   function buildAdminTable() {
     if (adminComplaints.length === 0) {
       $("#adminTableWrap").html(`
 
-        <p class="about-text">
+        <div class="empty-box-card">
 
-          No complaints have been submitted yet.
+          <div class="empty-box-icon-wrap">
 
-        </p>
+            <span class="empty-box-icon">📭</span>
+
+          </div>
+
+          <h3 class="empty-box-title">
+
+            No complaints submitted yet
+
+          </h3>
+
+          <p class="empty-box-message">
+
+            Citizen complaints will appear here in real time once they are submitted.
+
+          </p>
+
+        </div>
+
+      `);
+
+      return;
+    }
+
+    if (filteredComplaints.length === 0) {
+      $("#adminTableWrap").html(`
+
+        <div class="empty-box-card">
+
+          <h3 class="empty-box-title">
+
+            No matching complaints found
+
+          </h3>
+
+          <p class="empty-box-message">
+
+            Try changing your search, category, or status filter.
+
+          </p>
+
+        </div>
 
       `);
 
@@ -88,21 +269,17 @@ $(document).ready(function () {
 
           <tr>
 
-            <th>Category</th>
+            <th>#</th>
 
-            <th>Complaint</th>
+            <th>Category</th>
 
             <th>Language</th>
 
-            <th>Location</th>
-
-            <th>Coordinates</th>
-
-            <th>Photos</th>
+            <th>Status</th>
 
             <th>Date</th>
 
-            <th>Status</th>
+            <th>Actions</th>
 
           </tr>
 
@@ -112,69 +289,106 @@ $(document).ready(function () {
 
     `;
 
-    adminComplaints.forEach(function (complaint) {
+    filteredComplaints.forEach(function (complaint, index) {
+      let status = getSafeStatus(complaint.status);
+
+      let statusClass = getStatusClass(status);
+
       tableHtml += `
 
         <tr>
 
+          <td>${index + 1}</td>
+
+          <td>${escapeHtml(complaint.category || "N/A")}</td>
+
+          <td>${escapeHtml(complaint.language || "English")}</td>
+
           <td>
 
-            ${escapeHtml(complaint.category || "N/A")}
+            <span class="complaint-status ${statusClass}">
+
+              ${escapeHtml(status)}
+
+            </span>
 
           </td>
 
-          <td>
-
-            ${escapeHtml((complaint.complaintText || "").substring(0, 80))}...
-
-          </td>
+          <td>${formatComplaintDate(complaint.timestamp)}</td>
 
           <td>
 
-            ${escapeHtml(complaint.language || "English")}
+            <div class="admin-row-actions">
 
-          </td>
+              <button
+                type="button"
+                class="admin-small-btn admin-view-btn"
+                data-id="${complaint.id}">
 
-          <td>
+                View
 
-            ${escapeHtml(complaint.location || "Karachi")}
+              </button>
 
-          </td>
+              <button
+                type="button"
+                class="admin-small-btn admin-resolve-btn"
+                data-id="${complaint.id}">
 
-          <td>
+                Mark Resolved
 
-            ${escapeHtml(complaint.latitude || "N/A")},
-            ${escapeHtml(complaint.longitude || "N/A")}
+              </button>
 
-          </td>
+              <button
+                type="button"
+                class="admin-small-btn admin-danger-btn admin-delete-btn"
+                data-id="${complaint.id}">
 
-          <td>
+                Delete
 
-            ${getImageCount(complaint)}
+              </button>
 
-          </td>
-
-          <td>
-
-            ${formatComplaintDate(complaint.timestamp)}
-
-          </td>
-
-          <td>
-
-            <select
-              class="form-control dashboard-input admin-status-select"
-              data-id="${complaint.id}">
-
-              ${buildStatusOptions(complaint.status || "Pending")}
-
-            </select>
+            </div>
 
           </td>
 
         </tr>
 
       `;
+
+      if (expandedComplaintId === complaint.id) {
+        tableHtml += `
+
+          <tr class="admin-expanded-row">
+
+            <td colspan="6">
+
+              <div class="admin-expanded-content">
+
+                <strong>Complaint Text</strong>
+
+                <p>${escapeHtml(getComplaintText(complaint))}</p>
+
+                <strong>Location</strong>
+
+                <p>
+                  ${escapeHtml(complaint.location || "Karachi")}
+                  —
+                  ${escapeHtml(complaint.latitude || "N/A")},
+                  ${escapeHtml(complaint.longitude || "N/A")}
+                </p>
+
+                <strong>User</strong>
+
+                <p>${escapeHtml(complaint.userEmail || "N/A")}</p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+      }
     });
 
     tableHtml += `
@@ -188,14 +402,26 @@ $(document).ready(function () {
     $("#adminTableWrap").html(tableHtml);
   }
 
+  /*
+    Load complaints live
+  */
+
   function loadAdminComplaints() {
+    ensureAdminControls();
+
     $("#adminTableWrap").html(`
 
-      <p class="about-text">
+      <div class="loading-box">
 
-        Loading complaints...
+        <div class="spinner-border text-info" role="status">
 
-      </p>
+          <span class="visually-hidden">Loading...</span>
+
+        </div>
+
+        <p>Loading complaints...</p>
+
+      </div>
 
     `);
 
@@ -213,7 +439,7 @@ $(document).ready(function () {
 
         updateAdminStats();
 
-        buildAdminTable();
+        applyAdminFilters();
       },
 
       function (error) {
@@ -223,16 +449,30 @@ $(document).ready(function () {
 
         $("#adminTableWrap").html(`
 
-          <p class="about-text">
+          <div class="empty-box-card">
 
-            Could not load complaints. Please refresh the page.
+            <h3 class="empty-box-title">
 
-          </p>
+              Could not load complaints
+
+            </h3>
+
+            <p class="empty-box-message">
+
+              Please check Firebase rules or refresh the page.
+
+            </p>
+
+          </div>
 
         `);
       },
     );
   }
+
+  /*
+    Update complaint status
+  */
 
   function updateComplaintStatus(complaintId, newStatus) {
     civicFirestoreService
@@ -247,13 +487,126 @@ $(document).ready(function () {
       });
   }
 
-  $("#adminTableWrap").on("change", ".admin-status-select", function () {
+  /*
+    Delete complaint
+  */
+
+  function deleteComplaint(complaintId) {
+    let confirmed = confirm("Are you sure you want to delete this complaint?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    civicFirestoreService
+      .deleteComplaint(complaintId)
+      .then(function () {
+        showToast("Complaint deleted successfully.", "success");
+      })
+      .catch(function (error) {
+        console.log(error);
+
+        showToast("Could not delete complaint.", "danger");
+      });
+  }
+
+  /*
+    CSV export
+  */
+
+  function downloadVisibleComplaintsCsv() {
+    if (filteredComplaints.length === 0) {
+      showToast("No complaints available to export.", "warning");
+
+      return;
+    }
+
+    let rows = [["Date", "Category", "Language", "Status", "Complaint Text"]];
+
+    filteredComplaints.forEach(function (complaint) {
+      rows.push([
+        formatComplaintDate(complaint.timestamp),
+        complaint.category || "",
+        complaint.language || "",
+        getSafeStatus(complaint.status),
+        getComplaintText(complaint),
+      ]);
+    });
+
+    let csvContent = rows
+      .map(function (row) {
+        return row
+          .map(function (value) {
+            return '"' + String(value).replace(/"/g, '""') + '"';
+          })
+          .join(",");
+      })
+      .join("\n");
+
+    let blob = new Blob([csvContent], {
+      type: "text/csv;charset=utf-8;",
+    });
+
+    let url = URL.createObjectURL(blob);
+
+    let link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "civicconnect-complaints.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+  }
+
+  /*
+    Events
+  */
+
+  $("#adminTableWrap").on("click", ".admin-view-btn", function () {
     let complaintId = $(this).data("id");
 
-    let newStatus = $(this).val();
+    if (expandedComplaintId === complaintId) {
+      expandedComplaintId = "";
+    } else {
+      expandedComplaintId = complaintId;
+    }
 
-    updateComplaintStatus(complaintId, newStatus);
+    buildAdminTable();
   });
+
+  $("#adminTableWrap").on("click", ".admin-resolve-btn", function () {
+    let complaintId = $(this).data("id");
+
+    updateComplaintStatus(complaintId, "Resolved");
+  });
+
+  $("#adminTableWrap").on("click", ".admin-delete-btn", function () {
+    let complaintId = $(this).data("id");
+
+    deleteComplaint(complaintId);
+  });
+
+  $(document).on(
+    "input change",
+    "#adminSearchInput, #adminCategoryFilter, #adminStatusFilter",
+    function () {
+      applyAdminFilters();
+    },
+  );
+
+  $(document).on("click", "#adminDownloadCsvBtn", function () {
+    downloadVisibleComplaintsCsv();
+  });
+
+  /*
+    Initialize
+  */
 
   loadAdminComplaints();
 });

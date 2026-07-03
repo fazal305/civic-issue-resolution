@@ -748,10 +748,10 @@ $(document).ready(function () {
 
     let metaLine = highlightSearchTerms(
       (complaint.location || "Karachi") +
-        " · " +
-        (complaint.language || "English") +
-        " · " +
-        formatComplaintDate(complaint.timestamp),
+      " · " +
+      (complaint.language || "English") +
+      " · " +
+      formatComplaintDate(complaint.timestamp),
       searchTerms,
     );
 
@@ -1092,9 +1092,8 @@ $(document).ready(function () {
   }
 
   function deleteComplaint(complaintId) {
-    complaintsCollection
-      .doc(complaintId)
-      .delete()
+    civicFirestoreService
+      .deleteComplaint(complaintId)
       .then(function () {
         dashboardState.allComplaints = dashboardState.allComplaints.filter(
           function (complaint) {
@@ -1315,8 +1314,8 @@ $(document).ready(function () {
 
     let confirmDelete = window.confirm(
       "Are you sure you want to delete " +
-        dashboardState.selectedComplaints.length +
-        " selected complaint(s)?",
+      dashboardState.selectedComplaints.length +
+      " selected complaint(s)?",
     );
 
     if (!confirmDelete) {

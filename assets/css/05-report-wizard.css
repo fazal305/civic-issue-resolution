@@ -1,6 +1,6 @@
 /* CivicConnect - 05 Report Wizard */
 
-/* Report page & wizard */
+/* Report page */
 
 .report-hero {
   padding: 90px 0 50px;
@@ -9,41 +9,41 @@
 .report-hero-card,
 .progress-card,
 .workspace-card {
-  background: var(--glass-bg-soft);
-  border: 1px solid var(--glass-border-soft);
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .report-hero-card {
-  background: var(--glass-bg);
-  border-color: var(--glass-border);
   border-radius: 24px;
   padding: 50px;
-  backdrop-filter: blur(20px);
 }
 
 .report-title {
-  font-size: 3rem;
-  font-weight: 700;
   color: var(--white);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 800;
   margin-top: 10px;
 }
 
 .report-description {
-  color: var(--text-gray);
   max-width: 760px;
+  color: var(--text-gray);
   line-height: 1.9;
   margin-top: 20px;
 }
+
+/* Progress */
 
 .report-progress-section {
   padding-bottom: 60px;
 }
 
 .progress-card {
+  position: relative;
   border-radius: 22px;
   padding: 35px;
-  position: relative;
 }
 
 .progress-track {
@@ -52,7 +52,7 @@
   left: 12%;
   right: 12%;
   height: 4px;
-  background: var(--glass-border-soft);
+  background-color: var(--glass-border-soft);
   border-radius: 4px;
   z-index: 0;
   overflow: hidden;
@@ -74,9 +74,7 @@
 
 .progress-step {
   text-align: center;
-  transition:
-    transform 0.35s ease,
-    opacity 0.35s ease;
+  transition: 0.35s ease;
 }
 
 .progress-step:hover {
@@ -88,7 +86,7 @@
   height: 65px;
   margin: 0 auto 20px;
   border-radius: 50%;
-  background: var(--navy-light);
+  background-color: var(--navy-light);
   color: var(--text-gray);
   border: 2px solid var(--glass-border-soft);
   display: flex;
@@ -96,30 +94,22 @@
   justify-content: center;
   font-size: 1.4rem;
   font-weight: 700;
-  box-shadow: none;
-  transition:
-    background 0.4s ease,
-    color 0.4s ease,
-    border-color 0.4s ease,
-    box-shadow 0.4s ease,
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: 0.4s ease;
 }
 
 .step-number-label {
   display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: 0.35s ease;
 }
 
 .progress-step h5 {
   color: var(--white);
   margin-bottom: 10px;
-  transition: color 0.35s ease;
 }
 
 .progress-step p {
   color: var(--text-gray);
   font-size: 0.95rem;
-  transition: color 0.35s ease;
 }
 
 .progress-step.active-step h5 {
@@ -127,7 +117,7 @@
 }
 
 .progress-step.active-step .step-number {
-  background: var(--teal);
+  background-color: var(--teal);
   color: var(--navy);
   border-color: var(--teal);
   box-shadow: 0 0 30px var(--teal-glow);
@@ -136,77 +126,21 @@
 }
 
 .progress-step.completed-step .step-number {
-  background: var(--navy-light);
+  background-color: var(--navy-light);
   color: var(--teal);
   border-color: var(--teal);
   box-shadow: 0 0 18px var(--teal-glow);
-  transform: scale(1);
-  animation: none;
-}
-
-.progress-step.completed-step .step-number-label {
-  transform: scale(1);
 }
 
 .progress-step.just-completed .step-number {
-  animation: progressStepComplete 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: progressStepComplete 0.55s ease;
 }
 
 .progress-step.just-completed .step-number-label {
-  animation: progressCheckPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: progressCheckPop 0.45s ease;
 }
 
-@keyframes progressStepPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 22px var(--teal-glow);
-  }
-
-  50% {
-    box-shadow: 0 0 38px var(--teal-glow);
-  }
-}
-
-@keyframes progressStepComplete {
-  0% {
-    transform: scale(1.08);
-  }
-
-  45% {
-    transform: scale(1.18);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes progressCheckPop {
-  0% {
-    transform: scale(0.2);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .progress-track-fill {
-    transition: width 0.2s ease;
-  }
-
-  .progress-step.active-step .step-number {
-    animation: none;
-  }
-
-  .progress-step.just-completed .step-number,
-  .progress-step.just-completed .step-number-label {
-    animation: none;
-  }
-}
+/* Workspace */
 
 .report-workspace {
   padding-bottom: 120px;
@@ -228,8 +162,10 @@
   margin-bottom: 30px;
 }
 
+/* Wizard category cards */
+
 #reportWizard .category-card {
-  background: var(--glass-bg-soft);
+  background-color: var(--glass-bg-soft);
   border: 1px solid var(--glass-border-soft);
   border-radius: 20px;
   padding: 30px;
@@ -252,13 +188,15 @@
 }
 
 #reportWizard .category-card.selected-category {
-  background: var(--teal-soft-bg);
+  background-color: var(--teal-soft-bg);
 }
 
 #reportWizard .category-icon {
   width: auto;
   height: auto;
   background: none;
+  border: none;
+  box-shadow: none;
   font-size: 2.4rem;
   margin-bottom: 20px;
 }
@@ -272,13 +210,15 @@
   margin-bottom: 0;
 }
 
+/* Selected category */
+
 .selected-category-display {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
   border-radius: 50px;
-  background: var(--teal-soft-bg);
+  background-color: var(--teal-soft-bg);
   border: 1px solid var(--teal);
 }
 
@@ -292,6 +232,8 @@
   font-weight: 700;
 }
 
+/* Character counter */
+
 .character-counter {
   color: var(--text-gray);
   margin-top: 10px;
@@ -302,6 +244,8 @@
   color: var(--status-warning);
 }
 
+/* Language selector */
+
 .language-selector {
   display: flex;
   gap: 15px;
@@ -310,7 +254,7 @@
 
 .language-selector .language-btn {
   border: 1px solid var(--glass-border-soft);
-  background: transparent;
+  background-color: transparent;
   color: var(--white);
   border-radius: 50px;
   padding: 12px 28px;
@@ -319,7 +263,7 @@
 
 .language-selector .language-btn:hover,
 .language-selector .active-language {
-  background: var(--teal);
+  background-color: var(--teal);
   color: var(--navy);
 }
 
@@ -328,15 +272,17 @@
   outline-offset: 3px;
 }
 
+/* Result card */
+
 .report-workspace .result-card {
   display: block;
-  background: var(--glass-bg);
+  background-color: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 40px;
   margin-top: 30px;
   color: var(--white);
-  box-shadow: none;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
 }
 
 .report-workspace .result-card h3 {
@@ -348,6 +294,8 @@
   white-space: pre-line;
   line-height: 1.9;
 }
+
+/* Wizard panels */
 
 .wizard-panels-container {
   position: relative;
@@ -389,23 +337,7 @@
   z-index: 2;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .wizard-panels-container.wizard-animate > .wizard-panel {
-    transition:
-      opacity 0.2s ease,
-      visibility 0.2s ease;
-    transform: none;
-  }
-
-  .wizard-panels-container.wizard-animate.wizard-forward > .wizard-panel,
-  .wizard-panels-container.wizard-animate.wizard-backward > .wizard-panel {
-    transform: none;
-  }
-
-  .wizard-panels-container > .wizard-panel.active-wizard-panel {
-    transform: none;
-  }
-}
+/* Navigation */
 
 .wizard-navigation {
   display: flex;
@@ -446,6 +378,8 @@
   transform: none;
 }
 
+/* Validation */
+
 .wizard-field-error {
   display: none;
   color: var(--status-danger);
@@ -467,22 +401,7 @@
   animation: wizardShake 0.45s ease;
 }
 
-@keyframes wizardShake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  20%,
-  60% {
-    transform: translateX(-8px);
-  }
-
-  40%,
-  80% {
-    transform: translateX(8px);
-  }
-}
+/* Loading */
 
 .wizard-loading {
   text-align: center;
@@ -504,25 +423,6 @@
   animation: wizardSpin 0.8s linear infinite;
 }
 
-@keyframes wizardSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.footer-section,
-.site-footer {
-  background-color: var(--brand-green-dark);
-  color: var(--white);
-  padding: 45px 0;
-}
-
-.footer-section .footer-text,
-.site-footer .footer-text {
-  color: var(--text-gray);
-  margin-bottom: 0;
-}
-
 /* Location Picker */
 
 .location-picker {
@@ -533,7 +433,7 @@
   width: 100%;
   height: 360px;
   margin-top: 16px;
-  border: 1px solid var(--navy-border);
+  border: 1px solid var(--glass-border);
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 0 24px var(--teal-glow);
@@ -575,8 +475,8 @@
 
 .evidence-upload .form-control {
   padding: 12px;
-  background-color: var(--navy-light);
-  border: 1px solid var(--navy-border);
+  background-color: var(--glass-bg-soft);
+  border: 1px solid var(--glass-border);
   color: var(--text-light);
   border-radius: 14px;
 }
@@ -596,9 +496,9 @@
 .image-preview-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--navy-border);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
-  background-color: var(--navy-light);
+  background-color: var(--glass-bg-soft);
   box-shadow: 0 0 16px var(--overlay-soft);
 }
 
@@ -615,18 +515,16 @@
   right: 8px;
   width: 30px;
   height: 30px;
-  border: none;
   border-radius: 50%;
   background-color: var(--overlay-dark);
-  color: var(--white);
+  color: #ffffff;
   cursor: pointer;
-  transition:
-    background-color 0.25s ease,
-    transform 0.25s ease;
+  transition: 0.25s ease;
 }
 
 .remove-image-btn:hover {
   background-color: var(--teal);
+  color: var(--navy);
   transform: scale(1.08);
 }
 
@@ -635,20 +533,7 @@
   color: var(--text-gray);
   font-size: 0.9rem;
 }
-/* Local AI Complaint Improver */
 
-.ai-improve-btn {
-  background-color: var(--navy-light);
-  color: var(--white);
-  border: 1px solid var(--teal-soft-border);
-}
-
-.ai-improve-btn:hover {
-  background-color: var(--teal);
-  color: var(--navy);
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px var(--teal-glow);
-}
 /* AI Analysis Card */
 
 .ai-analysis-card {
@@ -657,6 +542,11 @@
   border-radius: 20px;
   background-color: var(--teal-soft-bg);
   border: 1px solid var(--teal-soft-border);
+}
+
+.ai-analysis-note {
+  color: var(--text-gray);
+  margin-bottom: 0;
 }
 
 .ai-analysis-grid {
@@ -685,15 +575,176 @@
   color: var(--white);
   font-size: 1rem;
 }
+
 .ai-analysis-wide {
   grid-column: 1 / -1;
-}
-.ai-analysis-note {
-  color: var(--text-gray);
-  margin-bottom: 0;
 }
 
 .ai-apply-category-btn {
   margin-top: 14px;
   width: fit-content;
+}
+
+/* Department guide */
+
+.department-guide-card {
+  margin-top: 30px;
+  padding: 28px;
+  border-radius: 22px;
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 0 28px var(--teal-glow);
+}
+
+.department-guide-card h4 {
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.department-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.department-guide-item {
+  padding: 18px;
+  border-radius: 16px;
+  background-color: var(--glass-bg-soft);
+  border: 1px solid var(--glass-border-soft);
+}
+
+.department-guide-item span {
+  display: block;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.department-guide-item strong,
+.department-guide-item a {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.department-guide-item a:hover {
+  color: var(--teal);
+}
+
+.department-guide-steps {
+  margin-top: 24px;
+  margin-bottom: 0;
+  color: var(--text-gray);
+  line-height: 1.9;
+}
+
+/* Animations */
+
+@keyframes progressStepPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 22px var(--teal-glow);
+  }
+
+  50% {
+    box-shadow: 0 0 38px var(--teal-glow);
+  }
+}
+
+@keyframes progressStepComplete {
+  0% {
+    transform: scale(1.08);
+  }
+
+  45% {
+    transform: scale(1.18);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes progressCheckPop {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wizardShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+@keyframes wizardSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-track-fill,
+  .progress-step.active-step .step-number,
+  .progress-step.just-completed .step-number,
+  .progress-step.just-completed .step-number-label,
+  .wizard-panels-container.wizard-animate > .wizard-panel,
+  .wizard-spinner {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 991px) {
+  .progress-track {
+    display: none;
+  }
+
+  .workspace-card {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-hero-card,
+  .workspace-card,
+  .report-workspace .result-card {
+    padding: 28px;
+  }
+
+  .wizard-navigation {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .wizard-nav-btn {
+    width: 100%;
+  }
+
+  .ai-analysis-grid,
+  .department-guide-grid {
+    grid-template-columns: 1fr;
+  }
 }

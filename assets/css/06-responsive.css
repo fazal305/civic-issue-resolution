@@ -18,6 +18,15 @@
   .navbar-logo {
     height: 46px;
   }
+
+  .admin-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 /* Mobile */
@@ -41,9 +50,18 @@
     font-size: 1.2rem;
   }
 
+  .hero-glow-orb {
+    width: 180px;
+    height: 180px;
+  }
+
   .custom-nav-link {
     margin-left: 0;
     padding: 12px 0;
+  }
+
+  .custom-nav-link::after {
+    bottom: 6px;
   }
 
   .theme-toggle-btn {
@@ -56,11 +74,6 @@
   .result-card,
   .about-card {
     padding: 25px;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .footer-logo {
@@ -91,12 +104,18 @@
   }
 
   .wizard-navigation {
+    align-items: stretch;
     flex-direction: column;
   }
 
   .wizard-nav-btn {
     width: 100%;
     min-width: auto;
+  }
+
+  .ai-analysis-grid,
+  .department-guide-grid {
+    grid-template-columns: 1fr;
   }
 
   .empty-box-card {
@@ -129,6 +148,22 @@
     min-width: auto;
   }
 
+  .bulk-actions-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-actions-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
   .notification-center {
     justify-content: flex-start;
   }
@@ -137,12 +172,6 @@
     right: auto;
     left: 0;
   }
-
-  .admin-table th,
-  .admin-table td {
-    padding: 12px;
-    font-size: 0.9rem;
-  }
 }
 
 /* Small Mobile */
@@ -150,6 +179,21 @@
 @media (max-width: 575px) {
   .steps-flow {
     grid-template-columns: 1fr;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .hero-btn,
+  .dashboard-btn,
+  .generate-btn,
+  .speak-btn,
+  .copy-btn,
+  .authority-btn,
+  .ai-improve-btn {
+    width: 100%;
+    text-align: center;
   }
 
   .loader-logo-image {
@@ -175,23 +219,19 @@
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2.6rem;
+    font-size: 2.45rem;
   }
 
-  .hero-btn,
-  .generate-btn,
-  .speak-btn {
-    width: 100%;
-    text-align: center;
+  .section-title {
+    font-size: 2rem;
   }
 
-  .result-actions {
-    flex-direction: column;
-  }
-
-  .copy-btn,
-  .authority-btn {
-    width: 100%;
+  .report-hero-card,
+  .workspace-card,
+  .report-workspace .result-card,
+  .department-guide-card,
+  .ai-analysis-card {
+    padding: 24px;
   }
 
   .notification-panel {

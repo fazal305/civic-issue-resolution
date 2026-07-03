@@ -13,17 +13,17 @@
 :root {
   --navy: #081c2d;
   --navy-light: #0e2a40;
+  --navy-deep: #04111f;
   --navy-border: rgba(255, 255, 255, 0.1);
-  --navy-navbar: rgba(8, 28, 45, 0.95);
-  --dashboard-border-soft: rgba(18, 55, 42, 0.08);
-  --dashboard-border-medium: rgba(18, 55, 42, 0.12);
-  --dashboard-pill-bg: rgba(18, 55, 42, 0.08);
+  --navy-navbar: rgba(8, 28, 45, 0.88);
+
   --teal: #00c2b2;
   --teal-hover: #00a99a;
   --teal-glow: rgba(0, 194, 178, 0.35);
+  --teal-strong-glow: rgba(0, 194, 178, 0.65);
   --teal-soft-bg: rgba(0, 194, 178, 0.12);
-  --teal-soft-border: rgba(0, 194, 178, 0.2);
-  --teal-focus-ring: rgba(0, 194, 178, 0.15);
+  --teal-soft-border: rgba(0, 194, 178, 0.24);
+  --teal-focus-ring: rgba(0, 194, 178, 0.18);
 
   --white: #ffffff;
   --black: #000000;
@@ -47,6 +47,10 @@
   --overlay-dark: rgba(0, 0, 0, 0.7);
   --overlay-soft: rgba(0, 0, 0, 0.25);
   --overlay-light: rgba(255, 255, 255, 0.08);
+
+  --dashboard-border-soft: rgba(18, 55, 42, 0.08);
+  --dashboard-border-medium: rgba(18, 55, 42, 0.12);
+  --dashboard-pill-bg: rgba(18, 55, 42, 0.08);
 
   --status-warning: #d97706;
   --status-info: #2563eb;
@@ -80,6 +84,51 @@
   --print-border: #cccccc;
 }
 
+/* Light theme variables */
+
+body.light-mode {
+  --navy: #f7fafc;
+  --navy-light: #ffffff;
+  --navy-deep: #eef5f8;
+  --navy-border: rgba(8, 28, 45, 0.12);
+  --navy-navbar: rgba(255, 255, 255, 0.9);
+
+  --teal: #00a99a;
+  --teal-hover: #008f83;
+  --teal-glow: rgba(0, 169, 154, 0.22);
+  --teal-strong-glow: rgba(0, 169, 154, 0.4);
+  --teal-soft-bg: rgba(0, 169, 154, 0.1);
+  --teal-soft-border: rgba(0, 169, 154, 0.22);
+  --teal-focus-ring: rgba(0, 169, 154, 0.16);
+
+  --white: #081c2d;
+  --black: #ffffff;
+  --dark-gray: #123047;
+  --medium-gray: #456173;
+  --light-gray: #eef5f4;
+
+  --text-light: #123047;
+  --text-gray: #456173;
+  --section-label-color: #008f83;
+
+  --brand-green-dark: #f7fafc;
+  --brand-green: #eef5f4;
+  --green-muted: #456173;
+
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(8, 28, 45, 0.12);
+  --glass-bg-soft: rgba(255, 255, 255, 0.7);
+  --glass-border-soft: rgba(8, 28, 45, 0.1);
+
+  --overlay-dark: rgba(8, 28, 45, 0.08);
+  --overlay-soft: rgba(8, 28, 45, 0.06);
+  --overlay-light: rgba(8, 28, 45, 0.05);
+
+  --dashboard-border-soft: rgba(8, 28, 45, 0.08);
+  --dashboard-border-medium: rgba(8, 28, 45, 0.14);
+  --dashboard-pill-bg: rgba(0, 169, 154, 0.1);
+}
+
 /* Smooth scrolling */
 
 html {
@@ -93,6 +142,9 @@ body {
   background-color: var(--navy);
   color: var(--white);
   overflow-x: hidden;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Links */
@@ -138,9 +190,17 @@ button {
 
 .custom-navbar {
   background-color: var(--navy-navbar);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 18px 0;
   border-bottom: 1px solid var(--navy-border);
+  transition: 0.3s ease;
+}
+
+.custom-navbar.navbar-scrolled {
+  background-color: var(--navy-navbar);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  border-bottom-color: var(--teal-soft-border);
 }
 
 /* Logo */
@@ -164,15 +224,56 @@ button {
 /* Navbar links */
 
 .custom-nav-link {
+  position: relative;
   color: var(--white) !important;
   margin-left: 20px;
   font-weight: 500;
   transition: 0.3s ease;
 }
 
+.custom-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: var(--teal);
+  box-shadow: 0 0 12px var(--teal-glow);
+  transition: 0.3s ease;
+}
+
 .custom-nav-link:hover,
 .active-nav {
   color: var(--teal) !important;
+}
+
+.custom-nav-link:hover::after,
+.active-nav::after {
+  width: 100%;
+}
+
+/* Theme toggle */
+
+.theme-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 18px;
+  border-radius: 50%;
+  background-color: var(--glass-bg);
+  color: var(--white);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 0 22px var(--teal-glow);
+  transition: 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--teal);
+  color: var(--navy);
+  transform: translateY(-3px);
 }
 
 /* Mobile toggle */
@@ -184,4 +285,17 @@ button {
 
 .navbar-toggler-icon {
   filter: invert(1);
+}
+
+/* Scroll animation base */
+
+.js-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.7s ease;
+}
+
+.js-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

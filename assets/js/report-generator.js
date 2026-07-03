@@ -1,11 +1,43 @@
+function generateComplaint(category, complaintText, language) {
+  let deferred = $.Deferred();
+
+  if (
+    typeof generateComplaintWithAi === "function" &&
+    typeof puter !== "undefined" &&
+    puter.ai
+  ) {
+    generateComplaintWithAi(category, complaintText, language)
+      .then(function (aiComplaint) {
+        deferred.resolve(aiComplaint);
+      })
+      .catch(function () {
+        deferred.resolve(
+          generateComplaintFallback(category, complaintText, language)
+        );
+      });
+  } else {
+    deferred.resolve(
+      generateComplaintFallback(category, complaintText, language)
+    );
+  }
+
+  return deferred.promise();
+}
+
 function generateComplaintFallback(category, complaintText, language) {
+  let issueDescription = cleanComplaintText(
+    complaintText,
+    category,
+    language
+  );
+
   let categoryTranslations = {
     English: {
       Garbage: "Garbage Collection",
       Electricity: "Electricity",
       Water: "Water Supply",
       Gas: "Gas Supply",
-      "Road Damage": "Road Damage",
+      "Road Damage": "Road Damage"
     },
 
     "Roman Urdu": {
@@ -13,7 +45,7 @@ function generateComplaintFallback(category, complaintText, language) {
       Electricity: "Bijli",
       Water: "Pani",
       Gas: "Gas",
-      "Road Damage": "Sadak",
+      "Road Damage": "Sadak"
     },
 
     Urdu: {
@@ -21,18 +53,12 @@ function generateComplaintFallback(category, complaintText, language) {
       Electricity: "بجلی",
       Water: "پانی",
       Gas: "گیس",
-      "Road Damage": "سڑک",
-    },
+      "Road Damage": "سڑک"
+    }
   };
 
   let translatedCategory =
     categoryTranslations[language][category] || category;
-
-  let issueDescription = cleanComplaintText(
-    complaintText,
-    category,
-    language
-  );
 
   if (language === "English") {
     return (
@@ -113,7 +139,7 @@ function saveComplaint(category, complaintText, language, generatedComplaint) {
       status: "Pending",
       location: $("#complaintLocation").val() || "Karachi",
       latitude: $("#complaintLatitude").val(),
-      longitude: $("#complaintLongitude").val(),
+      longitude: $("#complaintLongitude").val()
     };
 
     return civicFirestoreService.createComplaint(complaintData);
@@ -134,6 +160,8 @@ function showResult(category, generatedComplaint) {
   $("#resultTitle").text("Complaint Saved Successfully ✅");
 
   $("#resultText").text(generatedComplaint);
+
+  showDepartmentGuide(category);
 
   $("#resultCard").fadeIn(400);
 
@@ -159,9 +187,7 @@ function generateAndSaveComplaint() {
 
   $("#resultCard").hide();
 
-  $("#wizardNextBtn").prop("disabled", true);
-
-  $("#wizardPrevBtn").prop("disabled", true);
+  setWizardSubmitting(true);
 
   generateComplaint(category, complaintText, language)
     .then(function (generatedComplaint) {
@@ -174,22 +200,15 @@ function generateAndSaveComplaint() {
         showResult(category, generatedComplaint);
       });
     })
-    .catch(function (error) {
-      console.log(error);
-
+    .catch(function () {
       $("#resultLoading").hide();
 
-      showToast(
-        "Unable to generate the complaint. Please try again.",
-        "danger"
-      );
+      showToast("Could not generate or save the complaint.", "danger");
 
       goToStep(3);
     })
-    .finally(function () {
-      $("#wizardNextBtn").prop("disabled", false);
-
-      $("#wizardPrevBtn").prop("disabled", false);
+    .then(function () {
+      setWizardSubmitting(false);
 
       updateNavigation(currentStep);
     });
