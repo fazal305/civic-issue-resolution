@@ -22,33 +22,6 @@ function getDepartmentByCategory(category) {
   return "Concerned Civic Department";
 }
 
-function detectComplaintUrgency(complaintText) {
-  let text = complaintText.toLowerCase();
-
-  if (
-    text.indexOf("leak") !== -1 ||
-    text.indexOf("danger") !== -1 ||
-    text.indexOf("emergency") !== -1 ||
-    text.indexOf("accident") !== -1 ||
-    text.indexOf("smell") !== -1 ||
-    text.indexOf("spark") !== -1 ||
-    text.indexOf("broken wire") !== -1
-  ) {
-    return "High";
-  }
-
-  if (
-    text.indexOf("many days") !== -1 ||
-    text.indexOf("several days") !== -1 ||
-    text.indexOf("again") !== -1 ||
-    text.indexOf("repeated") !== -1 ||
-    text.indexOf("daily") !== -1
-  ) {
-    return "Medium";
-  }
-
-  return "Normal";
-}
 function detectCategoryFromText(complaintText) {
   let text = complaintText.toLowerCase();
 
@@ -57,7 +30,8 @@ function detectCategoryFromText(complaintText) {
     text.indexOf("kachra") !== -1 ||
     text.indexOf("waste") !== -1 ||
     text.indexOf("trash") !== -1 ||
-    text.indexOf("smell") !== -1
+    text.indexOf("smell") !== -1 ||
+    text.indexOf("badboo") !== -1
   ) {
     return "Garbage";
   }
@@ -68,17 +42,19 @@ function detectCategoryFromText(complaintText) {
     text.indexOf("power") !== -1 ||
     text.indexOf("load shedding") !== -1 ||
     text.indexOf("wire") !== -1 ||
-    text.indexOf("spark") !== -1
+    text.indexOf("spark") !== -1 ||
+    text.indexOf("voltage") !== -1
   ) {
     return "Electricity";
   }
 
   if (
     text.indexOf("water") !== -1 ||
-    text.indexOf("paani") !== -1 ||
+    text.indexOf("pani") !== -1 ||
     text.indexOf("leakage") !== -1 ||
     text.indexOf("pipeline") !== -1 ||
-    text.indexOf("sewerage") !== -1
+    text.indexOf("sewerage") !== -1 ||
+    text.indexOf("ganda pani") !== -1
   ) {
     return "Water";
   }
@@ -96,6 +72,7 @@ function detectCategoryFromText(complaintText) {
     text.indexOf("road") !== -1 ||
     text.indexOf("sadak") !== -1 ||
     text.indexOf("pothole") !== -1 ||
+    text.indexOf("gadda") !== -1 ||
     text.indexOf("footpath") !== -1 ||
     text.indexOf("traffic") !== -1
   ) {
@@ -104,6 +81,42 @@ function detectCategoryFromText(complaintText) {
 
   return "";
 }
+
+function detectComplaintUrgency(complaintText) {
+  let text = complaintText.toLowerCase();
+
+  if (
+    text.indexOf("leak") !== -1 ||
+    text.indexOf("danger") !== -1 ||
+    text.indexOf("emergency") !== -1 ||
+    text.indexOf("accident") !== -1 ||
+    text.indexOf("smell") !== -1 ||
+    text.indexOf("badboo") !== -1 ||
+    text.indexOf("spark") !== -1 ||
+    text.indexOf("broken wire") !== -1 ||
+    text.indexOf("gas leak") !== -1
+  ) {
+    return "High";
+  }
+
+  if (
+    text.indexOf("many days") !== -1 ||
+    text.indexOf("several days") !== -1 ||
+    text.indexOf("again") !== -1 ||
+    text.indexOf("repeated") !== -1 ||
+    text.indexOf("daily") !== -1 ||
+    text.indexOf("3 din") !== -1 ||
+    text.indexOf("4 din") !== -1 ||
+    text.indexOf("5 din") !== -1 ||
+    text.indexOf("hafta") !== -1 ||
+    text.indexOf("week") !== -1
+  ) {
+    return "Medium";
+  }
+
+  return "Normal";
+}
+
 function getWritingSuggestion(complaintText) {
   if (complaintText.length < 50) {
     return "Add more details such as street name, nearby landmark, duration, and impact.";
@@ -113,13 +126,16 @@ function getWritingSuggestion(complaintText) {
     complaintText.toLowerCase().indexOf("where") === -1 &&
     complaintText.toLowerCase().indexOf("area") === -1 &&
     complaintText.toLowerCase().indexOf("street") === -1 &&
-    complaintText.toLowerCase().indexOf("road") === -1
+    complaintText.toLowerCase().indexOf("road") === -1 &&
+    complaintText.toLowerCase().indexOf("ilaqa") === -1 &&
+    complaintText.toLowerCase().indexOf("mohalla") === -1
   ) {
     return "Consider mentioning the exact location or nearby landmark.";
   }
 
   return "Complaint has enough detail for a formal submission.";
 }
+
 function buildAiAnalysis(category, complaintText) {
   let detectedCategory = detectCategoryFromText(complaintText);
 
@@ -142,16 +158,62 @@ function buildAiAnalysis(category, complaintText) {
     department: getDepartmentByCategory(finalCategory),
     urgency: detectComplaintUrgency(complaintText),
     confidence: detectedCategory === "" ? "Medium" : "High",
-    writingQuality:
-      complaintText.length >= 80 ? "Detailed" : "Needs more detail",
+    writingQuality: complaintText.length >= 80 ? "Detailed" : "Needs more detail",
     detectedCategory: detectedCategory || category,
     categorySuggestion: categorySuggestion,
-    writingSuggestion: getWritingSuggestion(complaintText),
+    writingSuggestion: getWritingSuggestion(complaintText)
   };
+}
+
+function getTranslatedCategory(category, language) {
+  let categoryTranslations = {
+    English: {
+      Garbage: "Garbage Collection",
+      Electricity: "Electricity",
+      Water: "Water Supply",
+      Gas: "Gas Supply",
+      "Road Damage": "Road Damage"
+    },
+
+    "Roman Urdu": {
+      Garbage: "Kachra",
+      Electricity: "Bijli",
+      Water: "Pani",
+      Gas: "Gas",
+      "Road Damage": "Sadak"
+    },
+
+    Urdu: {
+      Garbage: "کچرا",
+      Electricity: "بجلی",
+      Water: "پانی",
+      Gas: "گیس",
+      "Road Damage": "سڑک"
+    }
+  };
+
+  if (
+    categoryTranslations[language] &&
+    categoryTranslations[language][category]
+  ) {
+    return categoryTranslations[language][category];
+  }
+
+  return category;
 }
 
 function improveComplaintWithLocalAi(category, complaintText, language) {
   let analysis = buildAiAnalysis(category, complaintText);
+
+  let finalCategory = analysis.detectedCategory || category;
+
+  let translatedCategory = getTranslatedCategory(finalCategory, language);
+
+  let cleanIssueText = cleanComplaintText(
+    complaintText,
+    finalCategory,
+    language
+  );
 
   let improvedComplaint = "";
 
@@ -161,64 +223,67 @@ function improveComplaintWithLocalAi(category, complaintText, language) {
       analysis.department +
       "\n\n" +
       "Subject: Formal Complaint Regarding " +
-      category +
-      " Issue\n\n" +
+      translatedCategory +
+      "\n\n" +
       "Respected Sir/Madam,\n\n" +
       "I would like to formally report a civic issue related to " +
-      category +
+      translatedCategory +
       " in my area.\n\n" +
       "Issue Details:\n" +
-      complaintText +
+      cleanIssueText +
       "\n\n" +
       "This issue is causing inconvenience for local residents and may become more serious if it is not addressed in time. The estimated urgency level of this complaint is: " +
       analysis.urgency +
       ".\n\n" +
       "I respectfully request the concerned department to inspect the matter and take appropriate action as soon as possible.\n\n" +
-      "Thank you.";
+      "Thank you.\n\n" +
+      "Yours faithfully,\nCitizen";
   } else if (language === "Roman Urdu") {
     improvedComplaint =
       "To: " +
       analysis.department +
       "\n\n" +
       "Subject: " +
-      category +
-      " maslay ke hawalay se formal complaint\n\n" +
+      translatedCategory +
+      " ki Shikayat\n\n" +
       "Mohtaram Sir/Madam,\n\n" +
       "Main apne ilaqay mein " +
-      category +
+      translatedCategory +
       " se mutalliq masla formally report karna chahta hoon.\n\n" +
-      "Maslay ki tafseel:\n" +
-      complaintText +
+      "Maslay ki Tafseel:\n" +
+      cleanIssueText +
       "\n\n" +
       "Yeh masla ilaqay ke rehne walon ke liye pareshani ka sabab ban raha hai. Is complaint ki urgency level: " +
       analysis.urgency +
       " hai.\n\n" +
       "Barah-e-karam is maslay ka jaiza liya jaye aur jald az jald munasib karwai ki jaye.\n\n" +
-      "Shukriya.";
+      "Shukriya.\n\n" +
+      "Darkhwast Guzar";
   } else {
     improvedComplaint =
-      "To: " +
+      "برائے: " +
       analysis.department +
       "\n\n" +
       "موضوع: " +
-      category +
+      translatedCategory +
       " سے متعلق باضابطہ شکایت\n\n" +
       "محترم جناب/محترمہ،\n\n" +
       "میں اپنے علاقے میں " +
-      category +
+      translatedCategory +
       " سے متعلق مسئلہ باضابطہ طور پر رپورٹ کرنا چاہتا ہوں۔\n\n" +
       "مسئلے کی تفصیل:\n" +
-      complaintText +
+      cleanIssueText +
       "\n\n" +
       "یہ مسئلہ مقامی رہائشیوں کے لیے پریشانی کا باعث بن رہا ہے۔ اس شکایت کی فوری نوعیت: " +
       analysis.urgency +
       " ہے۔\n\n" +
       "براہِ کرم اس مسئلے کا جائزہ لے کر جلد از جلد مناسب کارروائی کی جائے۔\n\n" +
-      "شکریہ۔";
+      "شکریہ۔\n\n" +
+      "درخواست گزار";
   }
 
   return {
     complaint: improvedComplaint,
-    analysis: analysis,
+    analysis: analysis
   };
 }

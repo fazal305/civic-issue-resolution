@@ -1,39 +1,103 @@
 function generateComplaint(category, complaintText, language) {
-  let generatedComplaint = "";
+  let deferred = $.Deferred();
+
+  let categoryTranslations = {
+    English: {
+      Garbage: "Garbage Collection",
+      Electricity: "Electricity",
+      Water: "Water Supply",
+      Gas: "Gas Supply",
+      "Road Damage": "Road Damage",
+    },
+
+    "Roman Urdu": {
+      Garbage: "Kachra",
+      Electricity: "Bijli",
+      Water: "Pani",
+      Gas: "Gas",
+      "Road Damage": "Sadak",
+    },
+
+    Urdu: {
+      Garbage: "کچرا",
+      Electricity: "بجلی",
+      Water: "پانی",
+      Gas: "گیس",
+      "Road Damage": "سڑک",
+    },
+  };
+
+  let translatedCategory =
+    (categoryTranslations[language] &&
+      categoryTranslations[language][category]) ||
+    category;
+
+  let issueDescription = cleanComplaintText(
+    complaintText,
+    category,
+    language,
+  );
+
+  let complaint = "";
 
   if (language === "English") {
-    generatedComplaint =
-      "To the concerned authorities,\n\n" +
-      "I would like to report a " +
-      category +
-      " issue in my area. " +
-      complaintText +
-      ". This issue is affecting local residents and requires immediate attention.\n\n" +
-      "I request the concerned department to take prompt action.\n\n" +
-      "Thank you.";
-  } else if (language === "Roman Urdu") {
-    generatedComplaint =
-      "Mutalliqah idaray ke naam,\n\n" +
-      "Main apne ilaqay mein " +
-      category +
-      " ka masla report karna chahta hoon. " +
-      complaintText +
-      ". Yeh masla ilaqay ke logon ko mutasir kar raha hai aur is par fori tawajjoh ki zaroorat hai.\n\n" +
-      "Barah-e-karam is maslay par jald az jald action liya jaye.\n\n" +
-      "Shukriya.";
-  } else {
-    generatedComplaint =
-      "متعلقہ ادارے کے نام،\n\n" +
-      "میں اپنے علاقے میں " +
-      category +
-      " کا مسئلہ رپورٹ کرنا چاہتا ہوں۔ " +
-      complaintText +
-      "۔ یہ مسئلہ مقامی رہائشیوں کو متاثر کر رہا ہے اور اس پر فوری توجہ کی ضرورت ہے۔\n\n" +
-      "براہِ کرم اس مسئلے پر جلد از جلد کارروائی کی جائے۔\n\n" +
-      "شکریہ۔";
+    complaint =
+      "To: Concerned Department\n\n" +
+      "Subject: Formal Complaint Regarding " +
+      translatedCategory +
+      "\n\n" +
+      "Respected Sir/Madam,\n\n" +
+      "I would like to formally report a civic issue regarding " +
+      translatedCategory +
+      " in my area.\n\n" +
+      "Issue Details:\n" +
+      issueDescription +
+      "\n\n" +
+      "This issue has caused considerable inconvenience to local residents and requires immediate attention. I kindly request your department to investigate the matter and take appropriate action as soon as possible.\n\n" +
+      "Thank you for your time and cooperation.\n\n" +
+      "Yours faithfully,\n\n" +
+      "Citizen";
   }
 
-  return generatedComplaint;
+  else if (language === "Roman Urdu") {
+    complaint =
+      "Mutaliqa Afsar Sahab,\n\n" +
+      "Subject: " +
+      translatedCategory +
+      " ki Shikayat\n\n" +
+      "Adaab,\n\n" +
+      "Main apne ilaqay mein " +
+      translatedCategory +
+      " se mutaliq aik shikayat darj karwana chahta hoon.\n\n" +
+      "Maslay ki Tafseel:\n" +
+      issueDescription +
+      "\n\n" +
+      "Yeh masla ilaqay ke rehne walon ke liye rozana mushkilat paida kar raha hai. Barah-e-karam is maslay ko jald az jald hal karne ke liye zaroori iqdamat kiye jayen.\n\n" +
+      "Aap ke taawun ka shukriya.\n\n" +
+      "Darkhwast Guzar";
+  }
+
+  else {
+    complaint =
+      "متعلقہ افسر صاحب،\n\n" +
+      "موضوع: " +
+      translatedCategory +
+      " سے متعلق شکایت\n\n" +
+      "السلام علیکم،\n\n" +
+      "میں اپنے علاقے میں " +
+      translatedCategory +
+      " سے متعلق ایک شکایت درج کروانا چاہتا ہوں۔\n\n" +
+      "مسئلے کی تفصیل:\n" +
+      issueDescription +
+      "\n\n" +
+      "یہ مسئلہ علاقے کے رہائشیوں کے لیے شدید پریشانی کا باعث بن رہا ہے۔ براہ کرم جلد از جلد مناسب کارروائی کرتے ہوئے اس مسئلے کو حل کیا جائے۔\n\n" +
+      "آپ کے تعاون کا شکریہ۔\n\n" +
+      "درخواست گزار";
+  }
+
+  deferred.resolve(complaint);
+
+  return deferred.promise();
 }
 
 function saveComplaint(category, complaintText, language, generatedComplaint) {
@@ -99,29 +163,43 @@ function generateAndSaveComplaint() {
 
   let language = $("#reportWizard .active-language").data("language");
 
-  let generatedComplaint = generateComplaint(category, complaintText, language);
-
   goToStep(4);
 
   $("#resultLoading").show();
 
   $("#resultCard").hide();
 
-  setWizardSubmitting(true);
+  $("#wizardNextBtn").prop("disabled", true);
 
-  saveComplaint(category, complaintText, language, generatedComplaint)
-    .then(function () {
-      showResult(category, generatedComplaint);
+  $("#wizardPrevBtn").prop("disabled", true);
+
+  generateComplaint(category, complaintText, language)
+    .then(function (generatedComplaint) {
+      return saveComplaint(
+        category,
+        complaintText,
+        language,
+        generatedComplaint
+      ).then(function () {
+        showResult(category, generatedComplaint);
+      });
     })
-    .catch(function () {
+    .catch(function (error) {
+      console.log(error);
+
       $("#resultLoading").hide();
 
-      showToast("Could not save the complaint. Please try again.", "danger");
+      showToast(
+        "Unable to generate the complaint. Please try again.",
+        "danger"
+      );
 
       goToStep(3);
     })
-    .then(function () {
-      setWizardSubmitting(false);
+    .finally(function () {
+      $("#wizardNextBtn").prop("disabled", false);
+
+      $("#wizardPrevBtn").prop("disabled", false);
 
       updateNavigation(currentStep);
     });
