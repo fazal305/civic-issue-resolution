@@ -166,7 +166,7 @@ Released under the MIT License.
 
 # Status
 
-**Version 0.9**
+**Version 1**
 
 - Responsive frontend complete
 - Firebase Firestore integration complete
