@@ -6,26 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>About | CivicConnect</title>
+
     <meta
       name="description"
-      content="Learn about CivicConnect, a civic technology platform helping citizens of Karachi report municipal issues in English, Roman Urdu, and Urdu."
+      content="Learn about CivicConnect, an AI-assisted civic technology platform helping citizens of Karachi report municipal issues in English, Roman Urdu, and Urdu."
     />
+
     <meta property="og:title" content="About CivicConnect" />
 
     <meta
       property="og:description"
-      content="A civic-tech platform for reporting municipal issues in Karachi."
+      content="A civic-tech platform for reporting municipal issues in Karachi with AI-assisted complaint generation and Firebase Firestore tracking."
     />
 
     <meta property="og:type" content="website" />
-    <!-- Bootstrap CSS -->
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
-    <!-- Google Font -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
@@ -35,12 +34,12 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
     <link
       rel="icon"
       type="image/png"
       href="../assets/images/logo/favicon.png"
     />
-    <!-- External CSS -->
 
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
@@ -63,24 +62,80 @@
         <div class="loader-spinner"></div>
       </div>
     </div>
-    <!-- Toast Container -->
 
     <div
       class="toast-container position-fixed top-0 end-0 p-4"
       id="toastContainer"
     ></div>
 
-    <!-- About Section -->
-
-    <section class="about-section reveal-section">
+    <nav
+      class="navbar navbar-expand-lg fixed-top custom-navbar"
+      id="mainNavbar"
+    >
       <div class="container">
-        <a href="../index.html#about" class="dashboard-btn mb-4">
-          ← Back To Home
+        <a class="navbar-brand logo-text" href="../index.html">
+          Civic<span>Connect</span>
         </a>
 
-        <div class="row align-items-center g-5 mt-3">
-          <!-- Left Content -->
+        <button
+          class="navbar-toggler custom-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="../index.html">
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link active-nav" href="about.html">
+                About
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="report.html">
+                Report
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="complaints.html">
+                Dashboard
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="admin.html"> Admin </a>
+            </li>
+
+            <li class="nav-item">
+              <button
+                type="button"
+                class="theme-toggle-btn"
+                aria-label="Toggle theme"
+              >
+                🌙
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="about-section reveal-section js-animate">
+      <div class="container">
+        <div class="row align-items-center g-5 mt-3">
           <div class="col-lg-6">
             <p class="section-label">ABOUT CIVICCONNECT</p>
 
@@ -89,22 +144,26 @@
             </h1>
 
             <p class="about-text mt-4">
-              CivicConnect is a civic-tech platform designed to help Pakistani
-              citizens report public issues such as garbage, electricity, water,
-              gas, and road damage.
+              CivicConnect is a civic-tech platform designed to help citizens in
+              Karachi report public issues such as garbage, electricity, water,
+              gas, and road damage through a simple digital complaint system.
             </p>
 
             <p class="about-text">
-              The platform supports English, Roman Urdu, and Urdu so more
-              citizens can understand, prepare, and submit structured civic
-              complaints easily.
+              The platform supports English, Roman Urdu, and Urdu, making civic
+              reporting easier for a wider range of citizens.
             </p>
 
             <p class="about-text">
-              This project is currently being developed as an Aptech Vision
-              Project by Team Sufyan, Fazal, and Sana, with a focus on
-              real-world civic problem solving, accessibility, and clean
-              frontend engineering.
+              CivicConnect includes AI-assisted complaint generation, department
+              guidance, Firebase Authentication, and Firestore-based complaint
+              tracking to make the reporting process more structured and useful.
+            </p>
+
+            <p class="about-text">
+              This project is developed as an Aptech Vision Project by Team
+              Sufyan, Fazal, and Sana, with a focus on real-world civic problem
+              solving, accessibility, and clean frontend engineering.
             </p>
 
             <div class="result-actions mt-4">
@@ -116,42 +175,40 @@
             </div>
           </div>
 
-          <!-- Right Content -->
-
           <div class="col-lg-6">
             <div class="about-card">
               <div class="about-item">
-                <h3>🌍 Multilingual Reporting</h3>
+                <h3>🤖 AI-Assisted Complaints</h3>
 
                 <p>
-                  Users can prepare complaints in English, Roman Urdu, and Urdu.
+                  Users can generate formal complaint letters with AI support
+                  and a safe local fallback system.
                 </p>
               </div>
 
               <div class="about-item">
-                <h3>🏛 Civic Department Mapping</h3>
+                <h3>🌍 Multilingual Reporting</h3>
 
                 <p>
-                  Issues can be connected with departments such as KMC, KWSC,
+                  Complaints can be prepared in English, Roman Urdu, and Urdu.
+                </p>
+              </div>
+
+              <div class="about-item">
+                <h3>🏛 Department Mapping</h3>
+
+                <p>
+                  Civic issues are connected with departments such as KMC, KWSC,
                   K-Electric, and SSGC.
                 </p>
               </div>
 
               <div class="about-item">
-                <h3>☁ Firebase Cloud Backend</h3>
+                <h3>☁ Firebase Firestore</h3>
 
                 <p>
-                  Complaints are saved to Firebase Firestore for cloud-based
-                  tracking and future expansion.
-                </p>
-              </div>
-
-              <div class="about-item">
-                <h3>📊 Complaint Dashboard</h3>
-
-                <p>
-                  The dashboard supports complaint cards, search, filtering,
-                  pagination, and status indicators.
+                  Complaints are stored in Firestore and displayed through live
+                  dashboards.
                 </p>
               </div>
             </div>
@@ -160,9 +217,7 @@
       </div>
     </section>
 
-    <!-- Features Section -->
-
-    <section class="category-section reveal-section">
+    <section class="category-section reveal-section js-animate">
       <div class="container">
         <div class="section-heading text-center">
           <p class="section-label">CURRENT FEATURES</p>
@@ -170,8 +225,8 @@
           <h2 class="section-title">What CivicConnect Can Do</h2>
 
           <p class="section-description">
-            The project already includes several important features that make
-            civic complaint reporting easier and more organized.
+            CivicConnect includes reporting, tracking, admin tools, maps,
+            notifications, and AI-assisted complaint writing.
           </p>
         </div>
 
@@ -191,52 +246,51 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">🔎</div>
+              <div class="category-icon">🤖</div>
 
-              <h3>Search & Filters</h3>
+              <h3>AI Complaint Writing</h3>
 
               <p>
-                Dashboard tools help users find complaints by text, category,
-                status, language, and date.
+                The platform helps rewrite complaints into clear formal letters.
               </p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">📄</div>
+              <div class="category-icon">🗺</div>
 
-              <h3>Generated Complaints</h3>
+              <h3>Location Mapping</h3>
 
               <p>
-                The platform creates formal complaint text in the selected
-                language.
+                Users can select complaint locations using Leaflet and
+                OpenStreetMap.
               </p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">🌙</div>
+              <div class="category-icon">📊</div>
 
-              <h3>Dark & Light Theme</h3>
+              <h3>Complaint Dashboard</h3>
 
               <p>
-                Users can switch between dark and light modes with saved
-                preference.
+                Users can search, filter, paginate, open, and manage submitted
+                complaints.
               </p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">♿</div>
+              <div class="category-icon">🔐</div>
 
-              <h3>Keyboard Support</h3>
+              <h3>Authentication</h3>
 
               <p>
-                The reporting wizard supports keyboard navigation and accessible
-                focus states.
+                Firebase Authentication supports signup, login, and protected
+                pages.
               </p>
             </div>
           </div>
@@ -248,8 +302,8 @@
               <h3>Responsive Layout</h3>
 
               <p>
-                CivicConnect is designed to work smoothly on mobile, tablet, and
-                desktop screens.
+                CivicConnect works smoothly on mobile, tablet, and desktop
+                screens.
               </p>
             </div>
           </div>
@@ -257,9 +311,7 @@
       </div>
     </section>
 
-    <!-- Stats Section -->
-
-    <section class="how-section reveal-section">
+    <section class="how-section reveal-section js-animate">
       <div class="container">
         <div class="section-heading text-center">
           <p class="section-label">PROJECT SNAPSHOT</p>
@@ -285,19 +337,19 @@
           </div>
 
           <div class="step-box">
-            <div class="step-circle">1</div>
+            <div class="step-circle">AI</div>
 
-            <h3>Cloud Database</h3>
+            <h3>Smart Writing</h3>
 
-            <p>Firebase Firestore stores complaint records.</p>
+            <p>AI-assisted formal complaint generation.</p>
           </div>
 
           <div class="step-box">
-            <div class="step-circle">100%</div>
+            <div class="step-circle">DB</div>
 
-            <h3>Responsive</h3>
+            <h3>Cloud Storage</h3>
 
-            <p>Built for mobile, tablet, and desktop users.</p>
+            <p>Firebase Firestore stores complaint records.</p>
           </div>
 
           <div class="step-box">
@@ -305,24 +357,23 @@
 
             <h3>Accessible Design</h3>
 
-            <p>Keyboard support and clear interface feedback.</p>
+            <p>Responsive UI with clear feedback and keyboard support.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Roadmap Section -->
-
-    <section class="about-section reveal-section">
+    <section class="about-section reveal-section js-animate">
       <div class="container">
         <div class="section-heading text-center">
-          <p class="section-label">DEVELOPMENT ROADMAP</p>
+          <p class="section-label">WHAT COMES NEXT</p>
 
-          <h2 class="section-title">What Comes Next</h2>
+          <h2 class="section-title">Future Improvements</h2>
 
           <p class="section-description">
-            CivicConnect is still growing. Future versions will add
-            authentication, maps, uploads, analytics, and notifications.
+            CivicConnect is feature-complete for the current educational scope.
+            Future upgrades can make it even closer to a production civic
+            platform.
           </p>
         </div>
 
@@ -330,10 +381,11 @@
           <div class="col-lg-4 col-md-6">
             <div class="about-card h-100">
               <div class="about-item">
-                <h3>🔐 Firebase Authentication</h3>
+                <h3>📷 Optional Image Uploads</h3>
 
                 <p>
-                  Citizen login, signup, admin login, and protected dashboards.
+                  Firebase Storage support is prepared but currently disabled to
+                  keep the project compatible with the free Firebase plan.
                 </p>
               </div>
             </div>
@@ -342,11 +394,11 @@
           <div class="col-lg-4 col-md-6">
             <div class="about-card h-100">
               <div class="about-item">
-                <h3>🗺 Location Maps</h3>
+                <h3>📈 Analytics Dashboard</h3>
 
                 <p>
-                  Leaflet and OpenStreetMap support for selecting complaint
-                  locations.
+                  Future versions can include charts, monthly reports, and
+                  complaint trend analysis.
                 </p>
               </div>
             </div>
@@ -355,9 +407,12 @@
           <div class="col-lg-4 col-md-6">
             <div class="about-card h-100">
               <div class="about-item">
-                <h3>📷 Image Uploads</h3>
+                <h3>🏢 Department Portal</h3>
 
-                <p>Firebase Storage support for complaint evidence photos.</p>
+                <p>
+                  A future department portal can support assignment, internal
+                  notes, and official resolution tracking.
+                </p>
               </div>
             </div>
           </div>
@@ -365,16 +420,14 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
-
-    <section class="complaint-section reveal-section">
+    <section class="complaint-section reveal-section js-animate">
       <div class="container text-center">
         <p class="section-label">START REPORTING</p>
 
         <h2 class="section-title">Ready To Report A Civic Issue?</h2>
 
         <p class="complaint-text mx-auto cta-description">
-          Use the report portal to generate and save a structured civic
+          Use the report portal to generate, save, and track a structured civic
           complaint in just a few steps.
         </p>
 
@@ -382,16 +435,45 @@
       </div>
     </section>
 
-    <!-- jQuery -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div>
+            <h4 class="logo-text mb-2">Civic<span>Connect</span></h4>
+
+            <p class="footer-text">
+              A civic issue reporting platform built for Karachi citizens.
+            </p>
+          </div>
+
+          <div class="footer-team">
+            <p>PROJECT TEAM</p>
+
+            <h4>Sufyan • Fazal • Sana</h4>
+          </div>
+
+          <div class="footer-note">
+            <p>APTECH VISION PROJECT</p>
+
+            <span class="footer-text">
+              Built with HTML, CSS, JavaScript, Bootstrap, jQuery, and Firebase.
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Bootstrap -->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="../assets/js/loader.js"></script>
+
     <script src="../assets/js/utils.js"></script>
-    <!-- Shared UI -->
+
+    <script src="../assets/js/theme.js"></script>
+
+    <script src="../assets/js/main.js"></script>
 
     <script src="../assets/js/ui.js"></script>
   </body>
