@@ -80,8 +80,8 @@
   padding: 28px;
   background-color: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .dashboard-search,
@@ -165,8 +165,8 @@
   position: absolute;
   top: 50%;
   right: 12px;
-  width: 28px;
-  height: 28px;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
   display: none;
   align-items: center;
   justify-content: center;
@@ -364,27 +364,27 @@
 }
 
 .category-garbage {
-  background-color: rgba(139, 92, 246, 0.15);
+  background-color: rgba(var(--category-garbage-rgb), 0.15);
   color: var(--category-garbage);
 }
 
 .category-electricity {
-  background-color: rgba(245, 158, 11, 0.15);
-  color: var(--status-warning);
+  background-color: rgba(var(--category-electricity-rgb), 0.15);
+  color: var(--category-electricity);
 }
 
 .category-water {
-  background-color: rgba(59, 130, 246, 0.15);
-  color: var(--status-info);
+  background-color: rgba(var(--category-water-rgb), 0.15);
+  color: var(--category-water);
 }
 
 .category-gas {
-  background-color: rgba(239, 68, 68, 0.15);
-  color: var(--status-danger);
+  background-color: rgba(var(--category-gas-rgb), 0.15);
+  color: var(--category-gas);
 }
 
 .category-road {
-  background-color: rgba(107, 114, 128, 0.15);
+  background-color: rgba(var(--category-road-rgb), 0.15);
   color: var(--category-road);
 }
 
@@ -501,11 +501,11 @@
   padding: 3rem;
   background-color: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.22),
+    var(--shadow-card-hover),
     0 0 30px var(--teal-glow);
   text-align: center;
 }
@@ -518,8 +518,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 110px;
-  height: 110px;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
   font-size: 3rem;
   border-radius: 50%;
   background-color: var(--teal-soft-bg);
@@ -577,16 +577,16 @@
 
 .dashboard-skeleton-card {
   height: 260px;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   background: linear-gradient(
     90deg,
-    var(--glass-bg-soft) 25%,
-    var(--glass-bg) 50%,
-    var(--glass-bg-soft) 75%
+    var(--glass-bg-soft) 0%,
+    var(--teal-soft-bg) 50%,
+    var(--glass-bg-soft) 100%
   );
-  background-size: 300% 100%;
+  background-size: 220% 100%;
   border: 1px solid var(--glass-border);
-  animation: skeletonLoading 1.3s linear infinite;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
 }
 
 /* Bulk actions */
@@ -927,8 +927,8 @@
 
 .notification-bell-btn {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: var(--icon-md);
+  height: var(--icon-md);
   border-radius: 50%;
   background-color: var(--glass-bg);
   color: var(--white);
@@ -1031,6 +1031,22 @@
   flex-shrink: 0;
 }
 
+.notification-success {
+  color: var(--teal);
+}
+
+.notification-warning {
+  color: var(--status-warning);
+}
+
+.notification-danger {
+  color: var(--status-danger);
+}
+
+.notification-info {
+  color: var(--status-info);
+}
+
 /* Print styles */
 
 @media print {
@@ -1062,18 +1078,18 @@
   .about-card h4,
   .about-card h5,
   .about-card p {
-    color: #000000;
+    color: var(--print-black);
   }
 
   .complaint-status {
-    color: #000000;
-    border: 1px solid #000000;
+    color: var(--print-black);
+    border: 1px solid var(--print-black);
     box-shadow: none;
   }
 
   .timeline-dot {
-    background: #000000;
-    border-color: #000000;
+    background: var(--print-black);
+    border-color: var(--print-black);
     box-shadow: none;
   }
 }
@@ -1118,15 +1134,6 @@
   }
 }
 
-@keyframes skeletonLoading {
-  from {
-    background-position: 100% 0;
-  }
-
-  to {
-    background-position: -100% 0;
-  }
-}
 
 /* Reduced motion */
 
@@ -1146,9 +1153,7 @@
     grid-template-columns: 1fr;
   }
 
-  .admin-filter-grid {
-    grid-template-columns: 1fr;
-  }
+  /* .admin-filter-grid grid-template-columns lives in 06-responsive.css */
 }
 
 @media (max-width: 768px) {

@@ -13,7 +13,7 @@ function updateProgressIndicator(step, previousStep) {
 
     if (stepNumber < step) {
       $(this).addClass("completed-step");
-      $label.text("✓");
+      $label.html(civicIcon("check", "civic-icon-sm"));
       $(this).attr("aria-label", "Step " + stepNumber + " completed");
     } else if (stepNumber === step) {
       $(this).addClass("active-step");

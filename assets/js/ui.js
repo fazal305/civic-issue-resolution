@@ -22,18 +22,18 @@ function showToast(message, type) {
   let toastType = type || "info";
 
   let toastData = {
-    icon: "ℹ️",
+    icon: "info-circle",
     title: "Information",
   };
 
   if (toastType === "success") {
-    toastData.icon = "✅";
+    toastData.icon = "check-circle";
     toastData.title = "Success";
   } else if (toastType === "warning") {
-    toastData.icon = "⚠️";
+    toastData.icon = "alert-triangle";
     toastData.title = "Warning";
   } else if (toastType === "danger") {
-    toastData.icon = "❌";
+    toastData.icon = "x-circle";
     toastData.title = "Error";
   }
 
@@ -53,9 +53,9 @@ function showToast(message, type) {
 
       <div class="toast-header">
 
-        <span class="toast-icon">
+        <span class="toast-icon toast-${toastType}">
 
-          ${toastData.icon}
+          ${civicIcon(toastData.icon)}
 
         </span>
 
@@ -104,38 +104,6 @@ function showToast(message, type) {
 }
 
 //
-// Theme Toggle
-//
-
-function initializeTheme() {
-  if ($("#themeToggleBtn").length === 0) {
-    return;
-  }
-
-  if (localStorage.getItem("civicTheme") === "light") {
-    $("body").addClass("light-theme");
-
-    $("#themeToggleBtn").text("☀️");
-  }
-
-  $("#themeToggleBtn")
-    .off("click")
-    .on("click", function () {
-      $("body").toggleClass("light-theme");
-
-      if ($("body").hasClass("light-theme")) {
-        $(this).text("☀️");
-
-        localStorage.setItem("civicTheme", "light");
-      } else {
-        $(this).text("🌙");
-
-        localStorage.setItem("civicTheme", "dark");
-      }
-    });
-}
-
-//
 // Scroll Reveal
 //
 
@@ -178,8 +146,6 @@ function initializeScrollReveal() {
 //
 
 $(document).ready(function () {
-  initializeTheme();
-
   if ($(".reveal-section").length) {
     initializeScrollReveal();
   }

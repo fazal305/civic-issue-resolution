@@ -99,13 +99,13 @@ $(document).ready(function () {
 
             <h1 class="mt-3">
 
-                ${complaint.category || "Civic"} Complaint
+                ${escapeHtml(complaint.category) || "Civic"} Complaint
 
             </h1>
 
             <p class="about-text">
 
-                ${complaint.complaintText || "No complaint description available."}
+                ${escapeHtml(complaint.complaintText) || "No complaint description available."}
 
             </p>
 
@@ -120,42 +120,42 @@ $(document).ready(function () {
             <p>
 
                 <strong>Complaint ID:</strong>
-                ${complaintId}
+                ${escapeHtml(complaintId)}
 
             </p>
 
             <p>
 
                 <strong>Category:</strong>
-                ${complaint.category || "N/A"}
+                ${escapeHtml(complaint.category) || "N/A"}
 
             </p>
 
             <p>
 
                 <strong>Language:</strong>
-                ${complaint.language || "English"}
+                ${escapeHtml(complaint.language) || "English"}
 
             </p>
 
            <p>
 
     <strong>Location:</strong>
-    ${complaint.location || "Karachi"}
+    ${escapeHtml(complaint.location) || "Karachi"}
 
 </p>
 
 <p>
 
     <strong>Latitude:</strong>
-    ${complaint.latitude || "N/A"}
+    ${escapeHtml(complaint.latitude) || "N/A"}
 
 </p>
 
 <p>
 
     <strong>Longitude:</strong>
-    ${complaint.longitude || "N/A"}
+    ${escapeHtml(complaint.longitude) || "N/A"}
 
 </p>
 
@@ -183,7 +183,7 @@ $(document).ready(function () {
 
             <p class="about-text">
 
-                ${complaint.generatedComplaint || "Generated complaint text is not available."}
+                ${escapeHtml(complaint.generatedComplaint) || "Generated complaint text is not available."}
 
             </p>
 <hr>

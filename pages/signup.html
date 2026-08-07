@@ -7,6 +7,8 @@
 
     <title>Sign Up | CivicConnect</title>
 
+    <link rel="icon" type="image/png" href="../assets/images/logo-icon.png" />
+
     <!-- Bootstrap CSS -->
 
     <link
@@ -54,6 +56,85 @@
       class="toast-container position-fixed top-0 end-0 p-4"
       id="toastContainer"
     ></div>
+
+    <nav
+      class="navbar navbar-expand-lg fixed-top custom-navbar"
+      id="mainNavbar"
+    >
+      <div class="container">
+        <a class="navbar-brand logo-text" href="../index.html">
+          Civic<span>Connect</span>
+        </a>
+
+        <button
+          class="navbar-toggler custom-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="../index.html">
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="about.html"> About </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="report.html">
+                Report
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="complaints.html">
+                Dashboard
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="contact.html">
+                Contact
+              </a>
+            </li>
+
+            <li class="nav-item nav-admin-only d-none">
+              <a class="nav-link custom-nav-link" href="admin.html"> Admin </a>
+            </li>
+
+            <li class="nav-item">
+              <button
+                type="button"
+                class="theme-toggle-btn"
+                aria-label="Toggle theme"
+              >
+                <svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/></svg>
+              </button>
+            </li>
+
+            <li class="nav-item nav-auth-only d-none">
+              <button
+                type="button"
+                class="dashboard-btn ms-lg-3 mt-3 mt-lg-0"
+                id="logoutBtn"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <!-- Signup Section -->
 
@@ -127,6 +208,34 @@
       </div>
     </section>
 
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div>
+            <h4 class="logo-text mb-2">Civic<span>Connect</span></h4>
+
+            <p class="footer-text">
+              A civic issue reporting platform built for Karachi citizens.
+            </p>
+          </div>
+
+          <div class="footer-team">
+            <p>PROJECT TEAM</p>
+
+            <h4>Sufyan • Fazal • Sana</h4>
+          </div>
+
+          <div class="footer-note">
+            <p>APTECH VISION PROJECT</p>
+
+            <span class="footer-text">
+              Built with HTML, CSS, JavaScript, Bootstrap, jQuery, and Firebase.
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <!-- jQuery -->
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -141,11 +250,15 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
+    <script src="../assets/js/firebase-config.js"></script>
     <script src="../assets/js/firebase.js"></script>
 
     <script src="../assets/js/ui.js"></script>
 
     <script src="../assets/js/utils.js"></script>
+
+    <script src="../assets/js/icons.js"></script>
+    <script src="../assets/js/theme.js"></script>
 
     <script src="../assets/js/auth.js"></script>
 

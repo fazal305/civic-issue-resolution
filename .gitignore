@@ -86,6 +86,14 @@ coverage/
 .firebase/
 firebase-debug.log
 .firebaserc.local
+assets/js/firebase-config.js
+!assets/js/firebase-config.example.js
+
+#
+# Private credentials
+#
+
+ADMIN_CREDENTIALS.md
 
 #
 # Local Firebase Emulator

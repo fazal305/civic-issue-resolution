@@ -21,7 +21,7 @@
 
     <meta property="og:type" content="website" />
 
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="icon" type="image/png" href="assets/images/logo-icon.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
@@ -110,13 +110,29 @@
               </a>
             </li>
 
+            <li class="nav-item nav-admin-only d-none">
+              <a class="nav-link custom-nav-link" href="pages/admin.html">
+                Admin
+              </a>
+            </li>
+
             <li class="nav-item">
               <button
                 type="button"
                 class="theme-toggle-btn"
                 aria-label="Toggle theme"
               >
-                🌙
+                <svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/></svg>
+              </button>
+            </li>
+
+            <li class="nav-item nav-auth-only d-none">
+              <button
+                type="button"
+                class="dashboard-btn ms-lg-3 mt-3 mt-lg-0"
+                id="logoutBtn"
+              >
+                Logout
               </button>
             </li>
           </ul>
@@ -200,6 +216,7 @@
 
     <script src="assets/js/loader.js"></script>
 
+    <script src="assets/js/icons.js"></script>
     <script src="assets/js/theme.js"></script>
 
     <script src="assets/js/main.js"></script>

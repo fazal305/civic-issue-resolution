@@ -138,6 +138,29 @@ Open with Live Server or any local web server.
 
 No build tools are required.
 
+You'll also need `assets/js/firebase-config.js` (gitignored, not included in
+the repo). Copy `assets/js/firebase-config.example.js` to that filename and
+fill in your own Firebase project config, or ask a project maintainer for the
+real one.
+
+---
+
+# Demo Credentials
+
+A demo citizen account is available for reviewers/graders to try the reporting
+flow and dashboard without signing up:
+
+| Field    | Value                  |
+| -------- | ---------------------- |
+| Email    | `user@example.com`     |
+| Password | `CivicUser#2026`       |
+| Role     | Citizen                |
+
+This account can submit complaints and view/manage only its own complaints —
+it does **not** have admin access. Admin credentials are intentionally not
+published here, since admin access can read every citizen's complaint and
+email; contact a project maintainer directly if you need it for grading.
+
 ---
 
 # Team

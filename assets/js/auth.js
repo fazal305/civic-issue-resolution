@@ -46,8 +46,41 @@ $(document).ready(function () {
       });
   }
 
+  function updateAuthOnlyNav(user) {
+    if (!user) {
+      $(".nav-auth-only").addClass("d-none");
+
+      $(".nav-admin-only").addClass("d-none");
+
+      $(".nav-guest-only").removeClass("d-none");
+
+      return;
+    }
+
+    $(".nav-auth-only").removeClass("d-none");
+
+    $(".nav-guest-only").addClass("d-none");
+
+    firestoreDatabase
+      .collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (document) {
+        if (document.exists && document.data().role === "admin") {
+          $(".nav-admin-only").removeClass("d-none");
+        } else {
+          $(".nav-admin-only").addClass("d-none");
+        }
+      })
+      .catch(function () {
+        $(".nav-admin-only").addClass("d-none");
+      });
+  }
+
   function watchAuthState() {
     firebaseAuth.onAuthStateChanged(function (user) {
+      updateAuthOnlyNav(user);
+
       let currentPage = window.location.pathname.toLowerCase();
 
       if (

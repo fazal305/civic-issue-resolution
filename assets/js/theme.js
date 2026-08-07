@@ -13,15 +13,11 @@ $(document).ready(function () {
         if (themeName === "light") {
             $("body").addClass("light-mode");
 
-            $(".theme-toggle-btn").text("☀️");
-
-            $("#themeToggleBtn").text("☀️");
+            $(".theme-toggle-btn").html(civicIcon("sun"));
         } else {
             $("body").removeClass("light-mode");
 
-            $(".theme-toggle-btn").text("🌙");
-
-            $("#themeToggleBtn").text("🌙");
+            $(".theme-toggle-btn").html(civicIcon("moon"));
         }
     }
 
@@ -63,7 +59,7 @@ $(document).ready(function () {
       Register theme button
     */
 
-    $(".theme-toggle-btn, #themeToggleBtn")
+    $(".theme-toggle-btn")
         .off("click")
         .on("click", function () {
             toggleTheme();

@@ -157,7 +157,9 @@ function resetImageUploadState() {
 function showResult(category, generatedComplaint) {
   $("#resultLoading").hide();
 
-  $("#resultTitle").text("Complaint Saved Successfully ✅");
+  $("#resultTitle").html(
+    "Complaint Saved Successfully " + civicIcon("check-circle", "civic-icon-sm"),
+  );
 
   $("#resultText").text(generatedComplaint);
 

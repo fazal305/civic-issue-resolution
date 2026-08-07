@@ -214,7 +214,7 @@ $(document).ready(function () {
 
           <div class="empty-box-icon-wrap">
 
-            <span class="empty-box-icon">📭</span>
+            <span class="empty-box-icon">${civicIcon("inbox", "civic-icon-lg")}</span>
 
           </div>
 
@@ -425,27 +425,11 @@ $(document).ready(function () {
 
     `);
 
-    civicFirestoreService.listenAllComplaints(
-      function (snapshot) {
-        adminComplaints = [];
+    let unsubscribeAuth = firebaseAuth.onAuthStateChanged(function (user) {
+      unsubscribeAuth();
 
-        snapshot.forEach(function (doc) {
-          let complaintData = doc.data();
-
-          complaintData.id = doc.id;
-
-          adminComplaints.push(complaintData);
-        });
-
-        updateAdminStats();
-
-        applyAdminFilters();
-      },
-
-      function (error) {
-        console.log(error);
-
-        showToast("Could not load admin complaints.", "danger");
+      if (!user) {
+        showToast("Please login to continue.", "warning");
 
         $("#adminTableWrap").html(`
 
@@ -453,21 +437,76 @@ $(document).ready(function () {
 
             <h3 class="empty-box-title">
 
-              Could not load complaints
+              Please log in
 
             </h3>
 
             <p class="empty-box-message">
 
-              Please check Firebase rules or refresh the page.
+              You must be signed in as an administrator to view this page.
 
             </p>
 
           </div>
 
         `);
-      },
-    );
+
+        return;
+      }
+
+      civicFirestoreService.listenAllComplaints(
+        function (snapshot) {
+          adminComplaints = [];
+
+          snapshot.forEach(function (doc) {
+            let complaintData = doc.data();
+
+            complaintData.id = doc.id;
+
+            adminComplaints.push(complaintData);
+          });
+
+          updateAdminStats();
+
+          applyAdminFilters();
+
+          if (adminComplaints.length >= civicFirestoreService.ADMIN_COMPLAINTS_LIMIT) {
+            showToast(
+              "Showing the " +
+                civicFirestoreService.ADMIN_COMPLAINTS_LIMIT +
+                " most recent complaints. Older complaints are not shown here.",
+              "warning",
+            );
+          }
+        },
+
+        function (error) {
+          console.log(error);
+
+          showToast("Could not load admin complaints.", "danger");
+
+          $("#adminTableWrap").html(`
+
+            <div class="empty-box-card">
+
+              <h3 class="empty-box-title">
+
+                Could not load complaints
+
+              </h3>
+
+              <p class="empty-box-message">
+
+                Please check Firebase rules or refresh the page.
+
+              </p>
+
+            </div>
+
+          `);
+        },
+      );
+    });
   }
 
   /*

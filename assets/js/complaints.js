@@ -812,7 +812,7 @@ $(document).ready(function () {
                             type="button"
                             class="dashboard-btn delete-btn"
                             data-id="${complaint.id}">
-                            🗑 Delete
+                            ${civicIcon("trash", "civic-icon-sm")} Delete
                         </button>
                     </div>
 
@@ -1050,45 +1050,49 @@ $(document).ready(function () {
   function loadComplaints() {
     showLoadingState();
 
-    let currentUser = firebaseAuth.currentUser;
+    let unsubscribeAuth = firebaseAuth.onAuthStateChanged(function (user) {
+      unsubscribeAuth();
 
-    if (!currentUser) {
-      showToast("Please login to view your complaints.", "warning");
-
-      hideLoadingState();
-
-      return;
-    }
-
-    civicFirestoreService.listenUserComplaints(
-      currentUser.uid,
-
-      function (snapshot) {
-        dashboardState.allComplaints = [];
-
-        snapshot.forEach(function (doc) {
-          let complaintData = doc.data();
-
-          complaintData.id = doc.id;
-
-          dashboardState.allComplaints.push(complaintData);
-        });
-
-        checkForStatusNotifications(dashboardState.allComplaints);
-
-        filterComplaints(true);
-      },
-
-      function (error) {
-        console.log(error);
+      if (!user) {
+        showToast("Please login to view your complaints.", "warning");
 
         hideLoadingState();
 
-        showEmptyState("Could not load complaints. Please refresh the page.");
+        $("#complaintsContainer").empty();
 
-        showToast("Failed to load complaints from the database.", "danger");
-      },
-    );
+        return;
+      }
+
+      civicFirestoreService.listenUserComplaints(
+        user.uid,
+
+        function (snapshot) {
+          dashboardState.allComplaints = [];
+
+          snapshot.forEach(function (doc) {
+            let complaintData = doc.data();
+
+            complaintData.id = doc.id;
+
+            dashboardState.allComplaints.push(complaintData);
+          });
+
+          checkForStatusNotifications(dashboardState.allComplaints);
+
+          filterComplaints(true);
+        },
+
+        function (error) {
+          console.log(error);
+
+          hideLoadingState();
+
+          showEmptyState("Could not load complaints. Please refresh the page.");
+
+          showToast("Failed to load complaints from the database.", "danger");
+        },
+      );
+    });
   }
 
   function deleteComplaint(complaintId) {

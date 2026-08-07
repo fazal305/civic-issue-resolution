@@ -87,16 +87,16 @@ $(document).ready(function () {
   function getNotificationIcon(type) {
     switch (type) {
       case "success":
-        return "✅";
+        return "check-circle";
 
       case "warning":
-        return "⚠️";
+        return "alert-triangle";
 
       case "danger":
-        return "❌";
+        return "x-circle";
 
       default:
-        return "ℹ️";
+        return "info-circle";
     }
   }
 
@@ -142,9 +142,9 @@ $(document).ready(function () {
 
           <div class="notification-message">
 
-            <span class="notification-icon">
+            <span class="notification-icon notification-${notification.type || "info"}">
 
-              ${getNotificationIcon(notification.type)}
+              ${civicIcon(getNotificationIcon(notification.type))}
 
             </span>
 

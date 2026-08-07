@@ -38,7 +38,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="../assets/images/logo/favicon.png"
+      href="../assets/images/logo-icon.png"
     />
 
     <link rel="stylesheet" href="../assets/css/style.css" />
@@ -49,7 +49,7 @@
       <div class="loader-content">
         <div class="loader-logo">
           <img
-            src="../assets/images/logo/logo-light.png"
+            src="../assets/images/logo-icon.png"
             alt="CivicConnect Logo"
             class="loader-logo-image"
           />
@@ -98,7 +98,11 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link custom-nav-link active-nav" href="about.html">
+              <a
+                class="nav-link custom-nav-link active-nav"
+                href="about.html"
+                aria-current="page"
+              >
                 About
               </a>
             </li>
@@ -116,6 +120,12 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="contact.html">
+                Contact
+              </a>
+            </li>
+
+            <li class="nav-item nav-admin-only d-none">
               <a class="nav-link custom-nav-link" href="admin.html"> Admin </a>
             </li>
 
@@ -125,7 +135,17 @@
                 class="theme-toggle-btn"
                 aria-label="Toggle theme"
               >
-                🌙
+                <svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/></svg>
+              </button>
+            </li>
+
+            <li class="nav-item nav-auth-only d-none">
+              <button
+                type="button"
+                class="dashboard-btn ms-lg-3 mt-3 mt-lg-0"
+                id="logoutBtn"
+              >
+                Logout
               </button>
             </li>
           </ul>
@@ -178,7 +198,7 @@
           <div class="col-lg-6">
             <div class="about-card">
               <div class="about-item">
-                <h3>🤖 AI-Assisted Complaints</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="10" rx="2.5"/><path d="M12 5v4"/><circle cx="12" cy="4" r="1.1"/><circle cx="9.3" cy="14" r="1"/><circle cx="14.7" cy="14" r="1"/><path d="M9 18h6"/></svg> AI-Assisted Complaints</h3>
 
                 <p>
                   Users can generate formal complaint letters with AI support
@@ -187,7 +207,7 @@
               </div>
 
               <div class="about-item">
-                <h3>🌍 Multilingual Reporting</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg> Multilingual Reporting</h3>
 
                 <p>
                   Complaints can be prepared in English, Roman Urdu, and Urdu.
@@ -195,7 +215,7 @@
               </div>
 
               <div class="about-item">
-                <h3>🏛 Department Mapping</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V10l7-5 7 5v11"/><path d="M4 21h16"/><path d="M9 21v-6h6v6"/></svg> Department Mapping</h3>
 
                 <p>
                   Civic issues are connected with departments such as KMC, KWSC,
@@ -204,7 +224,7 @@
               </div>
 
               <div class="about-item">
-                <h3>☁ Firebase Firestore</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 17.2 8.1 4 4 0 0 1 17 16H7Z"/></svg> Firebase Firestore</h3>
 
                 <p>
                   Complaints are stored in Firestore and displayed through live
@@ -233,7 +253,7 @@
         <div class="row g-4 mt-4">
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">📝</div>
+              <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7Z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg></div>
 
               <h3>Report Wizard</h3>
 
@@ -246,7 +266,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">🤖</div>
+              <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="10" rx="2.5"/><path d="M12 5v4"/><circle cx="12" cy="4" r="1.1"/><circle cx="9.3" cy="14" r="1"/><circle cx="14.7" cy="14" r="1"/><path d="M9 18h6"/></svg></div>
 
               <h3>AI Complaint Writing</h3>
 
@@ -258,7 +278,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">🗺</div>
+              <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg></div>
 
               <h3>Location Mapping</h3>
 
@@ -271,7 +291,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">📊</div>
+              <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="3.2" height="8"/><rect x="10.4" y="6" width="3.2" height="14"/><rect x="16.8" y="9" width="3.2" height="11"/></svg></div>
 
               <h3>Complaint Dashboard</h3>
 
@@ -284,7 +304,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">🔐</div>
+              <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
 
               <h3>Authentication</h3>
 
@@ -297,7 +317,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="category-card">
-              <div class="category-icon">📱</div>
+              <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
 
               <h3>Responsive Layout</h3>
 
@@ -381,7 +401,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="about-card h-100">
               <div class="about-item">
-                <h3>📷 Optional Image Uploads</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4Z"/><circle cx="12" cy="13.5" r="3.3"/></svg> Optional Image Uploads</h3>
 
                 <p>
                   Firebase Storage support is prepared but currently disabled to
@@ -394,7 +414,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="about-card h-100">
               <div class="about-item">
-                <h3>📈 Analytics Dashboard</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="3.2" height="8"/><rect x="10.4" y="6" width="3.2" height="14"/><rect x="16.8" y="9" width="3.2" height="11"/></svg> Analytics Dashboard</h3>
 
                 <p>
                   Future versions can include charts, monthly reports, and
@@ -407,7 +427,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="about-card h-100">
               <div class="about-item">
-                <h3>🏢 Department Portal</h3>
+                <h3><svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V10l7-5 7 5v11"/><path d="M4 21h16"/><path d="M9 21v-6h6v6"/></svg> Department Portal</h3>
 
                 <p>
                   A future department portal can support assignment, internal
@@ -471,6 +491,7 @@
 
     <script src="../assets/js/utils.js"></script>
 
+    <script src="../assets/js/icons.js"></script>
     <script src="../assets/js/theme.js"></script>
 
     <script src="../assets/js/main.js"></script>

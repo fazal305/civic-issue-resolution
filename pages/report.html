@@ -7,6 +7,8 @@
 
     <title>Report Issue | CivicConnect</title>
 
+    <link rel="icon" type="image/png" href="../assets/images/logo-icon.png" />
+
     <!-- Bootstrap -->
 
     <link
@@ -55,16 +57,96 @@
         <div class="loader-spinner"></div>
       </div>
     </div>
-    <!--  
+
+    <nav
+      class="navbar navbar-expand-lg fixed-top custom-navbar"
+      id="mainNavbar"
+    >
+      <div class="container">
+        <a class="navbar-brand logo-text" href="../index.html">
+          Civic<span>Connect</span>
+        </a>
+
+        <button
+          class="navbar-toggler custom-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="../index.html">
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="about.html"> About </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link custom-nav-link active-nav"
+                href="report.html"
+                aria-current="page"
+              >
+                Report
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="complaints.html">
+                Dashboard
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link custom-nav-link" href="contact.html">
+                Contact
+              </a>
+            </li>
+
+            <li class="nav-item nav-admin-only d-none">
+              <a class="nav-link custom-nav-link" href="admin.html"> Admin </a>
+            </li>
+
+            <li class="nav-item">
+              <button
+                type="button"
+                class="theme-toggle-btn"
+                aria-label="Toggle theme"
+              >
+                <svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/></svg>
+              </button>
+            </li>
+
+            <li class="nav-item nav-auth-only d-none">
+              <button
+                type="button"
+                class="dashboard-btn ms-lg-3 mt-3 mt-lg-0"
+                id="logoutBtn"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--
          Report Hero
      -->
 
     <section class="report-hero">
       <div class="container">
-        <a href="../index.html" class="dashboard-btn mb-4"> ← Back To Home </a>
-        <button type="button" class="dashboard-btn mb-4 ms-2" id="logoutBtn">
-          Logout
-        </button>
         <div class="report-hero-card">
           <p class="section-label">CIVICCONNECT PORTAL</p>
 
@@ -202,7 +284,7 @@
               <div class="row g-4 mt-2" id="categoryGrid">
                 <div class="col-lg-4 col-md-6">
                   <div class="category-card" data-category="Garbage">
-                    <div class="category-icon">🗑️</div>
+                    <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/></svg></div>
 
                     <h4>Garbage</h4>
 
@@ -215,7 +297,7 @@
 
                 <div class="col-lg-4 col-md-6">
                   <div class="category-card" data-category="Electricity">
-                    <div class="category-icon">⚡</div>
+                    <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
 
                     <h4>Electricity</h4>
 
@@ -228,7 +310,7 @@
 
                 <div class="col-lg-4 col-md-6">
                   <div class="category-card" data-category="Water">
-                    <div class="category-icon">💧</div>
+                    <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12Z"/></svg></div>
 
                     <h4>Water</h4>
 
@@ -240,7 +322,7 @@
 
                 <div class="col-lg-6">
                   <div class="category-card" data-category="Gas">
-                    <div class="category-icon">🔥</div>
+                    <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2s5 4.2 5 9.2a5 5 0 0 1-10 0C7 8.5 8 6.5 9 5.2c.2 1.4 1 2 1 2C10 5 10.5 3.3 12 2Z"/></svg></div>
 
                     <h4>Gas</h4>
 
@@ -252,7 +334,7 @@
 
                 <div class="col-lg-6">
                   <div class="category-card" data-category="Road Damage">
-                    <div class="category-icon">🛣️</div>
+                    <div class="category-icon"><svg class="civic-icon civic-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 21M16 3l4 18M12 6v2.5M12 12v2.5M12 18v1.5"/></svg></div>
 
                     <h4>Road Damage</h4>
 
@@ -308,7 +390,7 @@
                 <textarea
                   id="complaintText"
                   class="form-control"
-                  rows="7"
+                  rows="4"
                   maxlength="500"
                   placeholder="Example: Garbage has not been collected in my area for the last 3 days."
                 ></textarea>
@@ -350,7 +432,7 @@
                   <div id="complaintMap" class="complaint-map"></div>
 
                   <p class="selected-location-text mt-3">
-                    📍 Selected Location:
+                    <svg class="civic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> Selected Location:
                     <span id="selectedLocationText"> Karachi </span>
                   </p>
                   <!-- Evidence Upload -->
@@ -447,33 +529,33 @@
                   id="aiAnalysisCard"
                   style="display: none"
                 >
-                  <p class="section-label">🤖 CIVIC AI ASSISTANT</p>
+                  <p class="section-label"><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="10" rx="2.5"/><path d="M12 5v4"/><circle cx="12" cy="4" r="1.1"/><circle cx="9.3" cy="14" r="1"/><circle cx="14.7" cy="14" r="1"/><path d="M9 18h6"/></svg> CIVIC AI ASSISTANT</p>
                   <p class="ai-analysis-note">
                     This analysis is generated locally by CivicConnect and works
                     without an API key.
                   </p>
                   <div class="ai-analysis-grid">
                     <div class="ai-analysis-item">
-                      <span>🏛 Department</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V10l7-5 7 5v11"/><path d="M4 21h16"/><path d="M9 21v-6h6v6"/></svg> Department</span>
                       <strong id="aiDepartment">—</strong>
                     </div>
 
                     <div class="ai-analysis-item">
-                      <span>⚡ Urgency</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg> Urgency</span>
                       <strong id="aiUrgency">—</strong>
                     </div>
 
                     <div class="ai-analysis-item">
-                      <span>📝 Writing Quality</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7Z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg> Writing Quality</span>
                       <strong id="aiWritingQuality">—</strong>
                     </div>
 
                     <div class="ai-analysis-item">
-                      <span>🎯 Confidence</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.8" fill="currentColor" stroke="none"/></svg> Confidence</span>
                       <strong id="aiConfidence">—</strong>
                     </div>
                     <div class="ai-analysis-item ai-analysis-wide">
-                      <span>🧠 Category Check</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8A3 3 0 0 0 7 18h2M15 4a3 3 0 0 1 3 3 3 3 0 0 1 1 5.8 3 3 0 0 1-2 5.2h-2M9 4v14M15 4v14"/></svg> Category Check</span>
                       <strong id="aiCategorySuggestion">—</strong>
 
                       <button
@@ -486,7 +568,7 @@
                       </button>
                     </div>
                     <div class="ai-analysis-item ai-analysis-wide">
-                      <span>💡 Writing Suggestion</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6V16h5.4v-.5c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 3Z"/></svg> Writing Suggestion</span>
                       <strong id="aiWritingSuggestion">—</strong>
                     </div>
                   </div>
@@ -496,7 +578,7 @@
 
                 <div class="result-actions mt-4">
                   <button type="button" class="hero-btn copy-btn">
-                    📋 Copy Complaint
+                    <svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h6"/></svg> Copy Complaint
                   </button>
 
                   <button
@@ -504,11 +586,11 @@
                     class="dashboard-btn ai-improve-btn"
                     id="aiImproveBtn"
                   >
-                    🤖 Analyze & Improve
+                    <svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="10" rx="2.5"/><path d="M12 5v4"/><circle cx="12" cy="4" r="1.1"/><circle cx="9.3" cy="14" r="1"/><circle cx="14.7" cy="14" r="1"/><path d="M9 18h6"/></svg> Analyze & Improve
                   </button>
 
                   <button type="button" class="dashboard-btn authority-btn">
-                    📤 Submit To Authorities
+                    <svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5"/><path d="M21 3 13.5 21l-2.5-8"/><path d="M21 3 10.5 12.5"/></svg> Submit To Authorities
                   </button>
                 </div>
                 <div class="department-guide-card" id="departmentGuideCard">
@@ -522,12 +604,12 @@
 
                   <div class="department-guide-grid">
                     <div class="department-guide-item">
-                      <span>☎ Helpline</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1.2 1.2 0 0 1 1.3-.3c1.2.4 2.5.6 3.9.6a1.2 1.2 0 0 1 1.2 1.2V20a1.2 1.2 0 0 1-1.2 1.2C10.7 21.2 2.8 13.3 2.8 3.7A1.2 1.2 0 0 1 4 2.5h3.3a1.2 1.2 0 0 1 1.2 1.2c0 1.4.2 2.7.6 3.9.1.4 0 .9-.3 1.2Z"/></svg> Helpline</span>
                       <strong id="guideHelpline">—</strong>
                     </div>
 
                     <div class="department-guide-item">
-                      <span>🌐 Official Website</span>
+                      <span><svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg> Official Website</span>
                       <a href="#" target="_blank" id="guideWebsite"
                         >Open Portal</a
                       >
@@ -546,7 +628,7 @@
 
                   <div class="result-actions mt-4">
                     <button type="button" class="hero-btn copy-btn">
-                      📋 Copy Complaint
+                      <svg class="civic-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h6"/></svg> Copy Complaint
                     </button>
 
                     <a
@@ -620,13 +702,31 @@
      Footer
   -->
 
-    <footer class="footer-section">
-      <div class="container text-center">
-        <p>© 2026 CivicConnect</p>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div>
+            <h4 class="logo-text mb-2">Civic<span>Connect</span></h4>
 
-        <p class="footer-text">
-          Smart Civic Issue Reporting System for Karachi
-        </p>
+            <p class="footer-text">
+              A civic issue reporting platform built for Karachi citizens.
+            </p>
+          </div>
+
+          <div class="footer-team">
+            <p>PROJECT TEAM</p>
+
+            <h4>Sufyan • Fazal • Sana</h4>
+          </div>
+
+          <div class="footer-note">
+            <p>APTECH VISION PROJECT</p>
+
+            <span class="footer-text">
+              Built with HTML, CSS, JavaScript, Bootstrap, jQuery, and Firebase.
+            </span>
+          </div>
+        </div>
       </div>
     </footer>
 
@@ -654,6 +754,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
+    <script src="../assets/js/firebase-config.js"></script>
     <script src="../assets/js/firebase.js"></script>
     <script src="../assets/js/firestore-service.js"></script>
     <!-- Leaflet JS -->
@@ -665,6 +766,7 @@
     <script src="../assets/js/ui.js"></script>
 
     <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/icons.js"></script>
     <script src="../assets/js/theme.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/auth.js"></script>

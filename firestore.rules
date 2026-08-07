@@ -1,0 +1,82 @@
+rules_version = '2';
+
+// CivicConnect — Firestore Security Rules
+//
+// IMPORTANT: This file is a DRAFT for review. It is not deployed automatically.
+// You must copy this into the Firebase Console (Firestore Database > Rules)
+// or deploy it yourself with the Firebase CLI (`firebase deploy --only firestore:rules`).
+//
+// Context: the docs/firebase-setup.md rules currently in use allow ANY
+// authenticated user to read and write EVERY document in the database
+// ("allow read, write: if request.auth != null;" on /{document=**}).
+// That means any logged-in user can read other citizens' complaints
+// (including their email/location), read/write the admin-only "users"
+// collection, or promote themselves to admin by editing their own
+// users/{uid} document. These rules close those gaps while keeping the
+// app's existing behavior working (citizen dashboard, admin dashboard,
+// public homepage "latest complaints" feed, complaint submission).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // users/{uid} — profile + role. Citizens can read/create/update their
+    // own profile but can NEVER set/change their own "role" field, which
+    // is what requireAdmin() in auth.js relies on. Admins can read any
+    // profile (needed for admin views), but role changes should be made
+    // manually in the console, not through the app.
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+
+      allow create: if isOwner(userId) &&
+        request.resource.data.role == "citizen";
+
+      allow update: if isOwner(userId) &&
+        request.resource.data.role == resource.data.role;
+
+      allow delete: if false;
+    }
+
+    // complaints/{complaintId}
+    //  - Complaint documents store "userEmail" (see report-generator.js),
+    //    so reads require sign-in rather than being fully public — this
+    //    matches current behavior (existing dev rules also require
+    //    request.auth != null) and avoids exposing complainants' emails
+    //    to anonymous visitors via the homepage "latest complaints" feed.
+    //    NOTE: any signed-in citizen can currently see every complaint's
+    //    userEmail this way, not just their own — consider removing
+    //    userEmail from documents entirely and looking it up server-side
+    //    only when needed, if that's a concern.
+    //  - Only the authenticated owner can create a complaint, and the
+    //    "uid" field must match their own uid (so a citizen can't file a
+    //    complaint under someone else's uid).
+    //  - Only the owner or an admin can update/delete a complaint status.
+    match /complaints/{complaintId} {
+      allow read: if isSignedIn();
+
+      allow create: if isSignedIn() &&
+        request.resource.data.uid == request.auth.uid;
+
+      allow update, delete: if isSignedIn() &&
+        (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

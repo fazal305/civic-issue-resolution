@@ -88,7 +88,7 @@ function initializeAiImproveButton() {
 
       $("#aiImproveBtn")
         .prop("disabled", true)
-        .text("🤖 Civic AI is analyzing your complaint...");
+        .html(civicIcon("robot", "civic-icon-sm") + " Civic AI is analyzing your complaint...");
 
       showToast("Analyzing complaint...", "info");
 
@@ -127,7 +127,7 @@ function initializeAiImproveButton() {
 
             $("#aiImproveBtn")
               .prop("disabled", false)
-              .text("🤖 Analyze & Improve");
+              .html(civicIcon("robot", "civic-icon-sm") + " Analyze & Improve");
 
             showToast(
               "Civic AI analyzed your complaint successfully.",
@@ -137,63 +137,10 @@ function initializeAiImproveButton() {
           .catch(function () {
             $("#aiImproveBtn")
               .prop("disabled", false)
-              .text("🤖 Analyze & Improve");
+              .html(civicIcon("robot", "civic-icon-sm") + " Analyze & Improve");
 
             showToast("AI improvement failed. Please try again.", "danger");
           });
-
-        return;
-
-        let analysis = aiResult.analysis;
-
-        $("#resultText")
-          .hide()
-          .text(aiResult.complaint)
-          .fadeIn(500);
-
-        $("#aiDepartment").text(analysis.department);
-
-        $("#aiUrgency").text(analysis.urgency);
-
-        $("#aiWritingQuality").text(analysis.writingQuality);
-
-        $("#aiConfidence").text(analysis.confidence);
-
-        $("#aiCategorySuggestion").text(
-          analysis.categorySuggestion
-        );
-
-        $("#aiWritingSuggestion").text(
-          analysis.writingSuggestion
-        );
-
-        if (
-          analysis.detectedCategory &&
-          analysis.detectedCategory !== category
-        ) {
-          $("#aiApplyCategoryBtn")
-            .show()
-            .data("category", analysis.detectedCategory);
-        } else {
-          $("#aiApplyCategoryBtn").hide();
-        }
-
-        $("#aiAnalysisCard")
-          .hide()
-          .fadeIn(500);
-
-        showDepartmentGuide(
-          analysis.detectedCategory || category
-        );
-
-        $("#aiImproveBtn")
-          .prop("disabled", false)
-          .text("🤖 Analyze & Improve");
-
-        showToast(
-          "Civic AI analyzed your complaint successfully.",
-          "success"
-        );
       }, 1500);
     });
 }

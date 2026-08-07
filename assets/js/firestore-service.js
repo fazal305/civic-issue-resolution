@@ -31,9 +31,14 @@ let civicFirestoreService = {
     return complaintsCollection.orderBy("timestamp", "desc").get();
   },
 
+  // Capped to avoid downloading and holding a live listener over an
+  // unbounded number of documents on every admin dashboard load.
+  ADMIN_COMPLAINTS_LIMIT: 300,
+
   listenAllComplaints: function (callback, errorCallback) {
     return complaintsCollection
       .orderBy("timestamp", "desc")
+      .limit(this.ADMIN_COMPLAINTS_LIMIT)
       .onSnapshot(callback, errorCallback);
   },
 

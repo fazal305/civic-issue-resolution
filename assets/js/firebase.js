@@ -1,18 +1,13 @@
-// Firebase configuration
+// Firebase configuration comes from firebase-config.js (gitignored),
+// which must be loaded before this script. See
+// assets/js/firebase-config.example.js for the template.
 
-let firebaseConfig = {
-  apiKey: "AIzaSyDofp7tbH0wUAK_t-I7Ff_YngK2fPpxJJg",
-
-  authDomain: "civic-issue-resolution-ee4b3.firebaseapp.com",
-
-  projectId: "civic-issue-resolution-ee4b3",
-
-  storageBucket: "civic-issue-resolution-ee4b3.firebasestorage.app",
-
-  messagingSenderId: "612311604202",
-
-  appId: "1:612311604202:web:88d7875dd89af859907093",
-};
+if (typeof firebaseConfig === "undefined") {
+  throw new Error(
+    "firebaseConfig is not defined. Copy assets/js/firebase-config.example.js " +
+      "to assets/js/firebase-config.js and fill in your project values.",
+  );
+}
 
 // Initialize Firebase
 
