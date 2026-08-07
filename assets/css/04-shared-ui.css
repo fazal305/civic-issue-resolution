@@ -88,10 +88,18 @@
 }
 
 /* Inner pages spacing */
+/* Only the first section on a page needs to clear the fixed navbar and
+   fill the viewport — applying that to every stacked <section> (report.html,
+   about.html) forced each one to a full 100vh tall with 150px of top
+   padding, creating huge dead gaps between sections. */
 
-.inner-page section {
+.inner-page section:first-of-type {
   min-height: 100vh;
   padding-top: 150px;
+}
+
+.inner-page section:not(:first-of-type) {
+  padding-top: 60px;
 }
 
 /* Shared buttons */
