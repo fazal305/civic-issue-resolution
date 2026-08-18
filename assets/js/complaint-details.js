@@ -273,16 +273,7 @@ $(document).ready(function () {
                     class="hero-btn"
                     id="printComplaintBtn">
 
-                    Print Complaint
-
-                </button>
-
-                <button
-                    type="button"
-                    class="dashboard-btn"
-                    id="downloadComplaintBtn">
-
-                   Save As PDF
+                    Print / Save As PDF
 
                 </button>
 <a
@@ -328,15 +319,11 @@ $(document).ready(function () {
   }
 
   $("#complaintDetailsCard").on("click", "#printComplaintBtn", function () {
-    window.print();
-  });
-
-  $("#complaintDetailsCard").on("click", "#downloadComplaintBtn", function () {
-    showToast("Choose 'Save as PDF' in the print window.", "info");
+    showToast("Choose 'Save as PDF' as the destination to save a copy.", "info");
 
     setTimeout(function () {
       window.print();
-    }, 500);
+    }, 400);
   });
 
   loadComplaintDetails();

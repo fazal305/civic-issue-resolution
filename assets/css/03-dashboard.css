@@ -1061,8 +1061,7 @@
   .navbar,
   .footer-section,
   .footer,
-  #printComplaintBtn,
-  #downloadComplaintBtn {
+  #printComplaintBtn {
     display: none !important;
   }
 
