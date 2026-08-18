@@ -31,34 +31,7 @@ function generateComplaintFallback(category, complaintText, language) {
     language
   );
 
-  let categoryTranslations = {
-    English: {
-      Garbage: "Garbage Collection",
-      Electricity: "Electricity",
-      Water: "Water Supply",
-      Gas: "Gas Supply",
-      "Road Damage": "Road Damage"
-    },
-
-    "Roman Urdu": {
-      Garbage: "Kachra",
-      Electricity: "Bijli",
-      Water: "Pani",
-      Gas: "Gas",
-      "Road Damage": "Sadak"
-    },
-
-    Urdu: {
-      Garbage: "کچرا",
-      Electricity: "بجلی",
-      Water: "پانی",
-      Gas: "گیس",
-      "Road Damage": "سڑک"
-    }
-  };
-
-  let translatedCategory =
-    categoryTranslations[language][category] || category;
+  let translatedCategory = getTranslatedCategory(category, language);
 
   if (language === "English") {
     return (

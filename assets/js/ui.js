@@ -1,20 +1,4 @@
 //
-// Escape HTML
-//
-
-function escapeToastHtml(text) {
-  if (!text) {
-    return "";
-  }
-
-  return String(text)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-//
 // Toast Notifications
 //
 
@@ -82,7 +66,7 @@ function showToast(message, type) {
 
       <div class="toast-body">
 
-        ${escapeToastHtml(message)}
+        ${escapeHtml(message)}
 
       </div>
 

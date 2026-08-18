@@ -9,12 +9,6 @@ $(document).ready(function () {
     return;
   }
 
-  function setLoginLoading(isLoading) {
-    $("#loginBtn")
-      .prop("disabled", isLoading)
-      .text(isLoading ? "Logging In..." : "Login");
-  }
-
   function validateLoginForm(email, password) {
     if (email === "" || password === "") {
       showToast("Please enter your email and password.", "warning");
@@ -57,7 +51,7 @@ $(document).ready(function () {
       return;
     }
 
-    setLoginLoading(true);
+    showLoading($("#loginBtn"), "Logging In...");
 
     firebaseAuth
       .signInWithEmailAndPassword(email, password)
@@ -80,7 +74,7 @@ $(document).ready(function () {
         showToast(getLoginErrorMessage(error.code), "danger");
       })
       .then(function () {
-        setLoginLoading(false);
+        hideLoading($("#loginBtn"));
       });
   });
 });

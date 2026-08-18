@@ -9,18 +9,6 @@ $(document).ready(function () {
     return urlParams.get("id");
   }
 
-  function getStatusClass(status) {
-    if (status === "In Progress") {
-      return "progress-status";
-    }
-
-    if (status === "Resolved") {
-      return "resolved-status";
-    }
-
-    return "pending-status";
-  }
-
   function showMissingComplaint() {
     $("#complaintDetailsCard").html(`
 

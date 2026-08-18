@@ -9,12 +9,6 @@ $(document).ready(function () {
     return;
   }
 
-  function setSignupLoading(isLoading) {
-    $("#signupBtn")
-      .prop("disabled", isLoading)
-      .text(isLoading ? "Creating Account..." : "Create Account");
-  }
-
   function validateSignupForm(name, email, password) {
     if (name === "" || email === "" || password === "") {
       showToast("Please fill in all fields.", "warning");
@@ -63,7 +57,7 @@ $(document).ready(function () {
       return;
     }
 
-    setSignupLoading(true);
+    showLoading($("#signupBtn"), "Creating Account...");
 
     firebaseAuth
       .createUserWithEmailAndPassword(email, password)
@@ -102,7 +96,7 @@ $(document).ready(function () {
         );
       })
       .then(function () {
-        setSignupLoading(false);
+        hideLoading($("#signupBtn"));
       });
   });
 });

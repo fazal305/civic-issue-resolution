@@ -96,18 +96,6 @@ $(document).ready(function () {
     return "Pending";
   }
 
-  function getStatusClass(status) {
-    if (status === "Resolved") {
-      return "resolved-status";
-    }
-
-    if (status === "In Progress") {
-      return "progress-status";
-    }
-
-    return "pending-status";
-  }
-
   function getComplaintText(complaint) {
     return (
       complaint.generatedComplaint ||

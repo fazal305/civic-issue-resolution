@@ -1,27 +1,3 @@
-function getDepartmentByCategory(category) {
-  if (category === "Garbage") {
-    return "Karachi Metropolitan Corporation (KMC)";
-  }
-
-  if (category === "Electricity") {
-    return "K-Electric";
-  }
-
-  if (category === "Water") {
-    return "Karachi Water and Sewerage Corporation (KWSC)";
-  }
-
-  if (category === "Gas") {
-    return "Sui Southern Gas Company (SSGC)";
-  }
-
-  if (category === "Road Damage") {
-    return "Works and Services Department";
-  }
-
-  return "Concerned Civic Department";
-}
-
 function detectCategoryFromText(complaintText) {
   let text = complaintText.toLowerCase();
 
@@ -155,7 +131,7 @@ function buildAiAnalysis(category, complaintText) {
   }
 
   return {
-    department: getDepartmentByCategory(finalCategory),
+    department: getDepartmentGuide(finalCategory).department,
     urgency: detectComplaintUrgency(complaintText),
     confidence: detectedCategory === "" ? "Medium" : "High",
     writingQuality: complaintText.length >= 80 ? "Detailed" : "Needs more detail",
@@ -163,43 +139,6 @@ function buildAiAnalysis(category, complaintText) {
     categorySuggestion: categorySuggestion,
     writingSuggestion: getWritingSuggestion(complaintText)
   };
-}
-
-function getTranslatedCategory(category, language) {
-  let categoryTranslations = {
-    English: {
-      Garbage: "Garbage Collection",
-      Electricity: "Electricity",
-      Water: "Water Supply",
-      Gas: "Gas Supply",
-      "Road Damage": "Road Damage"
-    },
-
-    "Roman Urdu": {
-      Garbage: "Kachra",
-      Electricity: "Bijli",
-      Water: "Pani",
-      Gas: "Gas",
-      "Road Damage": "Sadak"
-    },
-
-    Urdu: {
-      Garbage: "کچرا",
-      Electricity: "بجلی",
-      Water: "پانی",
-      Gas: "گیس",
-      "Road Damage": "سڑک"
-    }
-  };
-
-  if (
-    categoryTranslations[language] &&
-    categoryTranslations[language][category]
-  ) {
-    return categoryTranslations[language][category];
-  }
-
-  return category;
 }
 
 function improveComplaintWithLocalAi(category, complaintText, language) {

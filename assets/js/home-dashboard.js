@@ -3,18 +3,6 @@ $(document).ready(function () {
     return;
   }
 
-  function getStatusClass(status) {
-    if (status === "In Progress") {
-      return "progress-status";
-    }
-
-    if (status === "Resolved") {
-      return "resolved-status";
-    }
-
-    return "pending-status";
-  }
-
   function formatHomeDate(timestamp) {
     if (!timestamp || !timestamp.toDate) {
       return "Just now";
@@ -25,14 +13,6 @@ $(document).ready(function () {
       month: "short",
       year: "numeric",
     });
-  }
-
-  function escapeHomeHtml(text) {
-    if (!text) {
-      return "";
-    }
-
-    return $("<div>").text(text).html();
   }
 
   function renderLoadingState() {
@@ -121,25 +101,25 @@ $(document).ready(function () {
 
             <span class="complaint-status ${getStatusClass(status)}">
 
-              ${escapeHomeHtml(status)}
+              ${escapeHtml(status)}
 
             </span>
 
             <h3>
 
-              ${escapeHomeHtml(complaint.category || "Civic")} Complaint
+              ${escapeHtml(complaint.category || "Civic")} Complaint
 
             </h3>
 
             <p>
 
-              ${escapeHomeHtml(preview)}
+              ${escapeHtml(preview)}
 
             </p>
 
             <p class="complaint-meta">
 
-              ${escapeHomeHtml(complaint.location || "Karachi")}
+              ${escapeHtml(complaint.location || "Karachi")}
 
               &bull;
 

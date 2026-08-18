@@ -42,6 +42,43 @@ function getStatusClass(status) {
   return "pending-status";
 }
 
+function getTranslatedCategory(category, language) {
+  let categoryTranslations = {
+    English: {
+      Garbage: "Garbage Collection",
+      Electricity: "Electricity",
+      Water: "Water Supply",
+      Gas: "Gas Supply",
+      "Road Damage": "Road Damage",
+    },
+
+    "Roman Urdu": {
+      Garbage: "Kachra",
+      Electricity: "Bijli",
+      Water: "Pani",
+      Gas: "Gas",
+      "Road Damage": "Sadak",
+    },
+
+    Urdu: {
+      Garbage: "کچرا",
+      Electricity: "بجلی",
+      Water: "پانی",
+      Gas: "گیس",
+      "Road Damage": "سڑک",
+    },
+  };
+
+  if (
+    categoryTranslations[language] &&
+    categoryTranslations[language][category]
+  ) {
+    return categoryTranslations[language][category];
+  }
+
+  return category;
+}
+
 function truncateText(text, limit) {
   if (!text) {
     return "";
