@@ -128,7 +128,6 @@ function saveComplaint(category, complaintText, language, generatedComplaint) {
   return uploadComplaintImages().then(function (imageUrls) {
     let complaintData = {
       uid: currentUser.uid,
-      userEmail: currentUser.email,
       userName: currentUser.displayName || "Citizen",
       category: category,
       complaintText: complaintText,

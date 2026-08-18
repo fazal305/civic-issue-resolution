@@ -377,9 +377,9 @@ $(document).ready(function () {
                   ${escapeHtml(complaint.longitude || "N/A")}
                 </p>
 
-                <strong>User</strong>
+                <strong>Submitted By</strong>
 
-                <p>${escapeHtml(complaint.userEmail || "N/A")}</p>
+                <p>${escapeHtml(complaint.userName || "Citizen")}</p>
 
               </div>
 
