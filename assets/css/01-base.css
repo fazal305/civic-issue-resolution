@@ -337,6 +337,18 @@ button {
   border-radius: 6px;
 }
 
+/* Global keyboard-focus fallback — most buttons/links rely on this;
+   components with their own :focus-visible rule override it naturally
+   via specificity. */
+
+a:focus-visible,
+button:focus-visible,
+.form-control:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
 .navbar-toggler-icon {
   filter: invert(1);
 }
