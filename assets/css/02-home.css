@@ -210,7 +210,7 @@
 
 .hero-subtitle {
   max-width: 850px;
-  color: var(--light-gray);
+  color: var(--text-light);
   font-size: clamp(1.15rem, 3vw, 2rem);
   line-height: 1.8;
   margin-bottom: 20px;
@@ -281,12 +281,12 @@
 .category-section,
 .how-section {
   background-color: var(--light-gray);
-  color: var(--navy);
+  color: var(--surface-light-text);
 }
 
 .category-section .section-title,
 .how-section .section-title {
-  color: var(--navy);
+  color: var(--surface-light-text);
 }
 
 .category-section .section-description,
@@ -307,8 +307,8 @@
   border-radius: var(--radius-md);
   cursor: pointer;
   overflow: hidden;
-  background-color: var(--white);
-  color: var(--navy);
+  background-color: var(--surface-light-bg);
+  color: var(--surface-light-text);
   border: 1px solid var(--dashboard-border-soft);
   box-shadow:
     var(--shadow-card),
@@ -356,7 +356,13 @@
   box-shadow: inset 0 0 24px var(--teal-soft-bg);
 }
 
-.category-card h3,
+.category-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--surface-light-text);
+}
+
 .complaint-card h3 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -364,7 +370,11 @@
   color: var(--navy);
 }
 
-.category-card p,
+.category-card p {
+  color: var(--green-muted);
+  margin-bottom: 24px;
+}
+
 .complaint-card p {
   color: var(--green-muted);
   margin-bottom: 24px;
@@ -431,8 +441,8 @@
 .step-box {
   position: relative;
   z-index: 2;
-  background-color: var(--white);
-  color: var(--navy);
+  background-color: var(--surface-light-bg);
+  color: var(--surface-light-text);
   padding: 32px;
   border-radius: var(--radius-md);
   height: 100%;
@@ -553,8 +563,8 @@ select.form-control option {
 
 .result-card {
   display: none;
-  background-color: var(--white);
-  color: var(--navy);
+  background-color: var(--surface-light-bg);
+  color: var(--surface-light-text);
   padding: 32px;
   border-radius: var(--radius-md);
   margin-top: 24px;
@@ -572,7 +582,7 @@ select.form-control option {
 }
 
 .result-card h3 {
-  color: var(--navy);
+  color: var(--surface-light-text);
   font-weight: 700;
   margin-bottom: 12px;
 }
@@ -610,7 +620,7 @@ select.form-control option {
 }
 
 .step-box h3 {
-  color: var(--navy);
+  color: var(--surface-light-text);
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 10px;

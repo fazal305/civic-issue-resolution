@@ -31,6 +31,13 @@
   --medium-gray: #666666;
   --light-gray: #f5f7f0;
 
+  /* Fixed (non-theme-swapping) tokens for "elevated light card" surfaces
+     that are meant to always look like a light card with dark text,
+     in both dark and light mode — unlike --white/--navy, which
+     deliberately swap roles per theme for page-level backgrounds. */
+  --surface-light-bg: #ffffff;
+  --surface-light-text: #123047;
+
   --text-light: #dce6ee;
   --text-gray: #b8c7d4;
   --section-label-color: #59d8cf;
@@ -118,13 +125,13 @@ body.light-mode {
   --navy-border: rgba(8, 28, 45, 0.12);
   --navy-navbar: rgba(255, 255, 255, 0.9);
 
-  --teal: #00a99a;
-  --teal-hover: #008f83;
-  --teal-glow: rgba(0, 169, 154, 0.22);
-  --teal-strong-glow: rgba(0, 169, 154, 0.4);
-  --teal-soft-bg: rgba(0, 169, 154, 0.1);
-  --teal-soft-border: rgba(0, 169, 154, 0.22);
-  --teal-focus-ring: rgba(0, 169, 154, 0.16);
+  --teal: #007a6f;
+  --teal-hover: #00655c;
+  --teal-glow: rgba(0, 122, 111, 0.22);
+  --teal-strong-glow: rgba(0, 122, 111, 0.4);
+  --teal-soft-bg: rgba(0, 122, 111, 0.1);
+  --teal-soft-border: rgba(0, 122, 111, 0.22);
+  --teal-focus-ring: rgba(0, 122, 111, 0.16);
 
   --white: #081c2d;
   --black: #ffffff;
@@ -134,7 +141,7 @@ body.light-mode {
 
   --text-light: #123047;
   --text-gray: #456173;
-  --section-label-color: #008f83;
+  --section-label-color: #007a6f;
 
   --brand-green-dark: #f7fafc;
   --brand-green: #eef5f4;
@@ -152,6 +159,12 @@ body.light-mode {
   --dashboard-border-soft: rgba(8, 28, 45, 0.08);
   --dashboard-border-medium: rgba(8, 28, 45, 0.14);
   --dashboard-pill-bg: rgba(0, 169, 154, 0.1);
+
+  /* #d97706 (dark-mode value) reads fine on a dark page, but only
+     hits 3.19:1 against light-mode's near-white surfaces — darken it
+     here so pending-status badges/icons stay AA-compliant. */
+  --status-warning: #9c5203;
+  --status-warning-rgb: 156, 82, 3;
 
   --shadow-card: 0 16px 40px rgba(8, 28, 45, 0.1);
   --shadow-card-hover: 0 20px 46px rgba(8, 28, 45, 0.14);
