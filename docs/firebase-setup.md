@@ -102,27 +102,15 @@ Supported authentication method:
 
 # Firestore Security Rules
 
-For development only:
+Production rules live in [`firestore.rules`](../firestore.rules) at the repo root —
+per-collection ownership/admin checks, not a blanket `if request.auth != null`. Deploy
+changes with:
 
-```javascript
-rules_version = '2';
-
-service cloud.firestore {
-
-  match /databases/{database}/documents {
-
-    match /{document=**} {
-
-      allow read, write: if request.auth != null;
-
-    }
-
-  }
-
-}
+```
+firebase deploy --only firestore:rules --project civic-issue-resolution-ee4b3
 ```
 
-These rules should be tightened before production deployment.
+This step is not automatic on push — re-run it any time `firestore.rules` changes.
 
 ---
 

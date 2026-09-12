@@ -2,19 +2,19 @@ rules_version = '2';
 
 // CivicConnect — Firestore Security Rules
 //
-// IMPORTANT: This file is a DRAFT for review. It is not deployed automatically.
-// You must copy this into the Firebase Console (Firestore Database > Rules)
-// or deploy it yourself with the Firebase CLI (`firebase deploy --only firestore:rules`).
+// Deployed to the civic-issue-resolution-ee4b3 project via
+// `firebase deploy --only firestore:rules`. Re-run that command after any
+// future edit to this file — it is not applied automatically on push.
 //
-// Context: the docs/firebase-setup.md rules currently in use allow ANY
-// authenticated user to read and write EVERY document in the database
-// ("allow read, write: if request.auth != null;" on /{document=**}).
-// That means any logged-in user can read other citizens' complaints
-// (including their email/location), read/write the admin-only "users"
-// collection, or promote themselves to admin by editing their own
-// users/{uid} document. These rules close those gaps while keeping the
-// app's existing behavior working (citizen dashboard, admin dashboard,
-// public homepage "latest complaints" feed, complaint submission).
+// Context: docs/firebase-setup.md previously documented rules that allowed
+// ANY authenticated user to read and write EVERY document in the database
+// ("allow read, write: if request.auth != null;" on /{document=**}), which
+// meant any logged-in user could read other citizens' complaints (including
+// their email/location), read/write the admin-only "users" collection, or
+// promote themselves to admin by editing their own users/{uid} document.
+// These rules close those gaps while keeping the app's existing behavior
+// working (citizen dashboard, admin dashboard, public homepage "latest
+// complaints" feed, complaint submission).
 
 service cloud.firestore {
   match /databases/{database}/documents {
