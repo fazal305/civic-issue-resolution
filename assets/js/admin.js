@@ -510,6 +510,12 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
 
+        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+          civicAuth.handleSessionExpired();
+
+          return;
+        }
+
         showToast("Could not update complaint status.", "danger");
       });
   }
@@ -532,6 +538,12 @@ $(document).ready(function () {
       })
       .catch(function (error) {
         console.log(error);
+
+        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+          civicAuth.handleSessionExpired();
+
+          return;
+        }
 
         showToast("Could not delete complaint.", "danger");
       });

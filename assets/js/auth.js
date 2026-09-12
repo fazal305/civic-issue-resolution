@@ -29,7 +29,40 @@ $(document).ready(function () {
     window.location.href = getPageBasePath() + "complaints.html";
   }
 
+  let sessionExpiredNotified = false;
+
+  function isSessionExpiredErrorCode(errorCode) {
+    switch (errorCode) {
+      case "auth/user-token-expired":
+      case "auth/requires-recent-login":
+      case "auth/invalid-user-token":
+      case "auth/user-disabled":
+        return true;
+
+      default:
+        return false;
+    }
+  }
+
+  function handleSessionExpired() {
+    if (sessionExpiredNotified) {
+      return;
+    }
+
+    sessionExpiredNotified = true;
+
+    sessionStorage.removeItem("civicWasAuthenticated");
+
+    showToast("Your session has expired — please log in again.", "danger");
+
+    setTimeout(function () {
+      redirectToLogin();
+    }, 900);
+  }
+
   function logoutUser() {
+    sessionStorage.removeItem("civicWasAuthenticated");
+
     firebaseAuth
       .signOut()
       .then(function () {
@@ -83,12 +116,27 @@ $(document).ready(function () {
 
       let currentPage = window.location.pathname.toLowerCase();
 
+      let onAuthOnlyPage =
+        currentPage.indexOf("login.html") !== -1 ||
+        currentPage.indexOf("signup.html") !== -1;
+
+      if (user) {
+        sessionExpiredNotified = false;
+
+        sessionStorage.setItem("civicWasAuthenticated", "1");
+
+        if (onAuthOnlyPage) {
+          redirectToDashboard();
+        }
+
+        return;
+      }
+
       if (
-        user &&
-        (currentPage.indexOf("login.html") !== -1 ||
-          currentPage.indexOf("signup.html") !== -1)
+        sessionStorage.getItem("civicWasAuthenticated") === "1" &&
+        !onAuthOnlyPage
       ) {
-        redirectToDashboard();
+        handleSessionExpired();
       }
     });
   }
@@ -104,6 +152,15 @@ $(document).ready(function () {
         window.location.pathname + window.location.search,
       );
 
+      if (
+        sessionExpiredNotified ||
+        sessionStorage.getItem("civicWasAuthenticated") === "1"
+      ) {
+        handleSessionExpired();
+
+        return;
+      }
+
       showToast("Please login to continue.", "warning");
 
       setTimeout(function () {
@@ -115,6 +172,15 @@ $(document).ready(function () {
   function requireAdmin() {
     firebaseAuth.onAuthStateChanged(function (user) {
       if (!user) {
+        if (
+          sessionExpiredNotified ||
+          sessionStorage.getItem("civicWasAuthenticated") === "1"
+        ) {
+          handleSessionExpired();
+
+          return;
+        }
+
         showToast("Please login first.", "warning");
 
         setTimeout(function () {
@@ -167,6 +233,8 @@ $(document).ready(function () {
     logoutUser: logoutUser,
     requireLogin: requireLogin,
     requireAdmin: requireAdmin,
+    isSessionExpiredErrorCode: isSessionExpiredErrorCode,
+    handleSessionExpired: handleSessionExpired,
   };
 
   watchAuthState();

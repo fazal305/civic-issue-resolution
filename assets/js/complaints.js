@@ -1112,6 +1112,12 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
 
+        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+          civicAuth.handleSessionExpired();
+
+          return;
+        }
+
         showToast("Could not delete this complaint.", "danger");
       });
   }
@@ -1342,6 +1348,12 @@ $(document).ready(function () {
       })
       .catch(function (error) {
         console.log(error);
+
+        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+          civicAuth.handleSessionExpired();
+
+          return;
+        }
 
         showToast("Could not delete selected complaints.", "danger");
       });
