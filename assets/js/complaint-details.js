@@ -50,15 +50,17 @@ $(document).ready(function () {
 
     if (complaint.imageUrls && complaint.imageUrls.length > 0) {
       complaint.imageUrls.forEach(function (imageUrl) {
+        let safeImageUrl = escapeHtml(imageUrl);
+
         imagesHtml += `
 
             <a
-                href="${imageUrl}"
+                href="${safeImageUrl}"
                 target="_blank"
                 class="complaint-image-link">
 
                 <img
-                    src="${imageUrl}"
+                    src="${safeImageUrl}"
                     alt="Complaint evidence photo"
                     class="complaint-detail-image">
 
@@ -81,7 +83,7 @@ $(document).ready(function () {
 
             <span class="complaint-status ${statusClass}">
 
-                ${status}
+                ${escapeHtml(status)}
 
             </span>
 
@@ -150,7 +152,7 @@ $(document).ready(function () {
             <p>
 
                 <strong>Status:</strong>
-                ${status}
+                ${escapeHtml(status)}
 
             </p>
 
