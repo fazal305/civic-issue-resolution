@@ -748,10 +748,10 @@ $(document).ready(function () {
 
     let metaLine = highlightSearchTerms(
       (complaint.location || "Karachi") +
-      " · " +
-      (complaint.language || "English") +
-      " · " +
-      formatComplaintDate(complaint.timestamp),
+        " · " +
+        (complaint.language || "English") +
+        " · " +
+        formatComplaintDate(complaint.timestamp),
       searchTerms,
     );
 
@@ -1112,7 +1112,10 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
 
-        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+        if (
+          window.civicAuth &&
+          civicAuth.isSessionExpiredErrorCode(error.code)
+        ) {
           civicAuth.handleSessionExpired();
 
           return;
@@ -1324,8 +1327,8 @@ $(document).ready(function () {
 
     let confirmDelete = window.confirm(
       "Are you sure you want to delete " +
-      dashboardState.selectedComplaints.length +
-      " selected complaint(s)?",
+        dashboardState.selectedComplaints.length +
+        " selected complaint(s)?",
     );
 
     if (!confirmDelete) {
@@ -1349,7 +1352,10 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
 
-        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+        if (
+          window.civicAuth &&
+          civicAuth.isSessionExpiredErrorCode(error.code)
+        ) {
           civicAuth.handleSessionExpired();
 
           return;

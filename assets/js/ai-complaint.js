@@ -134,10 +134,11 @@ function buildAiAnalysis(category, complaintText) {
     department: getDepartmentGuide(finalCategory).department,
     urgency: detectComplaintUrgency(complaintText),
     confidence: detectedCategory === "" ? "Medium" : "High",
-    writingQuality: complaintText.length >= 80 ? "Detailed" : "Needs more detail",
+    writingQuality:
+      complaintText.length >= 80 ? "Detailed" : "Needs more detail",
     detectedCategory: detectedCategory || category,
     categorySuggestion: categorySuggestion,
-    writingSuggestion: getWritingSuggestion(complaintText)
+    writingSuggestion: getWritingSuggestion(complaintText),
   };
 }
 
@@ -151,7 +152,7 @@ function improveComplaintWithLocalAi(category, complaintText, language) {
   let cleanIssueText = cleanComplaintText(
     complaintText,
     finalCategory,
-    language
+    language,
   );
 
   let improvedComplaint = "";
@@ -223,6 +224,6 @@ function improveComplaintWithLocalAi(category, complaintText, language) {
 
   return {
     complaint: improvedComplaint,
-    analysis: analysis
+    analysis: analysis,
   };
 }

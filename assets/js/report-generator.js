@@ -12,12 +12,12 @@ function generateComplaint(category, complaintText, language) {
       })
       .catch(function () {
         deferred.resolve(
-          generateComplaintFallback(category, complaintText, language)
+          generateComplaintFallback(category, complaintText, language),
         );
       });
   } else {
     deferred.resolve(
-      generateComplaintFallback(category, complaintText, language)
+      generateComplaintFallback(category, complaintText, language),
     );
   }
 
@@ -25,11 +25,7 @@ function generateComplaint(category, complaintText, language) {
 }
 
 function generateComplaintFallback(category, complaintText, language) {
-  let issueDescription = cleanComplaintText(
-    complaintText,
-    category,
-    language
-  );
+  let issueDescription = cleanComplaintText(complaintText, category, language);
 
   let translatedCategory = getTranslatedCategory(category, language);
 
@@ -111,7 +107,7 @@ function saveComplaint(category, complaintText, language, generatedComplaint) {
       status: "Pending",
       location: $("#complaintLocation").val() || "Karachi",
       latitude: $("#complaintLatitude").val(),
-      longitude: $("#complaintLongitude").val()
+      longitude: $("#complaintLongitude").val(),
     };
 
     return civicFirestoreService.createComplaint(complaintData);
@@ -130,7 +126,8 @@ function showResult(category, generatedComplaint) {
   $("#resultLoading").hide();
 
   $("#resultTitle").html(
-    "Complaint Saved Successfully " + civicIcon("check-circle", "civic-icon-sm"),
+    "Complaint Saved Successfully " +
+      civicIcon("check-circle", "civic-icon-sm"),
   );
 
   $("#resultText").text(generatedComplaint);
@@ -169,7 +166,7 @@ function generateAndSaveComplaint() {
         category,
         complaintText,
         language,
-        generatedComplaint
+        generatedComplaint,
       ).then(function () {
         showResult(category, generatedComplaint);
       });

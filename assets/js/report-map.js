@@ -57,7 +57,11 @@ function initializeComplaintMap() {
 
           let address =
             (data && data.display_name) ||
-            "Karachi (" + latitude.toFixed(5) + ", " + longitude.toFixed(5) + ")";
+            "Karachi (" +
+              latitude.toFixed(5) +
+              ", " +
+              longitude.toFixed(5) +
+              ")";
 
           $("#complaintLocation").val(address);
 
@@ -69,7 +73,11 @@ function initializeComplaintMap() {
           }
 
           let fallback =
-            "Karachi (" + latitude.toFixed(5) + ", " + longitude.toFixed(5) + ")";
+            "Karachi (" +
+            latitude.toFixed(5) +
+            ", " +
+            longitude.toFixed(5) +
+            ")";
 
           $("#complaintLocation").val(fallback);
 

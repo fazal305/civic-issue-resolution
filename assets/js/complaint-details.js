@@ -321,7 +321,10 @@ $(document).ready(function () {
   }
 
   $("#complaintDetailsCard").on("click", "#printComplaintBtn", function () {
-    showToast("Choose 'Save as PDF' as the destination to save a copy.", "info");
+    showToast(
+      "Choose 'Save as PDF' as the destination to save a copy.",
+      "info",
+    );
 
     setTimeout(function () {
       window.print();

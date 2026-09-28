@@ -458,7 +458,10 @@ $(document).ready(function () {
 
           applyAdminFilters();
 
-          if (adminComplaints.length >= civicFirestoreService.ADMIN_COMPLAINTS_LIMIT) {
+          if (
+            adminComplaints.length >=
+            civicFirestoreService.ADMIN_COMPLAINTS_LIMIT
+          ) {
             showToast(
               "Showing the " +
                 civicFirestoreService.ADMIN_COMPLAINTS_LIMIT +
@@ -510,7 +513,10 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
 
-        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+        if (
+          window.civicAuth &&
+          civicAuth.isSessionExpiredErrorCode(error.code)
+        ) {
           civicAuth.handleSessionExpired();
 
           return;
@@ -539,7 +545,10 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
 
-        if (window.civicAuth && civicAuth.isSessionExpiredErrorCode(error.code)) {
+        if (
+          window.civicAuth &&
+          civicAuth.isSessionExpiredErrorCode(error.code)
+        ) {
           civicAuth.handleSessionExpired();
 
           return;

@@ -27,11 +27,9 @@ function showDepartmentGuide(category) {
 
   $("#guideHelpline").text(guide.helpline);
 
-  $("#guideWebsite")
-    .attr("href", guide.website);
+  $("#guideWebsite").attr("href", guide.website);
 
-  $("#guidePortalBtn")
-    .attr("href", guide.website);
+  $("#guidePortalBtn").attr("href", guide.website);
 
   $("#departmentGuideCard").fadeIn(300);
 }
@@ -66,7 +64,7 @@ function initializeAuthorityButton() {
         {
           scrollTop: $("#departmentGuideCard").offset().top - 80,
         },
-        500
+        500,
       );
     });
 }
@@ -88,14 +86,17 @@ function initializeAiImproveButton() {
 
       $("#aiImproveBtn")
         .prop("disabled", true)
-        .html(civicIcon("robot", "civic-icon-sm") + " Civic AI is analyzing your complaint...");
+        .html(
+          civicIcon("robot", "civic-icon-sm") +
+            " Civic AI is analyzing your complaint...",
+        );
 
       showToast("Analyzing complaint...", "info");
 
       setTimeout(function () {
         let aiResult = {
           complaint: "",
-          analysis: buildAiAnalysis(category, complaintText)
+          analysis: buildAiAnalysis(category, complaintText),
         };
 
         generateComplaint(category, complaintText, language)
@@ -113,7 +114,10 @@ function initializeAiImproveButton() {
             $("#aiCategorySuggestion").text(analysis.categorySuggestion);
             $("#aiWritingSuggestion").text(analysis.writingSuggestion);
 
-            if (analysis.detectedCategory && analysis.detectedCategory !== category) {
+            if (
+              analysis.detectedCategory &&
+              analysis.detectedCategory !== category
+            ) {
               $("#aiApplyCategoryBtn")
                 .show()
                 .data("category", analysis.detectedCategory);
@@ -131,7 +135,7 @@ function initializeAiImproveButton() {
 
             showToast(
               "Civic AI analyzed your complaint successfully.",
-              "success"
+              "success",
             );
           })
           .catch(function () {
@@ -157,8 +161,8 @@ function initializeAiApplyCategoryButton() {
 
       let card = $(
         '#reportWizard .category-card[data-category="' +
-        suggestedCategory +
-        '"]'
+          suggestedCategory +
+          '"]',
       );
 
       if (card.length) {
@@ -166,10 +170,7 @@ function initializeAiApplyCategoryButton() {
 
         showDepartmentGuide(suggestedCategory);
 
-        showToast(
-          "Suggested category applied.",
-          "success"
-        );
+        showToast("Suggested category applied.", "success");
       }
     });
 }
